@@ -13,29 +13,35 @@
 open Smtcoq_plugin
 
 
-(* SMT-LIB2 commands *)
-type assertion = Smtlib2_ast.term
-type assertions = assertion array
+(** SMT-LIB2 terms **)
+type form =
+  | FFalse
 
-let declare_assertion ra rf (t:assertion) =
-  Smtlib2_genConstr.make_root ra rf t
+(* From smtlib2_genConstr.ml *)
+let make_form ra rf = function
+  | FFalse -> SmtAtom.Form.get rf SmtAtom.Form.pform_false
 
-let assertions = Hashtbl.create 17
+
+(** SMT-LIB2 commands **)
+type assertions = form array
+
+let assertions_tbl = Hashtbl.create 17
+
 let declare_assertions ra rf (a:assertions) =
   let cell = ref (-1) in
   List.rev (Array.fold_left (fun acc t ->
                 incr cell;
-                let aa = declare_assertion ra rf t in
-                Hashtbl.add assertions !cell aa;
+                let aa = make_form ra rf t in
+                Hashtbl.add assertions_tbl !cell aa;
                 aa::acc
               ) [] a)
 
 
-(* Certificate as a tree *)
+(** Certificate **)
 type certif =
-  | Assert of int
-  | False
-  | Resolution of certif list
+  | CAssert of int
+  | CFalse
+  | CResolution of certif list
 
 
 type 'hform rule_kind =
@@ -57,16 +63,16 @@ let process_certif =
         confl_num := id;
         let cl = SmtTrace.mkRootV [a] in
         add_clause id cl
-      ) assertions;
+      ) assertions_tbl;
     if !confl_num < 1 then failwith "The SMT problem should have at least one assertion";
   in
 
   (* Process the certificate *)
   let rec process_certif c =
     let kind = match c with
-        | Assert i -> RRoot (i+1)
-        | False -> RKind(SmtCertif.Other SmtCertif.False)
-        | Resolution l ->
+        | CAssert i -> RRoot (i+1)
+        | CFalse -> RKind(SmtCertif.Other SmtCertif.False)
+        | CResolution l ->
            (match List.map (fun cl -> VeritSyntax.get_clause (process_certif cl)) l with
               | cl1::cl2::q ->
                  let res = {SmtCertif.rc1 = cl1; SmtCertif.rc2 = cl2; SmtCertif.rtail = q} in
@@ -97,11 +103,11 @@ let import_trace (c:certif) =
   (SmtTrace.alloc !cfirst, !confl)
 
 
-(* The API checker *)
+(** The API checker **)
 
 let clear_all () =
   Smt_utils.clear_all ();
-  Hashtbl.clear assertions
+  Hashtbl.clear assertions_tbl
 
 
 (* From verit_checker.ml (TODO: factorize) *)
