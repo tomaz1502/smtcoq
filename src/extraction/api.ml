@@ -13,16 +13,62 @@
 open Smtcoq_plugin
 
 
-(** SMT-LIB2 terms **)
-type form =
-  | FFalse
+(** SMT-LIB2 terms and formulas **)
+(*** Terms ***)
+type term =
+  | TFun of string * term list
 
 (* From smtlib2_genConstr.ml *)
-let make_form ra rf = function
-  | FFalse -> SmtAtom.Form.get rf SmtAtom.Form.pform_false
+let rec make_term ra rf = function
+  | TFun (f, l) ->
+     let op = SmtMaps.get_fun f in
+     let l' = List.map (make_term ra rf) l in
+     SmtAtom.Atom.get ra (Aapp (op, Array.of_list l'))
+
+
+(*** Formulas ***)
+type form =
+  | FTerm of term
+  | FFalse
+  | FNeg of form
+
+(* From smtlib2_genConstr.ml *)
+let make_form ra rf f =
+  let rec make_form = function
+    | FTerm t -> SmtAtom.Form.get rf (Fatom (make_term ra rf t))
+    | FFalse -> SmtAtom.Form.get rf SmtAtom.Form.pform_false
+    | FNeg f -> SmtAtom.Form.neg (make_form f)
+  in
+  make_form f
 
 
 (** SMT-LIB2 commands **)
+(*** Sort declarations ***)
+(* TODO with arrays: take parameters *)
+type sort = string
+type sorts = sort list
+
+let declare_sorts (sl:sorts) =
+  List.iteri (fun i s ->
+      let res = SmtBtype.Tindex (SmtBtype.dummy_indexed_type i) in
+      SmtMaps.add_btype s res;
+    ) sl
+
+
+(*** Function symbols declarations ***)
+type funsym = string * sort list * sort
+type funsyms = funsym list
+
+let declare_funsyms (fl:funsyms) =
+  List.iteri (fun i (s, arg, cod) ->
+      let tyl = List.map (fun s -> Smtlib2_genConstr.sort_of_string s []) arg in
+      let ty = Smtlib2_genConstr.sort_of_string cod [] in
+      let op = SmtAtom.dummy_indexed_op (SmtAtom.Index 0) (Array.of_list tyl) ty in
+      SmtMaps.add_fun s op
+    ) fl
+
+
+(*** Assertions ***)
 type assertions = form array
 
 let assertions_tbl = Hashtbl.create 17
@@ -35,6 +81,16 @@ let declare_assertions ra rf (a:assertions) =
                 Hashtbl.add assertions_tbl !cell aa;
                 aa::acc
               ) [] a)
+
+
+(*** Commands ***)
+type smtlib2 = sorts * funsyms * assertions
+
+let declare_smtlib2 ra rf (smt:smtlib2) =
+  let (s, f, a) = smt in
+  declare_sorts s;
+  declare_funsyms f;
+  declare_assertions ra rf a
 
 
 (** Certificate **)
@@ -111,10 +167,10 @@ let clear_all () =
 
 
 (* From verit_checker.ml (TODO: factorize) *)
-let checker (smt:assertions) (proof:certif) : bool =
+let checker (smt:smtlib2) (proof:certif) : bool =
   clear_all ();
   let ra = VeritSyntax.ra in
   let rf = VeritSyntax.rf in
-  let roots = declare_assertions ra rf smt in
+  let roots = declare_smtlib2 ra rf smt in
   let (max_id, confl) = import_trace proof in
   Smt_utils.checker ra rf roots max_id confl
