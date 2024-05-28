@@ -37,32 +37,54 @@ type certif =
   | False
   | Resolution of certif list
 
+
+type 'hform rule_kind =
+  | RKind of 'hform SmtCertif.clause_kind
+  | RRoot of int
+
+
 let process_certif =
+  let add_clause id cl =
+    VeritSyntax.add_clause id cl;
+    if id > 1 then SmtTrace.link (VeritSyntax.get_clause (id-1)) cl
+  in
   let confl_num = ref 0 in
+
+  (* Add roots *)
+  let add_roots () =
+    Hashtbl.iter (fun i a ->
+        let id = i+1 in
+        confl_num := id;
+        let cl = SmtTrace.mkRootV [a] in
+        add_clause id cl
+      ) assertions;
+    if !confl_num < 1 then failwith "The SMT problem should have at least one assertion";
+  in
+
+  (* Process the certificate *)
   let rec process_certif c =
-    let (kind, value) = match c with
-        | Assert i ->
-           (SmtCertif.Root, Some [Hashtbl.find assertions i])
-        | False -> (SmtCertif.Other SmtCertif.False, None)
+    let kind = match c with
+        | Assert i -> RRoot (i+1)
+        | False -> RKind(SmtCertif.Other SmtCertif.False)
         | Resolution l ->
            (match List.map (fun cl -> VeritSyntax.get_clause (process_certif cl)) l with
               | cl1::cl2::q ->
                  let res = {SmtCertif.rc1 = cl1; SmtCertif.rc2 = cl2; SmtCertif.rtail = q} in
-                 (SmtCertif.Res res, None)
+                 RKind (SmtCertif.Res res)
               | _ -> failwith "Resolution should contain at least two clauses"
            )
     in
-    incr confl_num;
-    let id = !confl_num in
-    let cl =
-      if SmtTrace.isRoot kind then SmtTrace.mkRootV (Option.get value)
-      else SmtTrace.mk_scertif kind value
-    in
-    VeritSyntax.add_clause id cl;
-    if id > 1 then SmtTrace.link (VeritSyntax.get_clause (id-1)) cl;
-    id
+    match kind with
+      | RKind k ->
+         incr confl_num;
+         let id = !confl_num in
+         let cl = SmtTrace.mk_scertif k None in
+         add_clause id cl;
+         id
+      | RRoot i -> i
   in
-  process_certif
+
+  fun c -> add_roots (); process_certif c
 
 
 (* From verit.ml *)

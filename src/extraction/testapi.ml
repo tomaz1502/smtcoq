@@ -13,19 +13,31 @@
 open Smtcoq_extr
 
 
-(* Easy certificate: proof of unsatisfiability of `False` *)
+(* Easy certificates: proof of unsatisfiability of `False` *)
+let test1 =
+  let smt =
+    let pos = (Lexing.dummy_pos, Lexing.dummy_pos) in
+    let f = Smtcoq_plugin.Smtlib2_ast.Symbol(pos, "false") in
+    let s = Smtcoq_plugin.Smtlib2_ast.IdSymbol(pos, f) in
+    let t = Smtcoq_plugin.Smtlib2_ast.QualIdentifierId(pos, s) in
+    [|Smtcoq_plugin.Smtlib2_ast.TermQualIdentifier(pos, t)|]
+  in
+  let proof = Api.Resolution [Api.Assert 0; Api.False] in
+  Api.checker smt proof
 
-let smt =
-  let pos = (Lexing.dummy_pos, Lexing.dummy_pos) in
-  let f = Smtcoq_plugin.Smtlib2_ast.Symbol(pos, "false") in
-  let s = Smtcoq_plugin.Smtlib2_ast.IdSymbol(pos, f) in
-  let t = Smtcoq_plugin.Smtlib2_ast.QualIdentifierId(pos, s) in
-  [|Smtcoq_plugin.Smtlib2_ast.TermQualIdentifier(pos, t)|]
-
-
-let proof = Api.Resolution [Api.Assert 0; Api.False]
+let test2 =
+  let smt =
+    let pos = (Lexing.dummy_pos, Lexing.dummy_pos) in
+    let f = Smtcoq_plugin.Smtlib2_ast.Symbol(pos, "false") in
+    let s = Smtcoq_plugin.Smtlib2_ast.IdSymbol(pos, f) in
+    let t = Smtcoq_plugin.Smtlib2_ast.QualIdentifierId(pos, s) in
+    [|Smtcoq_plugin.Smtlib2_ast.TermQualIdentifier(pos, t)|]
+  in
+  let proof = Api.Resolution [Api.False; Api.Assert 0] in
+  Api.checker smt proof
 
 
 let _ =
-  assert (Api.checker smt proof);
+  assert test1;
+  assert test2;
   Printf.printf "All tests suceeded\n"
