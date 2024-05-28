@@ -13,19 +13,55 @@
 open Smtcoq_extr
 
 
-(* Easy certificates: proof of unsatisfiability of `False` *)
-let test1 =
-  let smt = [|Api.FFalse|] in
+(* Proofs of unsatisfiability of `False` *)
+let test01 =
+  let smt =
+    let sorts = [] in
+    let funs = [] in
+    let ass = [|Api.FFalse|] in
+    (sorts, funs, ass)
+  in
   let proof = Api.CResolution [Api.CAssert 0; Api.CFalse] in
   Api.checker smt proof
 
-let test2 =
-  let smt = [|Api.FFalse|] in
+let test02 =
+  let smt =
+    let sorts = [] in
+    let funs = [] in
+    let ass = [|Api.FFalse|] in
+    (sorts, funs, ass)
+  in
   let proof = Api.CResolution [Api.CFalse; Api.CAssert 0] in
   Api.checker smt proof
 
 
+(* Proofs of unsatisfiability of `a ∧ ¬a` *)
+let test03 =
+  let smt =
+    let sorts = [] in
+    let funs = [("a", [], "Bool")] in
+    let a = Api.FTerm (Api.TFun ("a", [])) in
+    let ass = [|a; Api.FNeg a|] in
+    (sorts, funs, ass)
+  in
+  let proof = Api.CResolution [Api.CAssert 0; Api.CAssert 1] in
+  Api.checker smt proof
+
+let test04 =
+  let smt =
+    let sorts = [] in
+    let funs = [("a", [], "Bool")] in
+    let a = Api.FTerm (Api.TFun ("a", [])) in
+    let ass = [|a; Api.FNeg a|] in
+    (sorts, funs, ass)
+  in
+  let proof = Api.CResolution [Api.CAssert 1; Api.CAssert 0] in
+  Api.checker smt proof
+
+
 let _ =
-  assert test1;
-  assert test2;
+  assert test01;
+  assert test02;
+  assert test03;
+  assert test04;
   Printf.printf "All tests suceeded\n"
