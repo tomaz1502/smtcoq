@@ -13,12 +13,21 @@
 open Smtcoq_plugin
 
 
-type assertion = Smtlib2_ast.term
-type assertions = assertion array
+(** SMT-LIB2 terms **)
+type form =
+  | FFalse
 
+
+(** SMT-LIB2 commands **)
+type assertions = form array
+
+
+(** Certificate **)
 type certif =
-  | Assert of int
-  | False
-  | Resolution of certif list
+  | CAssert of int
+  | CFalse
+  | CResolution of certif list
 
+
+(** The API checker **)
 val checker : assertions -> certif -> bool
