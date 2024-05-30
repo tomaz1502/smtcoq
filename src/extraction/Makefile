@@ -1,8 +1,9 @@
 # List of user's files and name of the final program (edit this part)
 
-USERFILES=smtcoq.ml
+# USERFILES=smtcoq.ml
 # USERFILES=test.ml
 # USERFILES=testapi.ml
+USERFILES=capi.ml
 PROGRAM=smtcoq
 
 
