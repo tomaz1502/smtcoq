@@ -35,4 +35,3 @@ cc -o prog -I `ocamlc -where` -L `ocamlc -where` -L `ocamlc -where`/../zarith -L
 
 # TODO
 - Try [https://ocaml.org/manual/5.2/intfc.html#s%3Aocamlmklib](ocalmmklib)
-- See if `-cclib lunix` can be removed from `Makefile`

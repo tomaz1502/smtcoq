@@ -14,8 +14,8 @@ COQLIBPATH=$(shell ocamlfind query coq-core)/
 
 FLAGS=-rectypes
 COMPILEFLAGS=-for-pack Smtcoq_extr
-PROGRAMFLAGS=-cclib -lunix -linkall
-LIBFLAGS=-cclib -lunix -pack
+PROGRAMFLAGS=-linkall
+LIBFLAGS=-pack
 
 SMTLIB=-I ..
 
