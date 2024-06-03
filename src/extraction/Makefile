@@ -2,8 +2,7 @@
 
 # USERFILES=smtcoq.ml
 # USERFILES=test.ml
-# USERFILES=testapi.ml
-USERFILES=capi.ml
+USERFILES=testapi.ml
 PROGRAM=smtcoq
 
 
@@ -43,7 +42,9 @@ OCAMLFIND=ocamlfind
 OCAMLFINDLIB=-thread -package zarith,num,findlib $(foreach x,$(COQUNITS),-package coq-core.$(x))
 
 
-all: $(LIB) $(PROGRAM)
+CPROG=cprog
+
+all: $(LIB) $(PROGRAM) $(CPROG)
 
 %.cmi: %.mli
 	$(OCAMLFIND) $(OCAMLC) $(OCAMLFINDLIB) -c $(FLAGS) $(SMTLIB) $<
@@ -58,11 +59,27 @@ $(PROGRAM): $(LIB) $(USERCMI) $(USERCMX)
 	$(OCAMLFIND) $(OCAMLOPT) $(FLAGS) $(OCAMLFINDLIB) $(SMTLIB) -o $@ $(PROGRAMFLAGS) $(COQCMX) $(SMTCOQCMX) $(LIB) $(USERCMX)
 
 
+# C API
+CFILES=apiwrap.c
+OFILES=$(CFILES:%.c=%.o)
+MLOFILE=capicaml.o
+CMAIN=main.c
+
+%.o : %.c
+	$(OCAMLOPT) -c $<
+
+$(CPROG): $(LIB) capi.cmx $(OFILES)
+	$(OCAMLFIND) $(OCAMLOPT) $(FLAGS) $(OCAMLFINDLIB) $(SMTLIB) -output-obj -o $(MLOFILE) $(PROGRAMFLAGS) $(COQCMX) $(SMTCOQCMX) $(LIB) capi.cmx
+	cp `ocamlc -where`/libasmrun.a run.a && chmod +w run.a
+	ar r run.a $(MLOFILE) $(OFILES)
+	cc -o $(CPROG) -I `ocamlc -where` -L `ocamlc -where` -L `ocamlc -where`/../zarith -L `ocamlc -where`/../coq-core/perf -L `ocamlc -where`/../coq-core/vm $(CMAIN) run.a -lm -lunix -lthreads -lnums -lcamlstr -lzarith -lgmp -lcoqperf_stubs -lcoqrun_stubs
+
+
 .PHONY: clean mrproper
 
 
 clean:
-	rm -f *.cmi *.cmx *.o
+	rm -f *.cmi *.cmx *.o *.a
 
 mrproper: clean
-	rm -rf $(PROGRAM)
+	rm -rf $(PROGRAM) $(CPROG)
