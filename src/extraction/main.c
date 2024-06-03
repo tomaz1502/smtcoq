@@ -10,10 +10,8 @@ int main(int argc, char ** argv)
 
   /* Initialize OCaml code */
   caml_startup(argv);
-  /* caml_main(argv); */
   /* /\* Do some computation *\/ */
-  /* result = dummy_checker(); */
-  /* printf("%s\n", result); */
-  printf("Finito pipo\n");
+  result = dummy_checker();
+  printf("%s\n", result);
   return 0;
 }
