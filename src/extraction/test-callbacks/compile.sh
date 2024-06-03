@@ -24,6 +24,12 @@ ocamlopt -c modwrap.c
 rm -f mod.a && ar r mod.a modcaml.o modwrap.o
 cc -o prog -I `ocamlc -where` main.c mod.a -lcurses -lm
 
+# Shared library (.so) - does not work
+# ocamlopt -c add.ml
+# ocamlopt -c mod.ml
+# ocamlopt -output-obj -o modcaml.so add.cmx mod.cmx
+
+
 
 # Native without putting the runtime in the archive - does not work
 # ocamlopt -c add.ml
