@@ -15,5 +15,5 @@ From SMTCoq Require Import SMTCoq.
 
 Set Extraction AccessOpaque.
 
-Extraction "extraction/sat_checker.ml" Sat_Checker.checker.
-Extraction "extraction/smt_checker.ml" Checker_Ext.checker_ext.
+Extraction "extraction/ocaml/sat_checker.ml" Sat_Checker.checker.
+Extraction "extraction/ocaml/smt_checker.ml" Checker_Ext.checker_ext.
