@@ -69,6 +69,7 @@ find . -name '*.mly' | sed -e 's/^.\(.*\).$/\1i/g'
 *.mlpack.d
 src/extraction/.Makefile.swp
 src/extraction/smtcoq
+src/extraction/cprog
 
 # proof certificates
 *.vtlog

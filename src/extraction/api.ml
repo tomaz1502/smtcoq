@@ -174,3 +174,10 @@ let checker (smt:smtlib2) (proof:certif) : bool =
   let roots = declare_smtlib2 ra rf smt in
   let (max_id, confl) = import_trace proof in
   Smt_utils.checker ra rf roots max_id confl
+
+
+(** Callback from C to OCaml
+    see https://ocaml.org/manual/4.09/intfc.html#sec426
+ **)
+
+let _ = Callback.register "checker" checker
