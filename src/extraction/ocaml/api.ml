@@ -166,7 +166,7 @@ let clear_all () =
   Hashtbl.clear assertions_tbl
 
 
-(* From verit_checker.ml (TODO: factorize) *)
+(* From verit_checker.ml *)
 let checker (smt:smtlib2) (proof:certif) : bool =
   clear_all ();
   let ra = VeritSyntax.ra in
