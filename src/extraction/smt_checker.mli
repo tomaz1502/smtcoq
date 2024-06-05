@@ -250,8 +250,7 @@ val mkPinj : positive -> 'a1 pol -> 'a1 pol
 
 val mkPinj_pred : positive -> 'a1 pol -> 'a1 pol
 
-val mkPX :
-  'a1 -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> positive -> 'a1 pol -> 'a1 pol
+val mkPX : 'a1 -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> positive -> 'a1 pol -> 'a1 pol
 
 val mkXi : 'a1 -> 'a1 -> positive -> 'a1 pol
 
@@ -264,62 +263,59 @@ val paddC : ('a1 -> 'a1 -> 'a1) -> 'a1 pol -> 'a1 -> 'a1 pol
 val psubC : ('a1 -> 'a1 -> 'a1) -> 'a1 pol -> 'a1 -> 'a1 pol
 
 val paddI :
-  ('a1 -> 'a1 -> 'a1) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol ->
-  positive -> 'a1 pol -> 'a1 pol
-
-val psubI :
-  ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1 pol -> 'a1 pol -> 'a1 pol) ->
-  'a1 pol -> positive -> 'a1 pol -> 'a1 pol
-
-val paddX :
-  'a1 -> ('a1 -> 'a1 -> bool) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol
-  -> positive -> 'a1 pol -> 'a1 pol
-
-val psubX :
-  'a1 -> ('a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1 pol -> 'a1 pol -> 'a1
-  pol) -> 'a1 pol -> positive -> 'a1 pol -> 'a1 pol
-
-val padd :
-  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol ->
-  'a1 pol
-
-val psub :
-  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1
-  -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol
-
-val pmulC_aux :
-  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 -> 'a1
-  pol
-
-val pmulC :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1
+  ('a1 -> 'a1 -> 'a1) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol -> positive -> 'a1 pol
   -> 'a1 pol
 
+val psubI :
+  ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol ->
+  positive -> 'a1 pol -> 'a1 pol
+
+val paddX :
+  'a1 -> ('a1 -> 'a1 -> bool) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol -> positive ->
+  'a1 pol -> 'a1 pol
+
+val psubX :
+  'a1 -> ('a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol
+  -> positive -> 'a1 pol -> 'a1 pol
+
+val padd :
+  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol
+
+val psub :
+  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1 -> 'a1 -> bool)
+  -> 'a1 pol -> 'a1 pol -> 'a1 pol
+
+val pmulC_aux :
+  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 -> 'a1 pol
+
+val pmulC :
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 -> 'a1 pol
+
 val pmulI :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1 pol ->
-  'a1 pol -> 'a1 pol) -> 'a1 pol -> positive -> 'a1 pol -> 'a1 pol
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1 pol -> 'a1 pol -> 'a1
+  pol) -> 'a1 pol -> positive -> 'a1 pol -> 'a1 pol
 
 val pmul :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 ->
-  bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1
+  pol -> 'a1 pol -> 'a1 pol
 
 val psquare :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 ->
-  bool) -> 'a1 pol -> 'a1 pol
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1
+  pol -> 'a1 pol
 
 val mk_X : 'a1 -> 'a1 -> positive -> 'a1 pol
 
 val ppow_pos :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 ->
-  bool) -> ('a1 pol -> 'a1 pol) -> 'a1 pol -> 'a1 pol -> positive -> 'a1 pol
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1
+  pol -> 'a1 pol) -> 'a1 pol -> 'a1 pol -> positive -> 'a1 pol
 
 val ppow_N :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 ->
-  bool) -> ('a1 pol -> 'a1 pol) -> 'a1 pol -> n -> 'a1 pol
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1
+  pol -> 'a1 pol) -> 'a1 pol -> n -> 'a1 pol
 
 val norm_aux :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 ->
-  'a1) -> ('a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pExpr -> 'a1 pol
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 ->
+  'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pExpr -> 'a1 pol
 
 type kind =
 | IsProp
@@ -333,8 +329,7 @@ type ('tA, 'tX, 'aA, 'aF) gFormula =
 | AND of kind * ('tA, 'tX, 'aA, 'aF) gFormula * ('tA, 'tX, 'aA, 'aF) gFormula
 | OR of kind * ('tA, 'tX, 'aA, 'aF) gFormula * ('tA, 'tX, 'aA, 'aF) gFormula
 | NOT of kind * ('tA, 'tX, 'aA, 'aF) gFormula
-| IMPL of kind * ('tA, 'tX, 'aA, 'aF) gFormula * 'aF option
-   * ('tA, 'tX, 'aA, 'aF) gFormula
+| IMPL of kind * ('tA, 'tX, 'aA, 'aF) gFormula * 'aF option * ('tA, 'tX, 'aA, 'aF) gFormula
 | IFF of kind * ('tA, 'tX, 'aA, 'aF) gFormula * ('tA, 'tX, 'aA, 'aF) gFormula
 | EQ of ('tA, 'tX, 'aA, 'aF) gFormula * ('tA, 'tX, 'aA, 'aF) gFormula
 
@@ -353,24 +348,24 @@ val cnf_tt : ('a1, 'a2) cnf
 val cnf_ff : ('a1, 'a2) cnf
 
 val add_term :
-  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1 * 'a2) -> ('a1, 'a2)
-  clause -> ('a1, 'a2) clause option
+  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1 * 'a2) -> ('a1, 'a2) clause -> ('a1,
+  'a2) clause option
 
 val or_clause :
-  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1,
-  'a2) clause -> ('a1, 'a2) clause option
+  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1, 'a2) clause ->
+  ('a1, 'a2) clause option
 
 val xor_clause_cnf :
-  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1,
-  'a2) cnf -> ('a1, 'a2) cnf
+  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1, 'a2) cnf ->
+  ('a1, 'a2) cnf
 
 val or_clause_cnf :
-  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1,
-  'a2) cnf -> ('a1, 'a2) cnf
+  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1, 'a2) cnf ->
+  ('a1, 'a2) cnf
 
 val or_cnf :
-  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) cnf -> ('a1, 'a2)
-  cnf -> ('a1, 'a2) cnf
+  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) cnf -> ('a1, 'a2) cnf -> ('a1,
+  'a2) cnf
 
 val and_cnf : ('a1, 'a2) cnf -> ('a1, 'a2) cnf -> ('a1, 'a2) cnf
 
@@ -383,43 +378,41 @@ val is_cnf_ff : ('a1, 'a2) cnf -> bool
 val and_cnf_opt : ('a1, 'a2) cnf -> ('a1, 'a2) cnf -> ('a1, 'a2) cnf
 
 val or_cnf_opt :
-  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) cnf -> ('a1, 'a2)
-  cnf -> ('a1, 'a2) cnf
+  ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) cnf -> ('a1, 'a2) cnf -> ('a1,
+  'a2) cnf
 
 val mk_and :
-  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3,
-  'a4, 'a5) tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4,
-  'a5) tFormula -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf
+  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3, 'a4, 'a5)
+  tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a1, 'a3,
+  'a4, 'a5) tFormula -> ('a2, 'a3) cnf
 
 val mk_or :
-  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3,
-  'a4, 'a5) tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4,
-  'a5) tFormula -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf
+  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3, 'a4, 'a5)
+  tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a1, 'a3,
+  'a4, 'a5) tFormula -> ('a2, 'a3) cnf
 
 val mk_impl :
-  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3,
-  'a4, 'a5) tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4,
-  'a5) tFormula -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf
+  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3, 'a4, 'a5)
+  tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a1, 'a3,
+  'a4, 'a5) tFormula -> ('a2, 'a3) cnf
 
 val mk_iff :
-  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3,
-  'a4, 'a5) tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4,
-  'a5) tFormula -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf
+  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3, 'a4, 'a5)
+  tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a1, 'a3,
+  'a4, 'a5) tFormula -> ('a2, 'a3) cnf
 
 val is_bool : kind -> ('a1, 'a2, 'a3, 'a4) tFormula -> bool option
 
 val xcnf :
-  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> ('a1 -> 'a3 -> ('a2, 'a3)
-  cnf) -> ('a1 -> 'a3 -> ('a2, 'a3) cnf) -> bool -> kind -> ('a1, 'a3, 'a4,
-  'a5) tFormula -> ('a2, 'a3) cnf
+  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> ('a1 -> 'a3 -> ('a2, 'a3) cnf) -> ('a1 ->
+  'a3 -> ('a2, 'a3) cnf) -> bool -> kind -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf
 
-val cnf_checker :
-  (('a1 * 'a2) list -> 'a3 -> bool) -> ('a1, 'a2) cnf -> 'a3 list -> bool
+val cnf_checker : (('a1 * 'a2) list -> 'a3 -> bool) -> ('a1, 'a2) cnf -> 'a3 list -> bool
 
 val tauto_checker :
-  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> ('a1 -> 'a3 -> ('a2, 'a3)
-  cnf) -> ('a1 -> 'a3 -> ('a2, 'a3) cnf) -> (('a2 * 'a3) list -> 'a4 -> bool)
-  -> ('a1, rtyp, 'a3, unit0) gFormula -> 'a4 list -> bool
+  ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> ('a1 -> 'a3 -> ('a2, 'a3) cnf) -> ('a1 ->
+  'a3 -> ('a2, 'a3) cnf) -> (('a2 * 'a3) list -> 'a4 -> bool) -> ('a1, rtyp, 'a3, unit0)
+  gFormula -> 'a4 list -> bool
 
 val cneqb : ('a1 -> 'a1 -> bool) -> 'a1 -> 'a1 -> bool
 
@@ -451,25 +444,23 @@ type 'c psatz =
 
 val map_option : ('a1 -> 'a2 option) -> 'a1 option -> 'a2 option
 
-val map_option2 :
-  ('a1 -> 'a2 -> 'a3 option) -> 'a1 option -> 'a2 option -> 'a3 option
+val map_option2 : ('a1 -> 'a2 -> 'a3 option) -> 'a1 option -> 'a2 option -> 'a3 option
 
 val pexpr_times_nformula :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 ->
-  bool) -> 'a1 polC -> 'a1 nFormula -> 'a1 nFormula option
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1
+  polC -> 'a1 nFormula -> 'a1 nFormula option
 
 val nformula_times_nformula :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 ->
-  bool) -> 'a1 nFormula -> 'a1 nFormula -> 'a1 nFormula option
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1
+  nFormula -> 'a1 nFormula -> 'a1 nFormula option
 
 val nformula_plus_nformula :
-  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 nFormula -> 'a1
-  nFormula -> 'a1 nFormula option
+  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 nFormula -> 'a1 nFormula -> 'a1
+  nFormula option
 
 val eval_Psatz :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 ->
-  bool) -> ('a1 -> 'a1 -> bool) -> 'a1 nFormula list -> 'a1 psatz -> 'a1
-  nFormula option
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1
+  -> 'a1 -> bool) -> 'a1 nFormula list -> 'a1 psatz -> 'a1 nFormula option
 
 val check_inconsistent :
   'a1 -> ('a1 -> 'a1 -> bool) -> ('a1 -> 'a1 -> bool) -> 'a1 nFormula -> bool
@@ -485,16 +476,15 @@ type op2 =
 type 't formula = { flhs : 't pExpr; fop : op2; frhs : 't pExpr }
 
 val norm :
-  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 ->
-  'a1) -> ('a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pExpr -> 'a1 pol
+  'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 ->
+  'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pExpr -> 'a1 pol
 
 val psub0 :
-  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1
-  -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol
+  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1 -> 'a1 -> bool)
+  -> 'a1 pol -> 'a1 pol -> 'a1 pol
 
 val padd0 :
-  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol ->
-  'a1 pol
+  'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol
 
 val popp0 : ('a1 -> 'a1) -> 'a1 pol -> 'a1 pol
 
@@ -739,24 +729,19 @@ module Raw :
 
   val map2_r : ('a1 option -> 'a2 option -> 'a3 option) -> 'a2 t -> 'a3 t
 
-  val map2 :
-    ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
+  val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
 
   val combine : 'a1 t -> 'a2 t -> ('a1 option * 'a2 option) t
 
-  val fold_right_pair :
-    ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3
+  val fold_right_pair : ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3
 
   val map2_alt :
-    ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> (key * 'a3)
-    list
+    ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> (key * 'a3) list
 
-  val at_least_one :
-    'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option
+  val at_least_one : 'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option
 
   val at_least_one_then_f :
-    ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2 option ->
-    'a3 option
+    ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2 option -> 'a3 option
  end
 
 module type Int =
@@ -844,12 +829,12 @@ module Coq_Raw :
   | Node of 'elt tree * key * 'elt * 'elt tree * I.t
 
   val tree_rect :
-    'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2)
-    -> 'a1 tree -> 'a2
+    'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2) -> 'a1 tree ->
+    'a2
 
   val tree_rec :
-    'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2)
-    -> 'a1 tree -> 'a2
+    'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2) -> 'a1 tree ->
+    'a2
 
   val height : 'a1 tree -> I.t
 
@@ -871,8 +856,7 @@ module Coq_Raw :
 
   val add : key -> 'a1 -> 'a1 tree -> 'a1 tree
 
-  val remove_min :
-    'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree * (key * 'a1)
+  val remove_min : 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree * (key * 'a1)
 
   val merge : 'a1 tree -> 'a1 tree -> 'a1 tree
 
@@ -880,8 +864,7 @@ module Coq_Raw :
 
   val join : 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree
 
-  type 'elt triple = { t_left : 'elt tree; t_opt : 'elt option;
-                       t_right : 'elt tree }
+  type 'elt triple = { t_left : 'elt tree; t_opt : 'elt option; t_right : 'elt tree }
 
   val t_left : 'a1 triple -> 'a1 tree
 
@@ -904,22 +887,21 @@ module Coq_Raw :
   | More of key * 'elt * 'elt tree * 'elt enumeration
 
   val enumeration_rect :
-    'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1
-    enumeration -> 'a2
+    'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1 enumeration ->
+    'a2
 
   val enumeration_rec :
-    'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1
-    enumeration -> 'a2
+    'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1 enumeration ->
+    'a2
 
   val cons : 'a1 tree -> 'a1 enumeration -> 'a1 enumeration
 
   val equal_more :
-    ('a1 -> 'a1 -> bool) -> X.t -> 'a1 -> ('a1 enumeration -> bool) -> 'a1
-    enumeration -> bool
+    ('a1 -> 'a1 -> bool) -> X.t -> 'a1 -> ('a1 enumeration -> bool) -> 'a1 enumeration ->
+    bool
 
   val equal_cont :
-    ('a1 -> 'a1 -> bool) -> 'a1 tree -> ('a1 enumeration -> bool) -> 'a1
-    enumeration -> bool
+    ('a1 -> 'a1 -> bool) -> 'a1 tree -> ('a1 enumeration -> bool) -> 'a1 enumeration -> bool
 
   val equal_end : 'a1 enumeration -> bool
 
@@ -932,12 +914,10 @@ module Coq_Raw :
   val map_option : (key -> 'a1 -> 'a2 option) -> 'a1 tree -> 'a2 tree
 
   val map2_opt :
-    (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-    ('a2 tree -> 'a3 tree) -> 'a1 tree -> 'a2 tree -> 'a3 tree
+    (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree -> 'a3
+    tree) -> 'a1 tree -> 'a2 tree -> 'a3 tree
 
-  val map2 :
-    ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 tree -> 'a2 tree -> 'a3
-    tree
+  val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 tree -> 'a2 tree -> 'a3 tree
 
   module Proofs :
    sig
@@ -1063,354 +1043,304 @@ module Coq_Raw :
 
       val mapi : (key -> 'a1 -> 'a2) -> 'a1 t -> 'a2 t
 
-      val option_cons :
-        key -> 'a1 option -> (key * 'a1) list -> (key * 'a1) list
+      val option_cons : key -> 'a1 option -> (key * 'a1) list -> (key * 'a1) list
 
       val map2_l : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a3 t
 
       val map2_r : ('a1 option -> 'a2 option -> 'a3 option) -> 'a2 t -> 'a3 t
 
-      val map2 :
-        ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
+      val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
 
       val combine : 'a1 t -> 'a2 t -> ('a1 option * 'a2 option) t
 
-      val fold_right_pair :
-        ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3
+      val fold_right_pair : ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3
 
       val map2_alt :
-        ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t ->
-        (key * 'a3) list
+        ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> (key * 'a3) list
 
-      val at_least_one :
-        'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option
+      val at_least_one : 'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option
 
       val at_least_one_then_f :
-        ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2 option
-        -> 'a3 option
+        ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2 option -> 'a3 option
      end
 
     type 'elt coq_R_mem =
     | R_mem_0 of 'elt tree
-    | R_mem_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 
-       bool * 'elt coq_R_mem
+    | R_mem_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * bool * 'elt coq_R_mem
     | R_mem_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-    | R_mem_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 
-       bool * 'elt coq_R_mem
+    | R_mem_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * bool * 'elt coq_R_mem
 
     val coq_R_mem_rect :
-      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-      -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 ->
-      'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ ->
-      __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-      I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> 'a1
-      tree -> bool -> 'a1 coq_R_mem -> 'a2
+      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree
+      -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree ->
+      key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 ->
+      'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
 
     val coq_R_mem_rec :
-      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-      -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 ->
-      'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ ->
-      __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-      I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> 'a1
-      tree -> bool -> 'a1 coq_R_mem -> 'a2
+      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree
+      -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree ->
+      key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 ->
+      'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
 
     type 'elt coq_R_find =
     | R_find_0 of 'elt tree
-    | R_find_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt option * 'elt coq_R_find
+    | R_find_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt option
+       * 'elt coq_R_find
     | R_find_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-    | R_find_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt option * 'elt coq_R_find
+    | R_find_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt option
+       * 'elt coq_R_find
 
     val coq_R_find_rect :
-      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-      -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find ->
-      'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t
-      -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-      tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 ->
-      'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2
+      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> ('a1 tree ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1
+      coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2
 
     val coq_R_find_rec :
-      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-      -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find ->
-      'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t
-      -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-      tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 ->
-      'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2
+      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> ('a1 tree ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1
+      coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2
 
     type 'elt coq_R_bal =
     | R_bal_0 of 'elt tree * key * 'elt * 'elt tree
-    | R_bal_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t
-    | R_bal_2 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t
-    | R_bal_3 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t * 'elt tree * key * 'elt * 'elt tree * 
-       I.t
+    | R_bal_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t
+    | R_bal_2 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t
+    | R_bal_3 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t * 'elt tree * key * 'elt * 'elt tree * I.t
     | R_bal_4 of 'elt tree * key * 'elt * 'elt tree
-    | R_bal_5 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t
-    | R_bal_6 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t
-    | R_bal_7 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t * 'elt tree * key * 'elt * 'elt tree * 
-       I.t
+    | R_bal_5 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t
+    | R_bal_6 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t
+    | R_bal_7 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t * 'elt tree * key * 'elt * 'elt tree * I.t
     | R_bal_8 of 'elt tree * key * 'elt * 'elt tree
 
     val coq_R_bal_rect :
-      ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1
-      tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
-      'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 ->
-      'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-      -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __
-      -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ ->
-      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1 tree ->
-      key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1
-      tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree ->
-      key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-      key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key ->
-      'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-      key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key ->
-      'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
-      'a1 tree -> I.t -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree ->
-      __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-      'a1 tree -> 'a1 coq_R_bal -> 'a2
+      ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+      'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __
+      -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key ->
+      'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 ->
+      'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 ->
+      'a1 tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree
+      -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __
+      -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree ->
+      key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+      'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t
+      -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1
+      tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key ->
+      'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
 
     val coq_R_bal_rec :
-      ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1
-      tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
-      'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 ->
-      'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-      -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __
-      -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ ->
-      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1 tree ->
-      key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1
-      tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree ->
-      key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-      key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key ->
-      'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-      key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key ->
-      'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
-      'a1 tree -> I.t -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree ->
-      __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-      'a1 tree -> 'a1 coq_R_bal -> 'a2
+      ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+      'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __
+      -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key ->
+      'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 ->
+      'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 ->
+      'a1 tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree
+      -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __
+      -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree ->
+      key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+      'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t
+      -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1
+      tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key ->
+      'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
 
     type 'elt coq_R_add =
     | R_add_0 of 'elt tree
-    | R_add_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt tree * 'elt coq_R_add
+    | R_add_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+       * 'elt coq_R_add
     | R_add_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-    | R_add_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt tree * 'elt coq_R_add
+    | R_add_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+       * 'elt coq_R_add
 
     val coq_R_add_rect :
-      key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-      -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-      coq_R_add -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-      tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-      -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
+      key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+      tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> ('a1 tree
+      -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
       coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_add -> 'a2
 
     val coq_R_add_rec :
-      key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-      -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-      coq_R_add -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-      tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-      -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
+      key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+      tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> ('a1 tree
+      -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
       coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_add -> 'a2
 
     type 'elt coq_R_remove_min =
     | R_remove_min_0 of 'elt tree * key * 'elt * 'elt tree
-    | R_remove_min_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * 
-       key * 'elt * 'elt tree * I.t * ('elt tree * (key * 'elt))
-       * 'elt coq_R_remove_min * 'elt tree * (key * 'elt)
+    | R_remove_min_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt
+       * 'elt tree * I.t * ('elt tree * (key * 'elt)) * 'elt coq_R_remove_min * 'elt tree
+       * (key * 'elt)
 
     val coq_R_remove_min_rect :
-      ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key
-      -> 'a1 -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-      -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 -> 'a1 tree
-      -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-      ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2
+      ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
+      tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> ('a1 tree * (key * 'a1)) ->
+      'a1 coq_R_remove_min -> 'a2 -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree ->
+      key -> 'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2
 
     val coq_R_remove_min_rec :
-      ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key
-      -> 'a1 -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-      -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 -> 'a1 tree
-      -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-      ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2
+      ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
+      tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> ('a1 tree * (key * 'a1)) ->
+      'a1 coq_R_remove_min -> 'a2 -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree ->
+      key -> 'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2
 
     type 'elt coq_R_merge =
     | R_merge_0 of 'elt tree * 'elt tree
-    | R_merge_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree
-       * I.t
-    | R_merge_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree
-       * I.t * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
-       * (key * 'elt) * key * 'elt
+    | R_merge_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+    | R_merge_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+       * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree * (key * 'elt) * key * 
+       'elt
 
     val coq_R_merge_rect :
-      ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-      tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree
-      -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1
-      tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> (key * 'a1)
-      -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree
-      -> 'a1 coq_R_merge -> 'a2
+      ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1
+      -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+      'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1
+      tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
+      tree -> 'a1 coq_R_merge -> 'a2
 
     val coq_R_merge_rec :
-      ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-      tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree
-      -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1
-      tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> (key * 'a1)
-      -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree
-      -> 'a1 coq_R_merge -> 'a2
+      ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1
+      -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+      'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1
+      tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
+      tree -> 'a1 coq_R_merge -> 'a2
 
     type 'elt coq_R_remove =
     | R_remove_0 of 'elt tree
-    | R_remove_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-       I.t * 'elt tree * 'elt coq_R_remove
+    | R_remove_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+       * 'elt coq_R_remove
     | R_remove_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-    | R_remove_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-       I.t * 'elt tree * 'elt coq_R_remove
+    | R_remove_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+       * 'elt coq_R_remove
 
     val coq_R_remove_rect :
-      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-      -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove ->
-      'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t
-      -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-      tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 ->
-      'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2
+      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> ('a1 tree ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
+      coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2
 
     val coq_R_remove_rec :
-      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-      -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove ->
-      'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t
-      -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-      tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 ->
-      'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2
+      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> ('a1 tree ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
+      coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2
 
     type 'elt coq_R_concat =
     | R_concat_0 of 'elt tree * 'elt tree
-    | R_concat_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-       * 'elt tree * I.t
-    | R_concat_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-       * 'elt tree * I.t * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt tree * (key * 'elt)
+    | R_concat_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+    | R_concat_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+       * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree * (key * 'elt)
 
     val coq_R_concat_rect :
-      ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-      tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree
-      -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1
-      tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> (key * 'a1)
-      -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_concat
-      -> 'a2
+      ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1
+      -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+      'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1
+      tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1
+      coq_R_concat -> 'a2
 
     val coq_R_concat_rec :
-      ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-      tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree
-      -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1
-      tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> (key * 'a1)
-      -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_concat
-      -> 'a2
+      ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1
+      -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+      'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1
+      tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1
+      coq_R_concat -> 'a2
 
     type 'elt coq_R_split =
     | R_split_0 of 'elt tree
-    | R_split_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt triple * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
+    | R_split_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt triple
+       * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
     | R_split_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-    | R_split_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt triple * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
+    | R_split_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt triple
+       * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
 
     val coq_R_split_rect :
-      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-      -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split
-      -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree
-      -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2)
-      -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __
-      -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1 option
-      -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split
-      -> 'a2
+      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+      option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+      option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split -> 'a2
 
     val coq_R_split_rec :
-      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-      -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split
-      -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree
-      -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2)
-      -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __
-      -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1 option
-      -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split
-      -> 'a2
+      X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+      option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+      I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+      option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split -> 'a2
 
     type ('elt, 'x) coq_R_map_option =
     | R_map_option_0 of 'elt tree
-    | R_map_option_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-       I.t * 'x * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree
-       * ('elt, 'x) coq_R_map_option
-    | R_map_option_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-       I.t * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree
-       * ('elt, 'x) coq_R_map_option
+    | R_map_option_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'x * 
+       'x tree * ('elt, 'x) coq_R_map_option * 'x tree * ('elt, 'x) coq_R_map_option
+    | R_map_option_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'x tree
+       * ('elt, 'x) coq_R_map_option * 'x tree * ('elt, 'x) coq_R_map_option
 
     val coq_R_map_option_rect :
-      (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree ->
-      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2
-      tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
-      coq_R_map_option -> 'a3 -> 'a3) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-      -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree -> ('a1, 'a2)
-      coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-      'a3 -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-      'a3
+      (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree -> 'a1 tree -> key
+      -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2 tree -> ('a1, 'a2)
+      coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) ->
+      ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree ->
+      ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3
+      -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3
 
     val coq_R_map_option_rec :
-      (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree ->
-      'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2
-      tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
-      coq_R_map_option -> 'a3 -> 'a3) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-      -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree -> ('a1, 'a2)
-      coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-      'a3 -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-      'a3
+      (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree -> 'a1 tree -> key
+      -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2 tree -> ('a1, 'a2)
+      coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) ->
+      ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree ->
+      ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3
+      -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3
 
     type ('elt, 'x0, 'x) coq_R_map2_opt =
     | R_map2_opt_0 of 'elt tree * 'x0 tree
-    | R_map2_opt_1 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-       * 'elt tree * I.t
-    | R_map2_opt_2 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-       * 'elt tree * I.t * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 'x0 tree
-       * 'x0 option * 'x0 tree * 'x * 'x tree
-       * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
+    | R_map2_opt_1 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree * I.t
+    | R_map2_opt_2 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree * I.t
+       * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 'x0 tree * 'x0 option * 'x0 tree * 
+       'x * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
        * ('elt, 'x0, 'x) coq_R_map2_opt
-    | R_map2_opt_3 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-       * 'elt tree * I.t * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 'x0 tree
-       * 'x0 option * 'x0 tree * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt
-       * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt
+    | R_map2_opt_3 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree * I.t
+       * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 'x0 tree * 'x0 option * 'x0 tree * 
+       'x tree * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt
 
     val coq_R_map2_opt_rect :
-      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-      ('a2 tree -> 'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1
-      tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ ->
-      __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-      tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t -> __ ->
-      'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3 tree ->
-      ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3)
-      coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree ->
-      key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2
-      tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> __ ->
-      'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
-      'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3
-      tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4
+      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree -> 'a3
+      tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree ->
+      key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree
+      -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t ->
+      __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3 tree -> ('a1, 'a2,
+      'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 ->
+      'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ ->
+      'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree
+      -> __ -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
+      'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3 tree -> ('a1,
+      'a2, 'a3) coq_R_map2_opt -> 'a4
 
     val coq_R_map2_opt_rec :
-      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-      ('a2 tree -> 'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1
-      tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ ->
-      __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-      tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t -> __ ->
-      'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3 tree ->
-      ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3)
-      coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree ->
-      key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2
-      tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> __ ->
-      'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
-      'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3
-      tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4
+      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree -> 'a3
+      tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree ->
+      key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree
+      -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t ->
+      __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3 tree -> ('a1, 'a2,
+      'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 ->
+      'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ ->
+      'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree
+      -> __ -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
+      'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3 tree -> ('a1,
+      'a2, 'a3) coq_R_map2_opt -> 'a4
 
     val fold' : (key -> 'a1 -> 'a2 -> 'a2) -> 'a1 tree -> 'a2 -> 'a2
 
@@ -1440,12 +1370,12 @@ module IntMake :
     | Node of 'elt tree * key * 'elt * 'elt tree * I.t
 
     val tree_rect :
-      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2)
-      -> 'a1 tree -> 'a2
+      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2) -> 'a1 tree ->
+      'a2
 
     val tree_rec :
-      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2)
-      -> 'a1 tree -> 'a2
+      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2) -> 'a1 tree ->
+      'a2
 
     val height : 'a1 tree -> I.t
 
@@ -1467,8 +1397,7 @@ module IntMake :
 
     val add : key -> 'a1 -> 'a1 tree -> 'a1 tree
 
-    val remove_min :
-      'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree * (key * 'a1)
+    val remove_min : 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree * (key * 'a1)
 
     val merge : 'a1 tree -> 'a1 tree -> 'a1 tree
 
@@ -1476,8 +1405,7 @@ module IntMake :
 
     val join : 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree
 
-    type 'elt triple = { t_left : 'elt tree; t_opt : 'elt option;
-                         t_right : 'elt tree }
+    type 'elt triple = { t_left : 'elt tree; t_opt : 'elt option; t_right : 'elt tree }
 
     val t_left : 'a1 triple -> 'a1 tree
 
@@ -1500,22 +1428,22 @@ module IntMake :
     | More of key * 'elt * 'elt tree * 'elt enumeration
 
     val enumeration_rect :
-      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1
-      enumeration -> 'a2
+      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1 enumeration ->
+      'a2
 
     val enumeration_rec :
-      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1
-      enumeration -> 'a2
+      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1 enumeration ->
+      'a2
 
     val cons : 'a1 tree -> 'a1 enumeration -> 'a1 enumeration
 
     val equal_more :
-      ('a1 -> 'a1 -> bool) -> X.t -> 'a1 -> ('a1 enumeration -> bool) -> 'a1
-      enumeration -> bool
+      ('a1 -> 'a1 -> bool) -> X.t -> 'a1 -> ('a1 enumeration -> bool) -> 'a1 enumeration ->
+      bool
 
     val equal_cont :
-      ('a1 -> 'a1 -> bool) -> 'a1 tree -> ('a1 enumeration -> bool) -> 'a1
-      enumeration -> bool
+      ('a1 -> 'a1 -> bool) -> 'a1 tree -> ('a1 enumeration -> bool) -> 'a1 enumeration ->
+      bool
 
     val equal_end : 'a1 enumeration -> bool
 
@@ -1528,12 +1456,10 @@ module IntMake :
     val map_option : (key -> 'a1 -> 'a2 option) -> 'a1 tree -> 'a2 tree
 
     val map2_opt :
-      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-      ('a2 tree -> 'a3 tree) -> 'a1 tree -> 'a2 tree -> 'a3 tree
+      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree -> 'a3
+      tree) -> 'a1 tree -> 'a2 tree -> 'a3 tree
 
-    val map2 :
-      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 tree -> 'a2 tree -> 'a3
-      tree
+    val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 tree -> 'a2 tree -> 'a3 tree
 
     module Proofs :
      sig
@@ -1659,360 +1585,306 @@ module IntMake :
 
         val mapi : (key -> 'a1 -> 'a2) -> 'a1 t -> 'a2 t
 
-        val option_cons :
-          key -> 'a1 option -> (key * 'a1) list -> (key * 'a1) list
+        val option_cons : key -> 'a1 option -> (key * 'a1) list -> (key * 'a1) list
 
-        val map2_l :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a3 t
+        val map2_l : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a3 t
 
-        val map2_r :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a2 t -> 'a3 t
+        val map2_r : ('a1 option -> 'a2 option -> 'a3 option) -> 'a2 t -> 'a3 t
 
-        val map2 :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
+        val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
 
         val combine : 'a1 t -> 'a2 t -> ('a1 option * 'a2 option) t
 
-        val fold_right_pair :
-          ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3
+        val fold_right_pair : ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3
 
         val map2_alt :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t ->
-          (key * 'a3) list
+          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> (key * 'a3) list
 
-        val at_least_one :
-          'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option
+        val at_least_one : 'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option
 
         val at_least_one_then_f :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2
-          option -> 'a3 option
+          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2 option -> 'a3 option
        end
 
       type 'elt coq_R_mem =
       | R_mem_0 of 'elt tree
-      | R_mem_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-         * bool * 'elt coq_R_mem
+      | R_mem_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * bool
+         * 'elt coq_R_mem
       | R_mem_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-      | R_mem_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-         * bool * 'elt coq_R_mem
+      | R_mem_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * bool
+         * 'elt coq_R_mem
 
       val coq_R_mem_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2
-        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
-        __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2)
-        -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> ('a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem ->
+        'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
 
       val coq_R_mem_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2
-        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
-        __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2)
-        -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> ('a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem ->
+        'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
 
       type 'elt coq_R_find =
       | R_find_0 of 'elt tree
-      | R_find_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-         I.t * 'elt option * 'elt coq_R_find
+      | R_find_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt option
+         * 'elt coq_R_find
       | R_find_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-      | R_find_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-         I.t * 'elt option * 'elt coq_R_find
+      | R_find_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt option
+         * 'elt coq_R_find
 
       val coq_R_find_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find
-        -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find
-        -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1
+        coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2
 
       val coq_R_find_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find
-        -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find
-        -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1
+        coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2
 
       type 'elt coq_R_bal =
       | R_bal_0 of 'elt tree * key * 'elt * 'elt tree
-      | R_bal_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * I.t
-      | R_bal_2 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * I.t
-      | R_bal_3 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * I.t * 'elt tree * key * 'elt * 'elt tree * 
-         I.t
+      | R_bal_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * I.t
+      | R_bal_2 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * I.t
+      | R_bal_3 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * I.t * 'elt tree * key * 'elt * 'elt tree * I.t
       | R_bal_4 of 'elt tree * key * 'elt * 'elt tree
-      | R_bal_5 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * I.t
-      | R_bal_6 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * I.t
-      | R_bal_7 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * I.t * 'elt tree * key * 'elt * 'elt tree * 
-         I.t
+      | R_bal_5 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * I.t
+      | R_bal_6 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * I.t
+      | R_bal_7 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * I.t * 'elt tree * key * 'elt * 'elt tree * I.t
       | R_bal_8 of 'elt tree * key * 'elt * 'elt tree
 
       val coq_R_bal_rect :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
-        tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ ->
-        'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __
-        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ ->
-        __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
-        __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __
-        -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __
-        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ ->
-        __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
-        __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __
+        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key
+        -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1
+        -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
+        __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 ->
+        'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
+        -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __
+        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
+        'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
+        -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
 
       val coq_R_bal_rec :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
-        tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ ->
-        'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __
-        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ ->
-        __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
-        __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __
-        -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __
-        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ ->
-        __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
-        __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __
+        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key
+        -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1
+        -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
+        __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 ->
+        'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
+        -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __
+        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
+        'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
+        -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
 
       type 'elt coq_R_add =
       | R_add_0 of 'elt tree
-      | R_add_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-         * 'elt tree * 'elt coq_R_add
+      | R_add_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+         * 'elt coq_R_add
       | R_add_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-      | R_add_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-         * 'elt tree * 'elt coq_R_add
+      | R_add_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+         * 'elt coq_R_add
 
       val coq_R_add_rect :
-        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree ->
-        key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_add ->
-        'a2
+        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree ->
+        'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_add -> 'a2
 
       val coq_R_add_rec :
-        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree ->
-        key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_add ->
-        'a2
+        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree ->
+        'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_add -> 'a2
 
       type 'elt coq_R_remove_min =
       | R_remove_min_0 of 'elt tree * key * 'elt * 'elt tree
-      | R_remove_min_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree
-         * key * 'elt * 'elt tree * I.t * ('elt tree * (key * 'elt))
-         * 'elt coq_R_remove_min * 'elt tree * (key * 'elt)
+      | R_remove_min_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt
+         * 'elt tree * I.t * ('elt tree * (key * 'elt)) * 'elt coq_R_remove_min * 'elt tree
+         * (key * 'elt)
 
       val coq_R_remove_min_rect :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key
-        -> 'a1 -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 -> 'a1
-        tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> ('a1 tree * (key * 'a1))
+        -> 'a1 coq_R_remove_min -> 'a2 -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree
+        -> key -> 'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2
 
       val coq_R_remove_min_rec :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key
-        -> 'a1 -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 -> 'a1
-        tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> ('a1 tree * (key * 'a1))
+        -> 'a1 coq_R_remove_min -> 'a2 -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree
+        -> key -> 'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2
 
       type 'elt coq_R_merge =
       | R_merge_0 of 'elt tree * 'elt tree
-      | R_merge_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * I.t
-      | R_merge_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * I.t * 'elt tree * key * 'elt * 'elt tree * I.t
-         * 'elt tree * (key * 'elt) * key * 'elt
+      | R_merge_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+      | R_merge_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+         * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree * (key * 'elt) * key * 
+         'elt
 
       val coq_R_merge_rect :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree ->
-        (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1 tree
-        -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
+        __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1
+        tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
 
       val coq_R_merge_rec :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree ->
-        (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1 tree
-        -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
+        __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1
+        tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
 
       type 'elt coq_R_remove =
       | R_remove_0 of 'elt tree
-      | R_remove_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-         I.t * 'elt tree * 'elt coq_R_remove
+      | R_remove_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+         * 'elt coq_R_remove
       | R_remove_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-      | R_remove_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-         I.t * 'elt tree * 'elt coq_R_remove
+      | R_remove_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+         * 'elt coq_R_remove
 
       val coq_R_remove_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove
-        -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove
-        -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
+        coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2
 
       val coq_R_remove_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove
-        -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove
-        -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
+        coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2
 
       type 'elt coq_R_concat =
       | R_concat_0 of 'elt tree * 'elt tree
-      | R_concat_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * I.t
-      | R_concat_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * I.t * 'elt tree * key * 'elt * 'elt tree * I.t
-         * 'elt tree * (key * 'elt)
+      | R_concat_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+      | R_concat_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+         * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree * (key * 'elt)
 
       val coq_R_concat_rect :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree ->
-        (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1
-        coq_R_concat -> 'a2
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
+        __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree ->
+        'a1 coq_R_concat -> 'a2
 
       val coq_R_concat_rec :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree ->
-        (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1
-        coq_R_concat -> 'a2
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
+        __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree ->
+        'a1 coq_R_concat -> 'a2
 
       type 'elt coq_R_split =
       | R_split_0 of 'elt tree
-      | R_split_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-         I.t * 'elt triple * 'elt coq_R_split * 'elt tree * 'elt option
-         * 'elt tree
+      | R_split_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt triple
+         * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
       | R_split_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-      | R_split_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-         I.t * 'elt triple * 'elt coq_R_split * 'elt tree * 'elt option
-         * 'elt tree
+      | R_split_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt triple
+         * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
 
       val coq_R_split_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split
-        -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __
-        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
-        __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree ->
-        'a1 option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1
-        coq_R_split -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+        option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree
+        -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree
+        -> I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+        option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split -> 'a2
 
       val coq_R_split_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split
-        -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __
-        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
-        __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree ->
-        'a1 option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1
-        coq_R_split -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+        option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree
+        -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree
+        -> I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+        option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split -> 'a2
 
       type ('elt, 'x) coq_R_map_option =
       | R_map_option_0 of 'elt tree
-      | R_map_option_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * I.t * 'x * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree
-         * ('elt, 'x) coq_R_map_option
-      | R_map_option_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * I.t * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree
-         * ('elt, 'x) coq_R_map_option
+      | R_map_option_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'x
+         * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree * ('elt, 'x) coq_R_map_option
+      | R_map_option_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'x tree
+         * ('elt, 'x) coq_R_map_option * 'x tree * ('elt, 'x) coq_R_map_option
 
       val coq_R_map_option_rect :
-        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2
-        tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
-        coq_R_map_option -> 'a3 -> 'a3) -> ('a1 tree -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree -> ('a1, 'a2)
-        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-        'a3 -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-        'a3
+        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2 tree -> ('a1, 'a2)
+        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree ->
+        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3
+        -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3
 
       val coq_R_map_option_rec :
-        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2
-        tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
-        coq_R_map_option -> 'a3 -> 'a3) -> ('a1 tree -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree -> ('a1, 'a2)
-        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-        'a3 -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-        'a3
+        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2 tree -> ('a1, 'a2)
+        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree ->
+        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3
+        -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3
 
       type ('elt, 'x0, 'x) coq_R_map2_opt =
       | R_map2_opt_0 of 'elt tree * 'x0 tree
-      | R_map2_opt_1 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-         * 'elt tree * I.t
-      | R_map2_opt_2 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-         * 'elt tree * I.t * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 
-         'x0 tree * 'x0 option * 'x0 tree * 'x * 'x tree
-         * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
+      | R_map2_opt_1 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree * I.t
+      | R_map2_opt_2 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree * 
+         I.t * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 'x0 tree * 'x0 option * 'x0 tree * 
+         'x * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
          * ('elt, 'x0, 'x) coq_R_map2_opt
-      | R_map2_opt_3 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-         * 'elt tree * I.t * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 
-         'x0 tree * 'x0 option * 'x0 tree * 'x tree
-         * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
+      | R_map2_opt_3 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree * 
+         I.t * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 'x0 tree * 'x0 option * 'x0 tree
+         * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
          * ('elt, 'x0, 'x) coq_R_map2_opt
 
       val coq_R_map2_opt_rect :
-        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-        ('a2 tree -> 'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t ->
-        __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3
-        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
-        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key ->
-        'a2 -> 'a2 tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree ->
-        __ -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3
-        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree ->
+        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree ->
+        'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2 tree
+        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2
+        tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3
+        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3)
+        coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 ->
+        'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t -> __ -> 'a2 tree
+        -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree ->
         'a2 tree -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4
 
       val coq_R_map2_opt_rec :
-        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-        ('a2 tree -> 'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t ->
-        __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3
-        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
-        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key ->
-        'a2 -> 'a2 tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree ->
-        __ -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3
-        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree ->
+        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree ->
+        'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2 tree
+        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2
+        tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3
+        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3)
+        coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 ->
+        'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t -> __ -> 'a2 tree
+        -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree ->
         'a2 tree -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4
 
       val fold' : (key -> 'a1 -> 'a2 -> 'a2) -> 'a1 tree -> 'a2 -> 'a2
@@ -2021,8 +1893,7 @@ module IntMake :
      end
    end
 
-  type 'elt bst =
-    'elt Raw.tree
+  type 'elt bst = 'elt Raw.tree
     (* singleton inductive, whose constructor was Bst *)
 
   val this : 'a1 bst -> 'a1 Raw.tree
@@ -2047,8 +1918,7 @@ module IntMake :
 
   val mapi : (key -> 'a1 -> 'a2) -> 'a1 t -> 'a2 t
 
-  val map2 :
-    ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
+  val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
 
   val elements : 'a1 t -> (key * 'a1) list
 
@@ -2080,12 +1950,12 @@ module Make :
     | Node of 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
 
     val tree_rect :
-      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> Z_as_Int.t
-      -> 'a2) -> 'a1 tree -> 'a2
+      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> Z_as_Int.t -> 'a2) -> 'a1
+      tree -> 'a2
 
     val tree_rec :
-      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> Z_as_Int.t
-      -> 'a2) -> 'a1 tree -> 'a2
+      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> Z_as_Int.t -> 'a2) -> 'a1
+      tree -> 'a2
 
     val height : 'a1 tree -> Z_as_Int.t
 
@@ -2107,8 +1977,7 @@ module Make :
 
     val add : key -> 'a1 -> 'a1 tree -> 'a1 tree
 
-    val remove_min :
-      'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree * (key * 'a1)
+    val remove_min : 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree * (key * 'a1)
 
     val merge : 'a1 tree -> 'a1 tree -> 'a1 tree
 
@@ -2116,8 +1985,7 @@ module Make :
 
     val join : 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree
 
-    type 'elt triple = { t_left : 'elt tree; t_opt : 'elt option;
-                         t_right : 'elt tree }
+    type 'elt triple = { t_left : 'elt tree; t_opt : 'elt option; t_right : 'elt tree }
 
     val t_left : 'a1 triple -> 'a1 tree
 
@@ -2140,22 +2008,22 @@ module Make :
     | More of key * 'elt * 'elt tree * 'elt enumeration
 
     val enumeration_rect :
-      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1
-      enumeration -> 'a2
+      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1 enumeration ->
+      'a2
 
     val enumeration_rec :
-      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1
-      enumeration -> 'a2
+      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1 enumeration ->
+      'a2
 
     val cons : 'a1 tree -> 'a1 enumeration -> 'a1 enumeration
 
     val equal_more :
-      ('a1 -> 'a1 -> bool) -> X.t -> 'a1 -> ('a1 enumeration -> bool) -> 'a1
-      enumeration -> bool
+      ('a1 -> 'a1 -> bool) -> X.t -> 'a1 -> ('a1 enumeration -> bool) -> 'a1 enumeration ->
+      bool
 
     val equal_cont :
-      ('a1 -> 'a1 -> bool) -> 'a1 tree -> ('a1 enumeration -> bool) -> 'a1
-      enumeration -> bool
+      ('a1 -> 'a1 -> bool) -> 'a1 tree -> ('a1 enumeration -> bool) -> 'a1 enumeration ->
+      bool
 
     val equal_end : 'a1 enumeration -> bool
 
@@ -2168,12 +2036,10 @@ module Make :
     val map_option : (key -> 'a1 -> 'a2 option) -> 'a1 tree -> 'a2 tree
 
     val map2_opt :
-      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-      ('a2 tree -> 'a3 tree) -> 'a1 tree -> 'a2 tree -> 'a3 tree
+      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree -> 'a3
+      tree) -> 'a1 tree -> 'a2 tree -> 'a3 tree
 
-    val map2 :
-      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 tree -> 'a2 tree -> 'a3
-      tree
+    val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 tree -> 'a2 tree -> 'a3 tree
 
     module Proofs :
      sig
@@ -2299,374 +2165,325 @@ module Make :
 
         val mapi : (key -> 'a1 -> 'a2) -> 'a1 t -> 'a2 t
 
-        val option_cons :
-          key -> 'a1 option -> (key * 'a1) list -> (key * 'a1) list
+        val option_cons : key -> 'a1 option -> (key * 'a1) list -> (key * 'a1) list
 
-        val map2_l :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a3 t
+        val map2_l : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a3 t
 
-        val map2_r :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a2 t -> 'a3 t
+        val map2_r : ('a1 option -> 'a2 option -> 'a3 option) -> 'a2 t -> 'a3 t
 
-        val map2 :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
+        val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
 
         val combine : 'a1 t -> 'a2 t -> ('a1 option * 'a2 option) t
 
-        val fold_right_pair :
-          ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3
+        val fold_right_pair : ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3
 
         val map2_alt :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t ->
-          (key * 'a3) list
+          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> (key * 'a3) list
 
-        val at_least_one :
-          'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option
+        val at_least_one : 'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option
 
         val at_least_one_then_f :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2
-          option -> 'a3 option
+          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2 option -> 'a3 option
        end
 
       type 'elt coq_R_mem =
       | R_mem_0 of 'elt tree
-      | R_mem_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * bool * 'elt coq_R_mem
+      | R_mem_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * bool
+         * 'elt coq_R_mem
       | R_mem_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
-      | R_mem_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * bool * 'elt coq_R_mem
+      | R_mem_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * bool
+         * 'elt coq_R_mem
 
       val coq_R_mem_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem
-        -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> bool -> 'a1
-        coq_R_mem -> 'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> bool
+        -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
 
       val coq_R_mem_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem
-        -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> bool -> 'a1
-        coq_R_mem -> 'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> bool
+        -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
 
       type 'elt coq_R_find =
       | R_find_0 of 'elt tree
-      | R_find_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt option * 'elt coq_R_find
-      | R_find_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t
-      | R_find_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt option * 'elt coq_R_find
+      | R_find_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt option * 'elt coq_R_find
+      | R_find_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+      | R_find_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt option * 'elt coq_R_find
 
       val coq_R_find_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 option -> 'a1
-        coq_R_find -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1
-        option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option ->
-        'a1 coq_R_find -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2)
+        -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __
+        -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1
+        coq_R_find -> 'a2
 
       val coq_R_find_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 option -> 'a1
-        coq_R_find -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1
-        option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option ->
-        'a1 coq_R_find -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2)
+        -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __
+        -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1
+        coq_R_find -> 'a2
 
       type 'elt coq_R_bal =
       | R_bal_0 of 'elt tree * key * 'elt * 'elt tree
-      | R_bal_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t
-      | R_bal_2 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t
-      | R_bal_3 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree
+      | R_bal_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
          * Z_as_Int.t
+      | R_bal_2 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t
+      | R_bal_3 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
       | R_bal_4 of 'elt tree * key * 'elt * 'elt tree
-      | R_bal_5 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t
-      | R_bal_6 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t
-      | R_bal_7 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree
+      | R_bal_5 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
          * Z_as_Int.t
+      | R_bal_6 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t
+      | R_bal_7 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
       | R_bal_8 of 'elt tree * key * 'elt * 'elt tree
 
       val coq_R_bal_rect :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-        key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-        key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
-        tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1
-        -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree
-        -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t ->
+        __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t ->
+        __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> __ ->
+        'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key
+        -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree ->
+        __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __
+        -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree
+        -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key -> 'a1
+        -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
 
       val coq_R_bal_rec :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-        key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-        key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
-        tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1
-        -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree
-        -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t ->
+        __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t ->
+        __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> __ ->
+        'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key
+        -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree ->
+        __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __
+        -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree
+        -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key -> 'a1
+        -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
 
       type 'elt coq_R_add =
       | R_add_0 of 'elt tree
-      | R_add_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * 'elt coq_R_add
+      | R_add_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * 'elt tree
+         * 'elt coq_R_add
       | R_add_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
-      | R_add_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * 'elt coq_R_add
+      | R_add_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * 'elt tree
+         * 'elt coq_R_add
 
       val coq_R_add_rect :
-        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1
-        tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
+        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ ->
+        'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ ->
+        __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
         coq_R_add -> 'a2
 
       val coq_R_add_rec :
-        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1
-        tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
+        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ ->
+        'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ ->
+        __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
         coq_R_add -> 'a2
 
       type 'elt coq_R_remove_min =
       | R_remove_min_0 of 'elt tree * key * 'elt * 'elt tree
-      | R_remove_min_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree
-         * key * 'elt * 'elt tree * Z_as_Int.t * ('elt tree * (key * 'elt))
-         * 'elt coq_R_remove_min * 'elt tree * (key * 'elt)
+      | R_remove_min_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt
+         * 'elt tree * Z_as_Int.t * ('elt tree * (key * 'elt)) * 'elt coq_R_remove_min
+         * 'elt tree * (key * 'elt)
 
       val coq_R_remove_min_rect :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key
-        -> 'a1 -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min
-        -> 'a2 -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min
-        -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> ('a1
+        tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 -> 'a1 tree -> (key * 'a1) -> __
+        -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1
+        coq_R_remove_min -> 'a2
 
       val coq_R_remove_min_rec :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key
-        -> 'a1 -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min
-        -> 'a2 -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min
-        -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> ('a1
+        tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 -> 'a1 tree -> (key * 'a1) -> __
+        -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1
+        coq_R_remove_min -> 'a2
 
       type 'elt coq_R_merge =
       | R_merge_0 of 'elt tree * 'elt tree
-      | R_merge_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t
-      | R_merge_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * (key * 'elt) * key * 'elt
+      | R_merge_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+      | R_merge_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * 'elt tree * (key * 'elt) * 
+         key * 'elt
 
       val coq_R_merge_rect :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) ->
-        ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) ->
-        'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ ->
+        'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
 
       val coq_R_merge_rec :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) ->
-        ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) ->
-        'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ ->
+        'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
 
       type 'elt coq_R_remove =
       | R_remove_0 of 'elt tree
-      | R_remove_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * 'elt coq_R_remove
-      | R_remove_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t
-      | R_remove_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * 'elt coq_R_remove
+      | R_remove_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt tree * 'elt coq_R_remove
+      | R_remove_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+      | R_remove_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt tree * 'elt coq_R_remove
 
       val coq_R_remove_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_remove -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1
-        tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree ->
-        'a1 coq_R_remove -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2)
+        -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __
+        -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
+        coq_R_remove -> 'a2
 
       val coq_R_remove_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_remove -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1
-        tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree ->
-        'a1 coq_R_remove -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2)
+        -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __
+        -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
+        coq_R_remove -> 'a2
 
       type 'elt coq_R_concat =
       | R_concat_0 of 'elt tree * 'elt tree
-      | R_concat_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t
-      | R_concat_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * (key * 'elt)
+      | R_concat_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+      | R_concat_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * 'elt tree
+         * (key * 'elt)
 
       val coq_R_concat_rect :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) ->
-        ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1
         tree -> 'a1 tree -> 'a1 coq_R_concat -> 'a2
 
       val coq_R_concat_rec :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) ->
-        ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1
         tree -> 'a1 tree -> 'a1 coq_R_concat -> 'a2
 
       type 'elt coq_R_split =
       | R_split_0 of 'elt tree
-      | R_split_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt triple * 'elt coq_R_split * 'elt tree
-         * 'elt option * 'elt tree
-      | R_split_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t
-      | R_split_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt triple * 'elt coq_R_split * 'elt tree
-         * 'elt option * 'elt tree
+      | R_split_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt triple * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
+      | R_split_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+      | R_split_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt triple * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
 
       val coq_R_split_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1
-        coq_R_split -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ ->
-        'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1
-        coq_R_split -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ ->
-        'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree ->
+        'a1 option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
+        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2
+        -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1
+        coq_R_split -> 'a2
 
       val coq_R_split_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1
-        coq_R_split -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ ->
-        'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1
-        coq_R_split -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ ->
-        'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split -> 'a2
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree ->
+        'a1 option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
+        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2
+        -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1
+        coq_R_split -> 'a2
 
       type ('elt, 'x) coq_R_map_option =
       | R_map_option_0 of 'elt tree
-      | R_map_option_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'x * 'x tree * ('elt, 'x) coq_R_map_option * 
-         'x tree * ('elt, 'x) coq_R_map_option
-      | R_map_option_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree
-         * ('elt, 'x) coq_R_map_option
+      | R_map_option_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * 
+         'x * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree * ('elt, 'x) coq_R_map_option
+      | R_map_option_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree * ('elt, 'x) coq_R_map_option
 
       val coq_R_map_option_rect :
-        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 -> __
-        -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree ->
-        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) -> ('a1 tree -> 'a1 tree
-        -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2 tree ->
-        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
+        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 -> __ -> 'a2 tree -> ('a1, 'a2)
+        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2
+        tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
         coq_R_map_option -> 'a3 -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2)
         coq_R_map_option -> 'a3
 
       val coq_R_map_option_rec :
-        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 -> __
-        -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree ->
-        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) -> ('a1 tree -> 'a1 tree
-        -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2 tree ->
-        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
+        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 -> __ -> 'a2 tree -> ('a1, 'a2)
+        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2
+        tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
         coq_R_map_option -> 'a3 -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2)
         coq_R_map_option -> 'a3
 
       type ('elt, 'x0, 'x) coq_R_map2_opt =
       | R_map2_opt_0 of 'elt tree * 'x0 tree
-      | R_map2_opt_1 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t
-      | R_map2_opt_2 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t * 'x0 tree * key * 'x0 * 'x0 tree
-         * Z_as_Int.t * 'x0 tree * 'x0 option * 'x0 tree * 'x * 'x tree
-         * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
+      | R_map2_opt_1 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t
+      | R_map2_opt_2 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t * 'x0 tree * key * 'x0 * 'x0 tree * Z_as_Int.t * 'x0 tree * 'x0 option
+         * 'x0 tree * 'x * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
          * ('elt, 'x0, 'x) coq_R_map2_opt
-      | R_map2_opt_3 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t * 'x0 tree * key * 'x0 * 'x0 tree
-         * Z_as_Int.t * 'x0 tree * 'x0 option * 'x0 tree * 'x tree
-         * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
+      | R_map2_opt_3 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t * 'x0 tree * key * 'x0 * 'x0 tree * Z_as_Int.t * 'x0 tree * 'x0 option
+         * 'x0 tree * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
          * ('elt, 'x0, 'x) coq_R_map2_opt
 
       val coq_R_map2_opt_rect :
-        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-        ('a2 tree -> 'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2
-        tree -> Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __
-        -> 'a3 -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 ->
-        'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> Z_as_Int.t -> __ ->
-        'a2 tree -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree -> ('a1,
-        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3)
-        coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3 tree ->
-        ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4
+        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree ->
+        'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key ->
+        'a2 -> 'a2 tree -> Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ ->
+        'a3 -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
+        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key
+        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree ->
+        Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree ->
+        ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4
 
       val coq_R_map2_opt_rec :
-        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-        ('a2 tree -> 'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2
-        tree -> Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __
-        -> 'a3 -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 ->
-        'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> Z_as_Int.t -> __ ->
-        'a2 tree -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree -> ('a1,
-        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3)
-        coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3 tree ->
-        ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4
+        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree ->
+        'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key ->
+        'a2 -> 'a2 tree -> Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ ->
+        'a3 -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
+        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key
+        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree ->
+        Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree ->
+        ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4
 
       val fold' : (key -> 'a1 -> 'a2 -> 'a2) -> 'a1 tree -> 'a2 -> 'a2
 
@@ -2674,8 +2491,7 @@ module Make :
      end
    end
 
-  type 'elt bst =
-    'elt Raw.tree
+  type 'elt bst = 'elt Raw.tree
     (* singleton inductive, whose constructor was Bst *)
 
   val this : 'a1 bst -> 'a1 Raw.tree
@@ -2700,8 +2516,7 @@ module Make :
 
   val mapi : (key -> 'a1 -> 'a2) -> 'a1 t -> 'a2 t
 
-  val map2 :
-    ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
+  val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
 
   val elements : 'a1 t -> (key * 'a1) list
 
@@ -2741,12 +2556,12 @@ module Map :
     | Node of 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
 
     val tree_rect :
-      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> Z_as_Int.t
-      -> 'a2) -> 'a1 tree -> 'a2
+      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> Z_as_Int.t -> 'a2) -> 'a1
+      tree -> 'a2
 
     val tree_rec :
-      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> Z_as_Int.t
-      -> 'a2) -> 'a1 tree -> 'a2
+      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> Z_as_Int.t -> 'a2) -> 'a1
+      tree -> 'a2
 
     val height : 'a1 tree -> Z_as_Int.t
 
@@ -2768,8 +2583,7 @@ module Map :
 
     val add : key -> 'a1 -> 'a1 tree -> 'a1 tree
 
-    val remove_min :
-      'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree * (key * 'a1)
+    val remove_min : 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree * (key * 'a1)
 
     val merge : 'a1 tree -> 'a1 tree -> 'a1 tree
 
@@ -2777,8 +2591,7 @@ module Map :
 
     val join : 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree
 
-    type 'elt triple = { t_left : 'elt tree; t_opt : 'elt option;
-                         t_right : 'elt tree }
+    type 'elt triple = { t_left : 'elt tree; t_opt : 'elt option; t_right : 'elt tree }
 
     val t_left : 'a1 triple -> 'a1 tree
 
@@ -2801,22 +2614,22 @@ module Map :
     | More of key * 'elt * 'elt tree * 'elt enumeration
 
     val enumeration_rect :
-      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1
-      enumeration -> 'a2
+      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1 enumeration ->
+      'a2
 
     val enumeration_rec :
-      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1
-      enumeration -> 'a2
+      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1 enumeration ->
+      'a2
 
     val cons : 'a1 tree -> 'a1 enumeration -> 'a1 enumeration
 
     val equal_more :
-      ('a1 -> 'a1 -> bool) -> Uint63.t -> 'a1 -> ('a1 enumeration -> bool) ->
-      'a1 enumeration -> bool
+      ('a1 -> 'a1 -> bool) -> Uint63.t -> 'a1 -> ('a1 enumeration -> bool) -> 'a1
+      enumeration -> bool
 
     val equal_cont :
-      ('a1 -> 'a1 -> bool) -> 'a1 tree -> ('a1 enumeration -> bool) -> 'a1
-      enumeration -> bool
+      ('a1 -> 'a1 -> bool) -> 'a1 tree -> ('a1 enumeration -> bool) -> 'a1 enumeration ->
+      bool
 
     val equal_end : 'a1 enumeration -> bool
 
@@ -2829,12 +2642,10 @@ module Map :
     val map_option : (key -> 'a1 -> 'a2 option) -> 'a1 tree -> 'a2 tree
 
     val map2_opt :
-      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-      ('a2 tree -> 'a3 tree) -> 'a1 tree -> 'a2 tree -> 'a3 tree
+      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree -> 'a3
+      tree) -> 'a1 tree -> 'a2 tree -> 'a3 tree
 
-    val map2 :
-      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 tree -> 'a2 tree -> 'a3
-      tree
+    val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 tree -> 'a2 tree -> 'a3 tree
 
     module Proofs :
      sig
@@ -2960,376 +2771,325 @@ module Map :
 
         val mapi : (key -> 'a1 -> 'a2) -> 'a1 t -> 'a2 t
 
-        val option_cons :
-          key -> 'a1 option -> (key * 'a1) list -> (key * 'a1) list
+        val option_cons : key -> 'a1 option -> (key * 'a1) list -> (key * 'a1) list
 
-        val map2_l :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a3 t
+        val map2_l : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a3 t
 
-        val map2_r :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a2 t -> 'a3 t
+        val map2_r : ('a1 option -> 'a2 option -> 'a3 option) -> 'a2 t -> 'a3 t
 
-        val map2 :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
+        val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
 
         val combine : 'a1 t -> 'a2 t -> ('a1 option * 'a2 option) t
 
-        val fold_right_pair :
-          ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3
+        val fold_right_pair : ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3
 
         val map2_alt :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t ->
-          (key * 'a3) list
+          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> (key * 'a3) list
 
-        val at_least_one :
-          'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option
+        val at_least_one : 'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option
 
         val at_least_one_then_f :
-          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2
-          option -> 'a3 option
+          ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2 option -> 'a3 option
        end
 
       type 'elt coq_R_mem =
       | R_mem_0 of 'elt tree
-      | R_mem_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * bool * 'elt coq_R_mem
+      | R_mem_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * bool
+         * 'elt coq_R_mem
       | R_mem_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
-      | R_mem_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * bool * 'elt coq_R_mem
+      | R_mem_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * bool
+         * 'elt coq_R_mem
 
       val coq_R_mem_rect :
-        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> bool -> 'a1
-        coq_R_mem -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ ->
-        bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1
-        coq_R_mem -> 'a2
+        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2)
+        -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __
+        -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
 
       val coq_R_mem_rec :
-        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> bool -> 'a1
-        coq_R_mem -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ ->
-        bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1
-        coq_R_mem -> 'a2
+        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2)
+        -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __
+        -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2
 
       type 'elt coq_R_find =
       | R_find_0 of 'elt tree
-      | R_find_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt option * 'elt coq_R_find
-      | R_find_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t
-      | R_find_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt option * 'elt coq_R_find
+      | R_find_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt option * 'elt coq_R_find
+      | R_find_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+      | R_find_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt option * 'elt coq_R_find
 
       val coq_R_find_rect :
-        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 option ->
-        'a1 coq_R_find -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ ->
-        'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option
-        -> 'a1 coq_R_find -> 'a2
+        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2)
+        -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __
+        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __
+        -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option ->
+        'a1 coq_R_find -> 'a2
 
       val coq_R_find_rec :
-        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 option ->
-        'a1 coq_R_find -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ ->
-        'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option
-        -> 'a1 coq_R_find -> 'a2
+        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2)
+        -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __
+        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __
+        -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option ->
+        'a1 coq_R_find -> 'a2
 
       type 'elt coq_R_bal =
       | R_bal_0 of 'elt tree * key * 'elt * 'elt tree
-      | R_bal_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t
-      | R_bal_2 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t
-      | R_bal_3 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree
+      | R_bal_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
          * Z_as_Int.t
+      | R_bal_2 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t
+      | R_bal_3 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
       | R_bal_4 of 'elt tree * key * 'elt * 'elt tree
-      | R_bal_5 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t
-      | R_bal_6 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t
-      | R_bal_7 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key
-         * 'elt * 'elt tree * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree
+      | R_bal_5 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
          * Z_as_Int.t
+      | R_bal_6 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t
+      | R_bal_7 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
       | R_bal_8 of 'elt tree * key * 'elt * 'elt tree
 
       val coq_R_bal_rect :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-        key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-        key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
-        tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1
-        -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree
-        -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t ->
+        __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t ->
+        __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> __ ->
+        'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key
+        -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree ->
+        __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __
+        -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree
+        -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key -> 'a1
+        -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
 
       val coq_R_bal_rec :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-        key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
-        key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
-        tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1
-        -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree
-        -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t ->
+        __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t ->
+        __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> __ ->
+        'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key
+        -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        Z_as_Int.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree ->
+        __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __
+        -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2) -> ('a1 tree
+        -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1 tree -> key -> 'a1
+        -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2
 
       type 'elt coq_R_add =
       | R_add_0 of 'elt tree
-      | R_add_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * 'elt coq_R_add
+      | R_add_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * 'elt tree
+         * 'elt coq_R_add
       | R_add_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
-      | R_add_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * 'elt coq_R_add
+      | R_add_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * 'elt tree
+         * 'elt coq_R_add
 
       val coq_R_add_rect :
-        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1
-        tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
+        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ ->
+        'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ ->
+        __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
         coq_R_add -> 'a2
 
       val coq_R_add_rec :
-        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1
-        tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
+        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ ->
+        'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ ->
+        __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
         coq_R_add -> 'a2
 
       type 'elt coq_R_remove_min =
       | R_remove_min_0 of 'elt tree * key * 'elt * 'elt tree
-      | R_remove_min_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree
-         * key * 'elt * 'elt tree * Z_as_Int.t * ('elt tree * (key * 'elt))
-         * 'elt coq_R_remove_min * 'elt tree * (key * 'elt)
+      | R_remove_min_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt
+         * 'elt tree * Z_as_Int.t * ('elt tree * (key * 'elt)) * 'elt coq_R_remove_min
+         * 'elt tree * (key * 'elt)
 
       val coq_R_remove_min_rect :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key
-        -> 'a1 -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min
-        -> 'a2 -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min
-        -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> ('a1
+        tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 -> 'a1 tree -> (key * 'a1) -> __
+        -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1
+        coq_R_remove_min -> 'a2
 
       val coq_R_remove_min_rec :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key
-        -> 'a1 -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min
-        -> 'a2 -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min
-        -> 'a2
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> ('a1
+        tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 -> 'a1 tree -> (key * 'a1) -> __
+        -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1
+        coq_R_remove_min -> 'a2
 
       type 'elt coq_R_merge =
       | R_merge_0 of 'elt tree * 'elt tree
-      | R_merge_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t
-      | R_merge_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * (key * 'elt) * key * 'elt
+      | R_merge_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+      | R_merge_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * 'elt tree * (key * 'elt) * 
+         key * 'elt
 
       val coq_R_merge_rect :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) ->
-        ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) ->
-        'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ ->
+        'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
 
       val coq_R_merge_rec :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) ->
-        ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) ->
-        'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ ->
+        'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2
 
       type 'elt coq_R_remove =
       | R_remove_0 of 'elt tree
-      | R_remove_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * 'elt coq_R_remove
-      | R_remove_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t
-      | R_remove_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * 'elt coq_R_remove
+      | R_remove_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt tree * 'elt coq_R_remove
+      | R_remove_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+      | R_remove_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt tree * 'elt coq_R_remove
 
       val coq_R_remove_rect :
-        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_remove -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1
-        tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree ->
-        'a1 coq_R_remove -> 'a2
+        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2)
+        -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __
+        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __
+        -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
+        coq_R_remove -> 'a2
 
       val coq_R_remove_rec :
-        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_remove -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1
-        tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree ->
-        'a1 coq_R_remove -> 'a2
+        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2)
+        -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __
+        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __
+        -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1
+        coq_R_remove -> 'a2
 
       type 'elt coq_R_concat =
       | R_concat_0 of 'elt tree * 'elt tree
-      | R_concat_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t
-      | R_concat_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt tree * (key * 'elt)
+      | R_concat_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+      | R_concat_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * 'elt tree
+         * (key * 'elt)
 
       val coq_R_concat_rect :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) ->
-        ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1
         tree -> 'a1 tree -> 'a1 coq_R_concat -> 'a2
 
       val coq_R_concat_rec :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) ->
-        ('a1 tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1
         tree -> 'a1 tree -> 'a1 coq_R_concat -> 'a2
 
       type 'elt coq_R_split =
       | R_split_0 of 'elt tree
-      | R_split_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt triple * 'elt coq_R_split * 'elt tree
-         * 'elt option * 'elt tree
-      | R_split_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t
-      | R_split_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'elt triple * 'elt coq_R_split * 'elt tree
-         * 'elt option * 'elt tree
+      | R_split_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt triple * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
+      | R_split_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+      | R_split_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'elt triple * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
 
       val coq_R_split_rect :
-        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple ->
-        'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ ->
-        'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1
-        coq_R_split -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ ->
-        'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split -> 'a2
+        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1
+        tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
+        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
+        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split
+        -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple
+        -> 'a1 coq_R_split -> 'a2
 
       val coq_R_split_rec :
-        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple ->
-        'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ ->
-        'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1
-        coq_R_split -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ ->
-        'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split -> 'a2
+        Uint63.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1
+        tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
+        -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
+        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split
+        -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple
+        -> 'a1 coq_R_split -> 'a2
 
       type ('elt, 'x) coq_R_map_option =
       | R_map_option_0 of 'elt tree
-      | R_map_option_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'x * 'x tree * ('elt, 'x) coq_R_map_option * 
-         'x tree * ('elt, 'x) coq_R_map_option
-      | R_map_option_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree
-         * Z_as_Int.t * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree
-         * ('elt, 'x) coq_R_map_option
+      | R_map_option_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t * 
+         'x * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree * ('elt, 'x) coq_R_map_option
+      | R_map_option_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * Z_as_Int.t
+         * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree * ('elt, 'x) coq_R_map_option
 
       val coq_R_map_option_rect :
-        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 -> __
-        -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree ->
-        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) -> ('a1 tree -> 'a1 tree
-        -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2 tree ->
-        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
+        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 -> __ -> 'a2 tree -> ('a1, 'a2)
+        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2
+        tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
         coq_R_map_option -> 'a3 -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2)
         coq_R_map_option -> 'a3
 
       val coq_R_map_option_rec :
-        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 -> __
-        -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree ->
-        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) -> ('a1 tree -> 'a1 tree
-        -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2 tree ->
-        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
+        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 -> __ -> 'a2 tree -> ('a1, 'a2)
+        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a2
+        tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
         coq_R_map_option -> 'a3 -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2)
         coq_R_map_option -> 'a3
 
       type ('elt, 'x0, 'x) coq_R_map2_opt =
       | R_map2_opt_0 of 'elt tree * 'x0 tree
-      | R_map2_opt_1 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t
-      | R_map2_opt_2 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t * 'x0 tree * key * 'x0 * 'x0 tree
-         * Z_as_Int.t * 'x0 tree * 'x0 option * 'x0 tree * 'x * 'x tree
-         * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
+      | R_map2_opt_1 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t
+      | R_map2_opt_2 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t * 'x0 tree * key * 'x0 * 'x0 tree * Z_as_Int.t * 'x0 tree * 'x0 option
+         * 'x0 tree * 'x * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
          * ('elt, 'x0, 'x) coq_R_map2_opt
-      | R_map2_opt_3 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-         * 'elt tree * Z_as_Int.t * 'x0 tree * key * 'x0 * 'x0 tree
-         * Z_as_Int.t * 'x0 tree * 'x0 option * 'x0 tree * 'x tree
-         * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
+      | R_map2_opt_3 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree
+         * Z_as_Int.t * 'x0 tree * key * 'x0 * 'x0 tree * Z_as_Int.t * 'x0 tree * 'x0 option
+         * 'x0 tree * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
          * ('elt, 'x0, 'x) coq_R_map2_opt
 
       val coq_R_map2_opt_rect :
-        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-        ('a2 tree -> 'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2
-        tree -> Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __
-        -> 'a3 -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 ->
-        'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> Z_as_Int.t -> __ ->
-        'a2 tree -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree -> ('a1,
-        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3)
-        coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3 tree ->
-        ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4
+        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree ->
+        'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key ->
+        'a2 -> 'a2 tree -> Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ ->
+        'a3 -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
+        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key
+        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree ->
+        Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree ->
+        ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4
 
       val coq_R_map2_opt_rec :
-        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-        ('a2 tree -> 'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2
-        tree -> Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __
-        -> 'a3 -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 ->
-        'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t
-        -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> Z_as_Int.t -> __ ->
-        'a2 tree -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree -> ('a1,
-        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3)
-        coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3 tree ->
-        ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4
+        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree ->
+        'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key ->
+        'a2 -> 'a2 tree -> Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ ->
+        'a3 -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
+        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key
+        -> 'a1 -> 'a1 tree -> Z_as_Int.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree ->
+        Z_as_Int.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree ->
+        ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4 -> 'a4) -> 'a1 tree -> 'a2 tree -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4
 
       val fold' : (key -> 'a1 -> 'a2 -> 'a2) -> 'a1 tree -> 'a2 -> 'a2
 
@@ -3337,8 +3097,7 @@ module Map :
      end
    end
 
-  type 'elt bst =
-    'elt Raw.tree
+  type 'elt bst = 'elt Raw.tree
     (* singleton inductive, whose constructor was Bst *)
 
   val this : 'a1 bst -> 'a1 Raw.tree
@@ -3363,8 +3122,7 @@ module Map :
 
   val mapi : (key -> 'a1 -> 'a2) -> 'a1 t -> 'a2 t
 
-  val map2 :
-    ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
+  val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t
 
   val elements : 'a1 t -> (key * 'a1) list
 
@@ -3444,6 +3202,8 @@ module C :
   val _true : t
 
   val is_false : t -> bool
+
+  val has_true : t -> bool
 
   val or_aux : (t -> t -> t) -> Uint63.t -> t -> t -> Uint63.t list
 
@@ -3568,8 +3328,7 @@ module Atom :
   | BO_select of Typ.coq_type * Typ.coq_type
   | BO_diffarray of Typ.coq_type * Typ.coq_type
 
-  type nop =
-    Typ.coq_type
+  type nop = Typ.coq_type
     (* singleton inductive, whose constructor was NO_distinct *)
 
   type terop =
@@ -3603,30 +3362,25 @@ module Atom :
  end
 
 val get_eq :
-  Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t ->
-  C.t) -> C.t
+  Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t -> C.t) -> C.t
 
 val check_trans_aux :
-  Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> Uint63.t list
-  -> Uint63.t -> C.t -> C.t
+  Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> Uint63.t list -> Uint63.t ->
+  C.t -> C.t
 
-val check_trans :
-  Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t list -> C.t
+val check_trans : Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t list -> C.t
 
 val build_congr :
-  Form.form array -> Atom.atom array -> Uint63.t option list -> Uint63.t list
-  -> Uint63.t list -> C.t -> C.t
+  Form.form array -> Atom.atom array -> Uint63.t option list -> Uint63.t list -> Uint63.t
+  list -> C.t -> C.t
 
 val check_congr :
-  Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t option list ->
-  C.t
+  Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t option list -> C.t
 
 val check_congr_pred :
-  Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> Uint63.t
-  option list -> C.t
+  Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> Uint63.t option list -> C.t
 
-val build_positive_atom_aux :
-  (Uint63.t -> positive option) -> Atom.atom -> positive option
+val build_positive_atom_aux : (Uint63.t -> positive option) -> Atom.atom -> positive option
 
 val build_positive : Atom.atom array -> Uint63.t -> positive option
 
@@ -3643,62 +3397,56 @@ val find_var : vmap -> Atom.atom -> vmap * positive
 val empty_vmap : vmap
 
 val build_pexpr_atom_aux :
-  Atom.atom array -> (vmap -> Uint63.t -> vmap * z pExpr) -> vmap ->
-  Atom.atom -> vmap * z pExpr
+  Atom.atom array -> (vmap -> Uint63.t -> vmap * z pExpr) -> vmap -> Atom.atom -> vmap * z
+  pExpr
 
 val build_pexpr : Atom.atom array -> vmap -> Uint63.t -> vmap * z pExpr
 
 val build_op2 : Atom.binop -> op2 option
 
-val build_formula_atom :
-  Atom.atom array -> vmap -> Atom.atom -> (vmap * z formula) option
+val build_formula_atom : Atom.atom array -> vmap -> Atom.atom -> (vmap * z formula) option
 
-val build_formula :
-  Atom.atom array -> vmap -> Uint63.t -> (vmap * z formula) option
+val build_formula : Atom.atom array -> vmap -> Uint63.t -> (vmap * z formula) option
 
 val build_not2 : Uint63.t -> z formula bFormula -> z formula bFormula
 
 val build_hform :
-  Atom.atom array -> (vmap -> Uint63.t -> (vmap * z formula bFormula) option)
-  -> vmap -> Form.form -> (vmap * z formula bFormula) option
+  Atom.atom array -> (vmap -> Uint63.t -> (vmap * z formula bFormula) option) -> vmap ->
+  Form.form -> (vmap * z formula bFormula) option
 
 val build_var :
-  Form.form array -> Atom.atom array -> vmap -> Uint63.t -> (vmap * z formula
-  bFormula) option
+  Form.form array -> Atom.atom array -> vmap -> Uint63.t -> (vmap * z formula bFormula)
+  option
 
 val build_form :
-  Form.form array -> Atom.atom array -> vmap -> Form.form -> (vmap * z
-  formula bFormula) option
+  Form.form array -> Atom.atom array -> vmap -> Form.form -> (vmap * z formula bFormula)
+  option
 
 val build_nlit :
-  Form.form array -> Atom.atom array -> vmap -> Uint63.t -> (vmap * z formula
-  bFormula) option
+  Form.form array -> Atom.atom array -> vmap -> Uint63.t -> (vmap * z formula bFormula)
+  option
 
 val build_clause_aux :
-  Form.form array -> Atom.atom array -> vmap -> Uint63.t list -> (vmap * z
-  formula bFormula) option
+  Form.form array -> Atom.atom array -> vmap -> Uint63.t list -> (vmap * z formula bFormula)
+  option
 
 val build_clause :
-  Form.form array -> Atom.atom array -> vmap -> Uint63.t list -> (vmap * (z
-  formula, eKind, unit0, unit0) gFormula) option
+  Form.form array -> Atom.atom array -> vmap -> Uint63.t list -> (vmap * (z formula, eKind,
+  unit0, unit0) gFormula) option
 
 val get_eq0 :
-  Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t ->
-  C.t) -> C.t
+  Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t -> C.t) -> C.t
 
 val get_not_le :
-  Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t ->
-  C.t) -> C.t
+  Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t -> C.t) -> C.t
 
 val check_micromega :
-  Form.form array -> Atom.atom array -> Uint63.t list -> zArithProof list ->
-  C.t
+  Form.form array -> Atom.atom array -> Uint63.t list -> zArithProof list -> C.t
 
 val check_diseq : Form.form array -> Atom.atom array -> Uint63.t -> C.t
 
 val check_atom_aux :
-  Atom.atom array -> (Uint63.t -> Uint63.t -> bool) -> Atom.atom -> Atom.atom
-  -> bool
+  Atom.atom array -> (Uint63.t -> Uint63.t -> bool) -> Atom.atom -> Atom.atom -> bool
 
 val check_hatom : Atom.atom array -> Uint63.t -> Uint63.t -> bool
 
@@ -3711,68 +3459,62 @@ val get_and : Form.form array -> Uint63.t -> Uint63.t array option
 val get_or : Form.form array -> Uint63.t -> Uint63.t array option
 
 val flatten_op_body :
-  (Uint63.t -> Uint63.t array option) -> (Uint63.t list -> Uint63.t ->
-  Uint63.t list) -> Uint63.t list -> Uint63.t -> Uint63.t list
+  (Uint63.t -> Uint63.t array option) -> (Uint63.t list -> Uint63.t -> Uint63.t list) ->
+  Uint63.t list -> Uint63.t -> Uint63.t list
 
 val flatten_op_lit :
-  (Uint63.t -> Uint63.t array option) -> Uint63.t -> Uint63.t list ->
-  Uint63.t -> Uint63.t list
+  (Uint63.t -> Uint63.t array option) -> Uint63.t -> Uint63.t list -> Uint63.t -> Uint63.t
+  list
 
 val flatten_and : Form.form array -> Uint63.t array -> Uint63.t list
 
 val flatten_or : Form.form array -> Uint63.t array -> Uint63.t list
 
 val check_flatten_body :
-  Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t -> Uint63.t
-  -> bool) -> (Uint63.t -> Uint63.t -> bool) -> Uint63.t -> Uint63.t -> bool
+  Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t -> Uint63.t -> bool) ->
+  (Uint63.t -> Uint63.t -> bool) -> Uint63.t -> Uint63.t -> bool
 
 val check_flatten_aux :
-  Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t -> Uint63.t
-  -> bool) -> Uint63.t -> Uint63.t -> bool
+  Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t -> Uint63.t -> bool) ->
+  Uint63.t -> Uint63.t -> bool
 
 val check_flatten :
-  Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t -> Uint63.t
-  -> bool) -> S.t -> Uint63.t -> Uint63.t -> C.t
+  Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t -> Uint63.t -> bool) -> S.t
+  -> Uint63.t -> Uint63.t -> C.t
 
 val check_spl_arith :
-  Form.form array -> Atom.atom array -> Uint63.t list -> Uint63.t ->
-  zArithProof list -> C.t
+  Form.form array -> Atom.atom array -> Uint63.t list -> Uint63.t -> zArithProof list -> C.t
 
 val check_in : Uint63.t -> Uint63.t list -> bool
 
 val check_diseqs_complete_aux :
   Uint63.t -> Uint63.t list -> (Uint63.t * Uint63.t) option array -> bool
 
-val check_diseqs_complete :
-  Uint63.t list -> (Uint63.t * Uint63.t) option array -> bool
+val check_diseqs_complete : Uint63.t list -> (Uint63.t * Uint63.t) option array -> bool
 
 val check_diseqs :
-  Form.form array -> Atom.atom array -> Typ.coq_type -> Uint63.t list ->
-  Uint63.t array -> bool
+  Form.form array -> Atom.atom array -> Typ.coq_type -> Uint63.t list -> Uint63.t array ->
+  bool
 
-val check_distinct :
-  Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t array -> bool
+val check_distinct : Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t array -> bool
 
 val check_distinct_two_args :
   Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> bool
 
 val check_lit :
-  Form.form array -> Atom.atom array -> (Uint63.t -> Uint63.t -> bool) ->
-  Uint63.t -> Uint63.t -> bool
+  Form.form array -> Atom.atom array -> (Uint63.t -> Uint63.t -> bool) -> Uint63.t ->
+  Uint63.t -> bool
 
 val check_form_aux :
-  Form.form array -> Atom.atom array -> (Uint63.t -> Uint63.t -> bool) ->
-  Form.form -> Form.form -> bool
+  Form.form array -> Atom.atom array -> (Uint63.t -> Uint63.t -> bool) -> Form.form ->
+  Form.form -> bool
 
-val check_hform :
-  Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> bool
+val check_hform : Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> bool
 
-val check_lit' :
-  Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> bool
+val check_lit' : Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> bool
 
 val check_distinct_elim :
-  Form.form array -> Atom.atom array -> Uint63.t list -> Uint63.t -> Uint63.t
-  list
+  Form.form array -> Atom.atom array -> Uint63.t list -> Uint63.t -> Uint63.t list
 
 val or_of_imp : Uint63.t array -> Uint63.t array
 
@@ -3797,30 +3539,24 @@ val check_bbc : Form.form array -> bool list -> Uint63.t list -> bool
 val check_bbConst : Atom.atom array -> Form.form array -> Uint63.t -> C.t
 
 val check_bb :
-  Atom.atom array -> Form.form array -> Uint63.t -> Uint63.t list -> nat ->
-  nat -> bool
+  Atom.atom array -> Form.form array -> Uint63.t -> Uint63.t list -> nat -> nat -> bool
 
 val check_bbVar : Atom.atom array -> Form.form array -> Uint63.t -> C.t
 
 val check_not : Uint63.t list -> Uint63.t list -> bool
 
-val check_bbNot :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t
+val check_bbNot : Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t
 
 val check_symopp :
-  Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list ->
-  Atom.binop -> bool
+  Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> Atom.binop -> bool
 
 val check_bbOp :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-  Uint63.t -> C.t
+  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t
 
-val check_eq :
-  Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> bool
+val check_eq : Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> bool
 
 val check_bbEq :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-  Uint63.t -> C.t
+  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t
 
 type carry =
 | Clit of Uint63.t
@@ -3832,64 +3568,52 @@ type carry =
 val eq_carry_lit : Form.form array -> carry -> Uint63.t -> bool
 
 val check_add :
-  Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> carry
-  -> bool
+  Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> carry -> bool
 
 val check_bbAdd :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-  Uint63.t -> C.t
+  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t
 
 val check_neg : Form.form array -> Uint63.t list -> Uint63.t list -> bool
 
-val check_bbNeg :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t
+val check_bbNeg : Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t
 
 val and_with_bit : Uint63.t list -> Uint63.t -> carry list
 
 val mult_step_k_h : carry list -> carry list -> carry -> z -> carry list
 
-val mult_step :
-  Uint63.t list -> Uint63.t list -> carry list -> nat -> nat -> carry list
+val mult_step : Uint63.t list -> Uint63.t list -> carry list -> nat -> nat -> carry list
 
 val bblast_bvmult : Uint63.t list -> Uint63.t list -> nat -> carry list
 
-val check_mult :
-  Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> bool
+val check_mult : Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> bool
 
 val check_bbMult :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-  Uint63.t -> C.t
+  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t
 
 val ult_big_endian_lit_list : Uint63.t list -> Uint63.t list -> carry
 
 val ult_lit_list : Uint63.t list -> Uint63.t list -> carry
 
-val check_ult :
-  Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t -> bool
+val check_ult : Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t -> bool
 
 val check_bbUlt :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-  Uint63.t -> C.t
+  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t
 
 val slt_big_endian_lit_list : Uint63.t list -> Uint63.t list -> carry
 
 val slt_lit_list : Uint63.t list -> Uint63.t list -> carry
 
-val check_slt :
-  Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t -> bool
+val check_slt : Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t -> bool
 
 val check_bbSlt :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-  Uint63.t -> C.t
+  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t
 
 val lit_to_carry : Uint63.t list -> carry list
 
-val check_concat :
-  Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> bool
+val check_concat : Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> bool
 
 val check_bbConcat :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-  Uint63.t -> C.t
+  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t
 
 val list_diseqb : bool list -> bool list -> bool
 
@@ -3897,8 +3621,7 @@ val check_bbDiseq : Atom.atom array -> Form.form array -> Uint63.t -> C.t
 
 val extract_lit : Uint63.t list -> nat -> nat -> Uint63.t list
 
-val check_extract :
-  Form.form array -> Uint63.t list -> Uint63.t list -> n -> n -> bool
+val check_extract : Form.form array -> Uint63.t list -> Uint63.t list -> n -> n -> bool
 
 val check_bbExtract :
   Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t
@@ -3907,8 +3630,7 @@ val extend_lit : Uint63.t list -> nat -> Uint63.t -> Uint63.t list
 
 val zextend_lit : Uint63.t list -> nat -> Uint63.t list
 
-val check_zextend :
-  Form.form array -> Uint63.t list -> Uint63.t list -> n -> bool
+val check_zextend : Form.form array -> Uint63.t list -> Uint63.t list -> n -> bool
 
 val check_bbZextend :
   Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t
@@ -3917,8 +3639,7 @@ val mk_list_lit_false : nat -> Uint63.t list
 
 val sextend_lit : Uint63.t list -> nat -> Uint63.t list
 
-val check_sextend :
-  Form.form array -> Uint63.t list -> Uint63.t list -> n -> bool
+val check_sextend : Form.form array -> Uint63.t list -> Uint63.t list -> n -> bool
 
 val check_bbSextend :
   Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t
@@ -3929,12 +3650,10 @@ val nshl_lit_be : Uint63.t list -> nat -> Uint63.t list
 
 val shl_lit_be : Uint63.t list -> bool list -> Uint63.t list
 
-val check_shl :
-  Form.form array -> Uint63.t list -> bool list -> Uint63.t list -> bool
+val check_shl : Form.form array -> Uint63.t list -> bool list -> Uint63.t list -> bool
 
 val check_bbShl :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-  Uint63.t -> C.t
+  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t
 
 val _shr_lit_be : Uint63.t list -> Uint63.t list
 
@@ -3942,32 +3661,29 @@ val nshr_lit_be : Uint63.t list -> nat -> Uint63.t list
 
 val shr_lit_be : Uint63.t list -> bool list -> Uint63.t list
 
-val check_shr :
-  Form.form array -> Uint63.t list -> bool list -> Uint63.t list -> bool
+val check_shr : Form.form array -> Uint63.t list -> bool list -> Uint63.t list -> bool
 
 val check_bbShr :
-  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-  Uint63.t -> C.t
+  Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t
 
 val check_roweq : Form.form array -> Atom.atom array -> Uint63.t -> C.t
 
 val store_of_me :
-  Atom.atom array -> Uint63.t -> Uint63.t ->
-  ((Typ.coq_type * Typ.coq_type) * Uint63.t) option
+  Atom.atom array -> Uint63.t -> Uint63.t -> ((Typ.coq_type * Typ.coq_type) * Uint63.t)
+  option
 
 val check_rowneq : Form.form array -> Atom.atom array -> Uint63.t list -> C.t
 
 val eq_sel_sym :
-  Atom.atom array -> Typ.coq_type -> Typ.coq_type -> Uint63.t -> Uint63.t ->
-  Uint63.t -> Uint63.t -> bool
+  Atom.atom array -> Typ.coq_type -> Typ.coq_type -> Uint63.t -> Uint63.t -> Uint63.t ->
+  Uint63.t -> bool
 
 val check_ext : Form.form array -> Atom.atom array -> Uint63.t -> C.t
 
 type 'step _trace_ = 'step list * 'step
 
 val _checker_ :
-  (S.t -> 'a1 -> S.t) -> (C.t -> bool) -> S.t -> 'a1 _trace_ -> Uint63.t ->
-  bool
+  (S.t -> 'a1 -> S.t) -> (C.t -> bool) -> S.t -> 'a1 _trace_ -> Uint63.t -> bool
 
 module Euf_Checker :
  sig
@@ -4019,13 +3735,21 @@ module Checker_Ext :
   val step_checker : Atom.atom array -> Form.form array -> S.t -> step -> S.t
 
   val checker :
-    Atom.atom array -> Form.form array -> (C.t -> bool) -> S.t -> step
-    _trace_ -> Uint63.t -> bool
+    Atom.atom array -> Form.form array -> (C.t -> bool) -> S.t -> step _trace_ -> Uint63.t
+    -> bool
 
   type certif =
   | Certif of Uint63.t * step _trace_ * Uint63.t
 
   val checker_ext :
-    Atom.atom array -> Form.form array -> Uint63.t array -> Uint63.t array
-    option -> certif -> bool
+    Atom.atom array -> Form.form array -> Uint63.t array -> Uint63.t array option -> certif
+    -> bool
+
+  val ignore_true_step : step -> bool
+
+  val position_of_step : step -> Uint63.t
+
+  val checker_ext_debug :
+    Atom.atom array -> Form.form array -> Uint63.t array -> Uint63.t array option -> certif
+    -> (nat * step) option
  end

@@ -880,8 +880,12 @@ Register Euf_Checker.ForallInst as SMTCoq.Trace.Euf_Checker.ForallInst.
 
 
 (* Checker for extraction, that does not know the evaluation contexts.
-   TODO: show that there always exists a well-typed evaluation
-   context. *)
+
+   TODO: show that there always exists a well-typed evaluation context.
+
+   There is also a checker for debugging, which is not proved and less
+   efficient, but returns (somehow) informative errors.
+ *)
 
 Module Checker_Ext.
 
@@ -1078,6 +1082,80 @@ Module Checker_Ext.
     apply S.valid_make.
     destruct (Form.check_form_correct (Atom.interp_form_hatom t_i t_func t_atom) (Atom.interp_form_hatom_bv t_i t_func t_atom) _ H1) as [_ H4]; auto with smtcoq_core.
   Qed.
+
+
+  (* Checker for debugging *)
+
+  Definition ignore_true_step (st:step) :=
+    match st with
+    | CTrue _
+    | _ => false
+    end.
+
+  Definition position_of_step (st:step) :=
+    match st with
+    | Res pos _
+    | Weaken pos _ _
+    | ImmFlatten pos _ _
+    | CTrue pos
+    | CFalse pos
+    | BuildDef pos _
+    | BuildDef2 pos _
+    | BuildProj pos _ _
+    | ImmBuildDef pos _
+    | ImmBuildDef2 pos _
+    | ImmBuildProj pos _ _
+    | EqTr pos _ _
+    | EqCgr pos _ _
+    | EqCgrP pos _ _ _
+    | LiaMicromega pos _ _
+    | LiaDiseq pos _
+    | SplArith pos _ _ _
+    | SplDistinctElim pos _ _
+    | BBVar pos _
+    | BBConst pos _
+    | BBOp pos _ _ _
+    | BBNot pos _ _
+    | BBNeg pos _ _
+    | BBAdd pos _ _ _
+    | BBConcat pos _ _ _
+    | BBMul pos _ _ _
+    | BBUlt pos _ _ _
+    | BBSlt pos _ _ _
+    | BBEq pos _ _ _
+    | BBDiseq pos _
+    | BBExtract pos _ _
+    | BBZextend pos _ _
+    | BBSextend pos _ _
+    | BBShl pos _ _ _
+    | BBShr pos _ _ _
+    | RowEq pos _
+    | RowNeq pos _
+    | Ext pos _ => pos
+    end.
+
+  Definition checker_ext_debug d used_roots (c:certif) :=
+    let (nclauses, t, confl) := c in
+    let s := Euf_Checker.add_roots (S.make nclauses) d used_roots in
+    let '(_, nb, failure) :=
+      List.fold_left
+        (fun acc (st:step) =>
+           match acc with
+           | (s, nb, None) =>
+               let nb := S nb in
+               let s := step_checker s st in
+               if negb (ignore_true_step st) &&
+                    C.has_true (S.get s (position_of_step st)) then
+                 (s, nb, Some st)
+               else (s, nb, None)
+           | _ => acc
+           end
+        ) (fst t) (s, O, None)
+    in
+    match failure with
+    | Some st => Some (nb, st)
+    | None => None
+    end.
 
   End Checker.
 

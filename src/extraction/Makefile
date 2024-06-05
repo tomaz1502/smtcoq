@@ -1,7 +1,7 @@
 # List of user's files and name of the final program (edit this part)
 
-USERFILES=smtcoq.ml
-# USERFILES=test.ml
+# USERFILES=smtcoq.ml
+USERFILES=test.ml
 PROGRAM=smtcoq
 
 

@@ -156,11 +156,10 @@ module Coq_Pos =
        | XI q -> XO (add_carry p q)
        | XO q -> XI (add p q)
        | XH -> XO (succ p))
-    | XO p ->
-      (match y with
-       | XI q -> XI (add p q)
-       | XO q -> XO (add p q)
-       | XH -> XI p)
+    | XO p -> (match y with
+               | XI q -> XI (add p q)
+               | XO q -> XO (add p q)
+               | XH -> XI p)
     | XH -> (match y with
              | XI q -> XO (succ q)
              | XO q -> XI q
@@ -180,11 +179,10 @@ module Coq_Pos =
        | XI q -> XO (add_carry p q)
        | XO q -> XI (add p q)
        | XH -> XO (succ p))
-    | XH ->
-      (match y with
-       | XI q -> XI (succ q)
-       | XO q -> XO (succ q)
-       | XH -> XI XH)
+    | XH -> (match y with
+             | XI q -> XI (succ q)
+             | XO q -> XO (succ q)
+             | XH -> XI XH)
 
   (** val pred_double : positive -> positive **)
 
@@ -348,11 +346,10 @@ module Coq_Pos =
              | Gt -> gcdn n1 (sub a' b') b)
           | XO b0 -> gcdn n1 a b0
           | XH -> XH)
-       | XO a0 ->
-         (match b with
-          | XI _ -> gcdn n1 a0 b
-          | XO b0 -> XO (gcdn n1 a0 b0)
-          | XH -> XH)
+       | XO a0 -> (match b with
+                   | XI _ -> gcdn n1 a0 b
+                   | XO b0 -> XO (gcdn n1 a0 b0)
+                   | XH -> XH)
        | XH -> XH)
 
   (** val gcd : positive -> positive -> positive **)
@@ -413,10 +410,9 @@ module N =
     | Npos n' ->
       (match m with
        | N0 -> n0
-       | Npos m' ->
-         (match Coq_Pos.sub_mask n' m' with
-          | Coq_Pos.IsPos p -> Npos p
-          | _ -> N0))
+       | Npos m' -> (match Coq_Pos.sub_mask n' m' with
+                     | Coq_Pos.IsPos p -> Npos p
+                     | _ -> N0))
 
   (** val compare : n -> n -> comparison **)
 
@@ -565,10 +561,9 @@ module Z =
     | Zpos x' -> (match y with
                   | Zpos y' -> Coq_Pos.compare x' y'
                   | _ -> Gt)
-    | Zneg x' ->
-      (match y with
-       | Zneg y' -> compOpp (Coq_Pos.compare x' y')
-       | _ -> Lt)
+    | Zneg x' -> (match y with
+                  | Zneg y' -> compOpp (Coq_Pos.compare x' y')
+                  | _ -> Lt)
 
   (** val leb : z -> z -> bool **)
 
@@ -717,10 +712,9 @@ let rec nth n0 l default0 =
 
 let rec removelast = function
 | Nil -> Nil
-| Cons (a, l0) ->
-  (match l0 with
-   | Nil -> Nil
-   | Cons (_, _) -> Cons (a, (removelast l0)))
+| Cons (a, l0) -> (match l0 with
+                   | Nil -> Nil
+                   | Cons (_, _) -> Cons (a, (removelast l0)))
 
 (** val rev : 'a1 list -> 'a1 list **)
 
@@ -771,10 +765,9 @@ let rec forallb f = function
 let rec firstn n0 l =
   match n0 with
   | O -> Nil
-  | S n1 ->
-    (match l with
-     | Nil -> Nil
-     | Cons (a, l0) -> Cons (a, (firstn n1 l0)))
+  | S n1 -> (match l with
+             | Nil -> Nil
+             | Cons (a, l0) -> Cons (a, (firstn n1 l0)))
 
 (** val zeq_bool : z -> z -> bool **)
 
@@ -816,10 +809,9 @@ let rec peq ceqb p p' =
              | _ -> false)
   | Pinj (j, q) ->
     (match p' with
-     | Pinj (j', q') ->
-       (match Coq_Pos.compare j j' with
-        | Eq -> peq ceqb q q'
-        | _ -> false)
+     | Pinj (j', q') -> (match Coq_Pos.compare j j' with
+                         | Eq -> peq ceqb q q'
+                         | _ -> false)
      | _ -> false)
   | PX (p2, i, q) ->
     (match p' with
@@ -844,17 +836,14 @@ let mkPinj_pred j p =
   | XO j0 -> Pinj ((Coq_Pos.pred_double j0), p)
   | XH -> p
 
-(** val mkPX :
-    'a1 -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> positive -> 'a1 pol -> 'a1 pol **)
+(** val mkPX : 'a1 -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> positive -> 'a1 pol -> 'a1 pol **)
 
 let mkPX cO ceqb p i q =
   match p with
   | Pc c -> if ceqb c cO then mkPinj XH q else PX (p, i, q)
   | Pinj (_, _) -> PX (p, i, q)
   | PX (p', i', q') ->
-    if peq ceqb q' (p0 cO)
-    then PX (p', (Coq_Pos.add i' i), q)
-    else PX (p, i, q)
+    if peq ceqb q' (p0 cO) then PX (p', (Coq_Pos.add i' i), q) else PX (p, i, q)
 
 (** val mkXi : 'a1 -> 'a1 -> positive -> 'a1 pol **)
 
@@ -890,8 +879,8 @@ let rec psubC csub p c =
   | PX (p2, i, q) -> PX (p2, i, (psubC csub q c))
 
 (** val paddI :
-    ('a1 -> 'a1 -> 'a1) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol ->
-    positive -> 'a1 pol -> 'a1 pol **)
+    ('a1 -> 'a1 -> 'a1) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol -> positive -> 'a1 pol
+    -> 'a1 pol **)
 
 let rec paddI cadd pop q j = function
 | Pc c -> mkPinj j (paddC cadd q c)
@@ -907,8 +896,8 @@ let rec paddI cadd pop q j = function
    | XH -> PX (p2, i, (pop q' q)))
 
 (** val psubI :
-    ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1 pol -> 'a1 pol -> 'a1 pol) ->
-    'a1 pol -> positive -> 'a1 pol -> 'a1 pol **)
+    ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol ->
+    positive -> 'a1 pol -> 'a1 pol **)
 
 let rec psubI cadd copp pop q j = function
 | Pc c -> mkPinj j (paddC cadd (popp copp q) c)
@@ -924,8 +913,8 @@ let rec psubI cadd copp pop q j = function
    | XH -> PX (p2, i, (pop q' q)))
 
 (** val paddX :
-    'a1 -> ('a1 -> 'a1 -> bool) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol
-    -> positive -> 'a1 pol -> 'a1 pol **)
+    'a1 -> ('a1 -> 'a1 -> bool) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1 pol -> positive ->
+    'a1 pol -> 'a1 pol **)
 
 let rec paddX cO ceqb pop p' i' p = match p with
 | Pc _ -> PX (p', i', p)
@@ -941,8 +930,8 @@ let rec paddX cO ceqb pop p' i' p = match p with
    | Zneg k -> mkPX cO ceqb (paddX cO ceqb pop p' k p2) i q')
 
 (** val psubX :
-    'a1 -> ('a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1 pol -> 'a1 pol -> 'a1
-    pol) -> 'a1 pol -> positive -> 'a1 pol -> 'a1 pol **)
+    'a1 -> ('a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1 pol -> 'a1 pol -> 'a1 pol) -> 'a1
+    pol -> positive -> 'a1 pol -> 'a1 pol **)
 
 let rec psubX cO copp ceqb pop p' i' p = match p with
 | Pc _ -> PX ((popp copp p'), i', p)
@@ -958,8 +947,7 @@ let rec psubX cO copp ceqb pop p' i' p = match p with
    | Zneg k -> mkPX cO ceqb (psubX cO copp ceqb pop p' k p2) i q')
 
 (** val padd :
-    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol
-    -> 'a1 pol **)
+    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol **)
 
 let rec padd cO cadd ceqb p = function
 | Pc c' -> paddC cadd p c'
@@ -970,24 +958,20 @@ let rec padd cO cadd ceqb p = function
    | Pinj (j, q) ->
      (match j with
       | XI j0 -> PX (p'0, i', (padd cO cadd ceqb (Pinj ((XO j0), q)) q'))
-      | XO j0 ->
-        PX (p'0, i',
-          (padd cO cadd ceqb (Pinj ((Coq_Pos.pred_double j0), q)) q'))
+      | XO j0 -> PX (p'0, i', (padd cO cadd ceqb (Pinj ((Coq_Pos.pred_double j0), q)) q'))
       | XH -> PX (p'0, i', (padd cO cadd ceqb q q')))
    | PX (p2, i, q) ->
      (match Z.pos_sub i i' with
-      | Z0 ->
-        mkPX cO ceqb (padd cO cadd ceqb p2 p'0) i (padd cO cadd ceqb q q')
+      | Z0 -> mkPX cO ceqb (padd cO cadd ceqb p2 p'0) i (padd cO cadd ceqb q q')
       | Zpos k ->
         mkPX cO ceqb (padd cO cadd ceqb (PX (p2, k, (p0 cO))) p'0) i'
           (padd cO cadd ceqb q q')
       | Zneg k ->
-        mkPX cO ceqb (paddX cO ceqb (padd cO cadd ceqb) p'0 k p2) i
-          (padd cO cadd ceqb q q')))
+        mkPX cO ceqb (paddX cO ceqb (padd cO cadd ceqb) p'0 k p2) i (padd cO cadd ceqb q q')))
 
 (** val psub :
-    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1
-    -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol **)
+    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1 -> 'a1 ->
+    bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol **)
 
 let rec psub cO cadd csub copp ceqb p = function
 | Pc c' -> psubC csub p c'
@@ -998,12 +982,10 @@ let rec psub cO cadd csub copp ceqb p = function
    | Pinj (j, q) ->
      (match j with
       | XI j0 ->
-        PX ((popp copp p'0), i',
-          (psub cO cadd csub copp ceqb (Pinj ((XO j0), q)) q'))
+        PX ((popp copp p'0), i', (psub cO cadd csub copp ceqb (Pinj ((XO j0), q)) q'))
       | XO j0 ->
         PX ((popp copp p'0), i',
-          (psub cO cadd csub copp ceqb (Pinj ((Coq_Pos.pred_double j0), q))
-            q'))
+          (psub cO cadd csub copp ceqb (Pinj ((Coq_Pos.pred_double j0), q)) q'))
       | XH -> PX ((popp copp p'0), i', (psub cO cadd csub copp ceqb q q')))
    | PX (p2, i, q) ->
      (match Z.pos_sub i i' with
@@ -1011,16 +993,14 @@ let rec psub cO cadd csub copp ceqb p = function
         mkPX cO ceqb (psub cO cadd csub copp ceqb p2 p'0) i
           (psub cO cadd csub copp ceqb q q')
       | Zpos k ->
-        mkPX cO ceqb (psub cO cadd csub copp ceqb (PX (p2, k, (p0 cO))) p'0)
-          i' (psub cO cadd csub copp ceqb q q')
+        mkPX cO ceqb (psub cO cadd csub copp ceqb (PX (p2, k, (p0 cO))) p'0) i'
+          (psub cO cadd csub copp ceqb q q')
       | Zneg k ->
-        mkPX cO ceqb
-          (psubX cO copp ceqb (psub cO cadd csub copp ceqb) p'0 k p2) i
+        mkPX cO ceqb (psubX cO copp ceqb (psub cO cadd csub copp ceqb) p'0 k p2) i
           (psub cO cadd csub copp ceqb q q')))
 
 (** val pmulC_aux :
-    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 ->
-    'a1 pol **)
+    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 -> 'a1 pol **)
 
 let rec pmulC_aux cO cmul ceqb p c =
   match p with
@@ -1030,17 +1010,14 @@ let rec pmulC_aux cO cmul ceqb p c =
     mkPX cO ceqb (pmulC_aux cO cmul ceqb p2 c) i (pmulC_aux cO cmul ceqb q c)
 
 (** val pmulC :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol ->
-    'a1 -> 'a1 pol **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 -> 'a1 pol **)
 
 let pmulC cO cI cmul ceqb p c =
-  if ceqb c cO
-  then p0 cO
-  else if ceqb c cI then p else pmulC_aux cO cmul ceqb p c
+  if ceqb c cO then p0 cO else if ceqb c cI then p else pmulC_aux cO cmul ceqb p c
 
 (** val pmulI :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1 pol ->
-    'a1 pol -> 'a1 pol) -> 'a1 pol -> positive -> 'a1 pol -> 'a1 pol **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1 pol -> 'a1 pol -> 'a1
+    pol) -> 'a1 pol -> positive -> 'a1 pol -> 'a1 pol **)
 
 let rec pmulI cO cI cmul ceqb pmul0 q j = function
 | Pc c -> mkPinj j (pmulC cO cI cmul ceqb q c)
@@ -1060,8 +1037,8 @@ let rec pmulI cO cI cmul ceqb pmul0 q j = function
    | XH -> mkPX cO ceqb (pmulI cO cI cmul ceqb pmul0 q XH p') i' (pmul0 q' q))
 
 (** val pmul :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1
-    -> bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1
+    pol -> 'a1 pol -> 'a1 pol **)
 
 let rec pmul cO cI cadd cmul ceqb p p'' = match p'' with
 | Pc c -> pmulC cO cI cmul ceqb p c
@@ -1073,8 +1050,7 @@ let rec pmul cO cI cadd cmul ceqb p p'' = match p'' with
      let qQ' =
        match j with
        | XI j0 -> pmul cO cI cadd cmul ceqb (Pinj ((XO j0), q)) q'
-       | XO j0 ->
-         pmul cO cI cadd cmul ceqb (Pinj ((Coq_Pos.pred_double j0), q)) q'
+       | XO j0 -> pmul cO cI cadd cmul ceqb (Pinj ((Coq_Pos.pred_double j0), q)) q'
        | XH -> pmul cO cI cadd cmul ceqb q q'
      in
      mkPX cO ceqb (pmul cO cI cadd cmul ceqb p p') i' qQ'
@@ -1084,20 +1060,18 @@ let rec pmul cO cI cadd cmul ceqb p p'' = match p'' with
      let qP' = pmul cO cI cadd cmul ceqb (mkPinj XH q) p' in
      let pP' = pmul cO cI cadd cmul ceqb p2 p' in
      padd cO cadd ceqb
-       (mkPX cO ceqb (padd cO cadd ceqb (mkPX cO ceqb pP' i (p0 cO)) qP') i'
-         (p0 cO)) (mkPX cO ceqb pQ' i qQ'))
+       (mkPX cO ceqb (padd cO cadd ceqb (mkPX cO ceqb pP' i (p0 cO)) qP') i' (p0 cO))
+       (mkPX cO ceqb pQ' i qQ'))
 
 (** val psquare :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1
-    -> bool) -> 'a1 pol -> 'a1 pol **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1
+    pol -> 'a1 pol **)
 
 let rec psquare cO cI cadd cmul ceqb = function
 | Pc c -> Pc (cmul c c)
 | Pinj (j, q) -> Pinj (j, (psquare cO cI cadd cmul ceqb q))
 | PX (p2, i, q) ->
-  let twoPQ =
-    pmul cO cI cadd cmul ceqb p2
-      (mkPinj XH (pmulC cO cI cmul ceqb q (cadd cI cI)))
+  let twoPQ = pmul cO cI cadd cmul ceqb p2 (mkPinj XH (pmulC cO cI cmul ceqb q (cadd cI cI)))
   in
   let q2 = psquare cO cI cadd cmul ceqb q in
   let p3 = psquare cO cI cadd cmul ceqb p2 in
@@ -1109,9 +1083,8 @@ let mk_X cO cI j =
   mkPinj_pred j (mkX cO cI)
 
 (** val ppow_pos :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1
-    -> bool) -> ('a1 pol -> 'a1 pol) -> 'a1 pol -> 'a1 pol -> positive -> 'a1
-    pol **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1
+    pol -> 'a1 pol) -> 'a1 pol -> 'a1 pol -> positive -> 'a1 pol **)
 
 let rec ppow_pos cO cI cadd cmul ceqb subst_l res p = function
 | XI p3 ->
@@ -1120,21 +1093,20 @@ let rec ppow_pos cO cI cadd cmul ceqb subst_l res p = function
       (ppow_pos cO cI cadd cmul ceqb subst_l
         (ppow_pos cO cI cadd cmul ceqb subst_l res p p3) p p3) p)
 | XO p3 ->
-  ppow_pos cO cI cadd cmul ceqb subst_l
-    (ppow_pos cO cI cadd cmul ceqb subst_l res p p3) p p3
+  ppow_pos cO cI cadd cmul ceqb subst_l (ppow_pos cO cI cadd cmul ceqb subst_l res p p3) p p3
 | XH -> subst_l (pmul cO cI cadd cmul ceqb res p)
 
 (** val ppow_N :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1
-    -> bool) -> ('a1 pol -> 'a1 pol) -> 'a1 pol -> n -> 'a1 pol **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1
+    pol -> 'a1 pol) -> 'a1 pol -> n -> 'a1 pol **)
 
 let ppow_N cO cI cadd cmul ceqb subst_l p = function
 | N0 -> p1 cI
 | Npos p2 -> ppow_pos cO cI cadd cmul ceqb subst_l (p1 cI) p p2
 
 (** val norm_aux :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1
-    -> 'a1) -> ('a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pExpr -> 'a1 pol **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1
+    -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pExpr -> 'a1 pol **)
 
 let rec norm_aux cO cI cadd cmul csub copp ceqb = function
 | PEc c -> Pc c
@@ -1142,14 +1114,12 @@ let rec norm_aux cO cI cadd cmul csub copp ceqb = function
 | PEadd (pe1, pe2) ->
   (match pe1 with
    | PEopp pe3 ->
-     psub cO cadd csub copp ceqb
-       (norm_aux cO cI cadd cmul csub copp ceqb pe2)
+     psub cO cadd csub copp ceqb (norm_aux cO cI cadd cmul csub copp ceqb pe2)
        (norm_aux cO cI cadd cmul csub copp ceqb pe3)
    | _ ->
      (match pe2 with
       | PEopp pe3 ->
-        psub cO cadd csub copp ceqb
-          (norm_aux cO cI cadd cmul csub copp ceqb pe1)
+        psub cO cadd csub copp ceqb (norm_aux cO cI cadd cmul csub copp ceqb pe1)
           (norm_aux cO cI cadd cmul csub copp ceqb pe3)
       | _ ->
         padd cO cadd ceqb (norm_aux cO cI cadd cmul csub copp ceqb pe1)
@@ -1162,8 +1132,7 @@ let rec norm_aux cO cI cadd cmul csub copp ceqb = function
     (norm_aux cO cI cadd cmul csub copp ceqb pe2)
 | PEopp pe1 -> popp copp (norm_aux cO cI cadd cmul csub copp ceqb pe1)
 | PEpow (pe1, n0) ->
-  ppow_N cO cI cadd cmul ceqb (fun p -> p)
-    (norm_aux cO cI cadd cmul csub copp ceqb pe1) n0
+  ppow_N cO cI cadd cmul ceqb (fun p -> p) (norm_aux cO cI cadd cmul csub copp ceqb pe1) n0
 
 type kind =
 | IsProp
@@ -1177,8 +1146,7 @@ type ('tA, 'tX, 'aA, 'aF) gFormula =
 | AND of kind * ('tA, 'tX, 'aA, 'aF) gFormula * ('tA, 'tX, 'aA, 'aF) gFormula
 | OR of kind * ('tA, 'tX, 'aA, 'aF) gFormula * ('tA, 'tX, 'aA, 'aF) gFormula
 | NOT of kind * ('tA, 'tX, 'aA, 'aF) gFormula
-| IMPL of kind * ('tA, 'tX, 'aA, 'aF) gFormula * 'aF option
-   * ('tA, 'tX, 'aA, 'aF) gFormula
+| IMPL of kind * ('tA, 'tX, 'aA, 'aF) gFormula * 'aF option * ('tA, 'tX, 'aA, 'aF) gFormula
 | IFF of kind * ('tA, 'tX, 'aA, 'aF) gFormula * ('tA, 'tX, 'aA, 'aF) gFormula
 | EQ of ('tA, 'tX, 'aA, 'aF) gFormula * ('tA, 'tX, 'aA, 'aF) gFormula
 
@@ -1203,8 +1171,8 @@ let cnf_ff =
   Cons (Nil, Nil)
 
 (** val add_term :
-    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1 * 'a2) -> ('a1, 'a2)
-    clause -> ('a1, 'a2) clause option **)
+    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1 * 'a2) -> ('a1, 'a2) clause -> ('a1,
+    'a2) clause option **)
 
 let rec add_term unsat deduce t0 = function
 | Nil ->
@@ -1225,8 +1193,8 @@ let rec add_term unsat deduce t0 = function
       | None -> None))
 
 (** val or_clause :
-    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1,
-    'a2) clause -> ('a1, 'a2) clause option **)
+    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1, 'a2) clause ->
+    ('a1, 'a2) clause option **)
 
 let rec or_clause unsat deduce cl1 cl2 =
   match cl1 with
@@ -1237,8 +1205,8 @@ let rec or_clause unsat deduce cl1 cl2 =
      | None -> None)
 
 (** val xor_clause_cnf :
-    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1,
-    'a2) cnf -> ('a1, 'a2) cnf **)
+    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1, 'a2) cnf ->
+    ('a1, 'a2) cnf **)
 
 let xor_clause_cnf unsat deduce t0 f =
   fold_left (fun acc e ->
@@ -1247,8 +1215,8 @@ let xor_clause_cnf unsat deduce t0 f =
     | None -> acc) f Nil
 
 (** val or_clause_cnf :
-    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1,
-    'a2) cnf -> ('a1, 'a2) cnf **)
+    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) clause -> ('a1, 'a2) cnf ->
+    ('a1, 'a2) cnf **)
 
 let or_clause_cnf unsat deduce t0 f =
   match t0 with
@@ -1256,8 +1224,8 @@ let or_clause_cnf unsat deduce t0 f =
   | Cons (_, _) -> xor_clause_cnf unsat deduce t0 f
 
 (** val or_cnf :
-    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) cnf -> ('a1,
-    'a2) cnf -> ('a1, 'a2) cnf **)
+    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) cnf -> ('a1, 'a2) cnf -> ('a1,
+    'a2) cnf **)
 
 let rec or_cnf unsat deduce f f' =
   match f with
@@ -1297,8 +1265,8 @@ let and_cnf_opt f1 f2 =
   else if is_cnf_tt f2 then f1 else and_cnf f1 f2
 
 (** val or_cnf_opt :
-    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) cnf -> ('a1,
-    'a2) cnf -> ('a1, 'a2) cnf **)
+    ('a1 -> bool) -> ('a1 -> 'a1 -> 'a1 option) -> ('a1, 'a2) cnf -> ('a1, 'a2) cnf -> ('a1,
+    'a2) cnf **)
 
 let or_cnf_opt unsat deduce f1 f2 =
   if if is_cnf_tt f1 then true else is_cnf_tt f2
@@ -1306,9 +1274,9 @@ let or_cnf_opt unsat deduce f1 f2 =
   else if is_cnf_ff f2 then f1 else or_cnf unsat deduce f1 f2
 
 (** val mk_and :
-    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1,
-    'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3,
-    'a4, 'a5) tFormula -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf **)
+    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3, 'a4, 'a5)
+    tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a1,
+    'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf **)
 
 let mk_and unsat deduce rEC k pol0 f1 f2 =
   if pol0
@@ -1316,9 +1284,9 @@ let mk_and unsat deduce rEC k pol0 f1 f2 =
   else or_cnf_opt unsat deduce (rEC pol0 k f1) (rEC pol0 k f2)
 
 (** val mk_or :
-    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1,
-    'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3,
-    'a4, 'a5) tFormula -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf **)
+    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3, 'a4, 'a5)
+    tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a1,
+    'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf **)
 
 let mk_or unsat deduce rEC k pol0 f1 f2 =
   if pol0
@@ -1326,9 +1294,9 @@ let mk_or unsat deduce rEC k pol0 f1 f2 =
   else and_cnf_opt (rEC pol0 k f1) (rEC pol0 k f2)
 
 (** val mk_impl :
-    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1,
-    'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3,
-    'a4, 'a5) tFormula -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf **)
+    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3, 'a4, 'a5)
+    tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a1,
+    'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf **)
 
 let mk_impl unsat deduce rEC k pol0 f1 f2 =
   if pol0
@@ -1336,13 +1304,12 @@ let mk_impl unsat deduce rEC k pol0 f1 f2 =
   else and_cnf_opt (rEC (negb pol0) k f1) (rEC pol0 k f2)
 
 (** val mk_iff :
-    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1,
-    'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3,
-    'a4, 'a5) tFormula -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf **)
+    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> (bool -> kind -> ('a1, 'a3, 'a4, 'a5)
+    tFormula -> ('a2, 'a3) cnf) -> kind -> bool -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a1,
+    'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf **)
 
 let mk_iff unsat deduce rEC k pol0 f1 f2 =
-  or_cnf_opt unsat deduce
-    (and_cnf_opt (rEC (negb pol0) k f1) (rEC false k f2))
+  or_cnf_opt unsat deduce (and_cnf_opt (rEC (negb pol0) k f1) (rEC false k f2))
     (and_cnf_opt (rEC pol0 k f1) (rEC true k f2))
 
 (** val is_bool : kind -> ('a1, 'a2, 'a3, 'a4) tFormula -> bool option **)
@@ -1353,9 +1320,8 @@ let is_bool _ = function
 | _ -> None
 
 (** val xcnf :
-    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> ('a1 -> 'a3 -> ('a2, 'a3)
-    cnf) -> ('a1 -> 'a3 -> ('a2, 'a3) cnf) -> bool -> kind -> ('a1, 'a3, 'a4,
-    'a5) tFormula -> ('a2, 'a3) cnf **)
+    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> ('a1 -> 'a3 -> ('a2, 'a3) cnf) -> ('a1 ->
+    'a3 -> ('a2, 'a3) cnf) -> bool -> kind -> ('a1, 'a3, 'a4, 'a5) tFormula -> ('a2, 'a3) cnf **)
 
 let rec xcnf unsat deduce normalise0 negate0 pol0 _ = function
 | TT _ -> if pol0 then cnf_tt else cnf_ff
@@ -1363,31 +1329,28 @@ let rec xcnf unsat deduce normalise0 negate0 pol0 _ = function
 | X (_, _) -> cnf_ff
 | A (_, x, t0) -> if pol0 then normalise0 x t0 else negate0 x t0
 | AND (k0, e1, e2) ->
-  mk_and unsat deduce (fun x x0 x1 ->
-    xcnf unsat deduce normalise0 negate0 x x0 x1) k0 pol0 e1 e2
+  mk_and unsat deduce (fun x x0 x1 -> xcnf unsat deduce normalise0 negate0 x x0 x1) k0 pol0
+    e1 e2
 | OR (k0, e1, e2) ->
-  mk_or unsat deduce (fun x x0 x1 ->
-    xcnf unsat deduce normalise0 negate0 x x0 x1) k0 pol0 e1 e2
+  mk_or unsat deduce (fun x x0 x1 -> xcnf unsat deduce normalise0 negate0 x x0 x1) k0 pol0
+    e1 e2
 | NOT (k0, e) -> xcnf unsat deduce normalise0 negate0 (negb pol0) k0 e
 | IMPL (k0, e1, _, e2) ->
-  mk_impl unsat deduce (fun x x0 x1 ->
-    xcnf unsat deduce normalise0 negate0 x x0 x1) k0 pol0 e1 e2
+  mk_impl unsat deduce (fun x x0 x1 -> xcnf unsat deduce normalise0 negate0 x x0 x1) k0 pol0
+    e1 e2
 | IFF (k0, e1, e2) ->
   (match is_bool k0 e2 with
-   | Some isb ->
-     xcnf unsat deduce normalise0 negate0 (if isb then pol0 else negb pol0)
-       k0 e1
+   | Some isb -> xcnf unsat deduce normalise0 negate0 (if isb then pol0 else negb pol0) k0 e1
    | None ->
-     mk_iff unsat deduce (fun x x0 x1 ->
-       xcnf unsat deduce normalise0 negate0 x x0 x1) k0 pol0 e1 e2)
+     mk_iff unsat deduce (fun x x0 x1 -> xcnf unsat deduce normalise0 negate0 x x0 x1) k0
+       pol0 e1 e2)
 | EQ (e1, e2) ->
   (match is_bool IsBool e2 with
    | Some isb ->
-     xcnf unsat deduce normalise0 negate0 (if isb then pol0 else negb pol0)
-       IsBool e1
+     xcnf unsat deduce normalise0 negate0 (if isb then pol0 else negb pol0) IsBool e1
    | None ->
-     mk_iff unsat deduce (fun x x0 x1 ->
-       xcnf unsat deduce normalise0 negate0 x x0 x1) IsBool pol0 e1 e2)
+     mk_iff unsat deduce (fun x x0 x1 -> xcnf unsat deduce normalise0 negate0 x x0 x1)
+       IsBool pol0 e1 e2)
 
 (** val cnf_checker :
     (('a1 * 'a2) list -> 'a3 -> bool) -> ('a1, 'a2) cnf -> 'a3 list -> bool **)
@@ -1398,13 +1361,12 @@ let rec cnf_checker checker0 f l =
   | Cons (e, f0) ->
     (match l with
      | Nil -> false
-     | Cons (c, l0) ->
-       if checker0 e c then cnf_checker checker0 f0 l0 else false)
+     | Cons (c, l0) -> if checker0 e c then cnf_checker checker0 f0 l0 else false)
 
 (** val tauto_checker :
-    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> ('a1 -> 'a3 -> ('a2, 'a3)
-    cnf) -> ('a1 -> 'a3 -> ('a2, 'a3) cnf) -> (('a2 * 'a3) list -> 'a4 ->
-    bool) -> ('a1, rtyp, 'a3, unit0) gFormula -> 'a4 list -> bool **)
+    ('a2 -> bool) -> ('a2 -> 'a2 -> 'a2 option) -> ('a1 -> 'a3 -> ('a2, 'a3) cnf) -> ('a1 ->
+    'a3 -> ('a2, 'a3) cnf) -> (('a2 * 'a3) list -> 'a4 -> bool) -> ('a1, rtyp, 'a3, unit0)
+    gFormula -> 'a4 list -> bool **)
 
 let tauto_checker unsat deduce normalise0 negate0 checker0 f w =
   cnf_checker checker0 (xcnf unsat deduce normalise0 negate0 true IsProp f) w
@@ -1414,8 +1376,7 @@ let tauto_checker unsat deduce normalise0 negate0 checker0 f w =
 let cneqb ceqb x y =
   negb (ceqb x y)
 
-(** val cltb :
-    ('a1 -> 'a1 -> bool) -> ('a1 -> 'a1 -> bool) -> 'a1 -> 'a1 -> bool **)
+(** val cltb : ('a1 -> 'a1 -> bool) -> ('a1 -> 'a1 -> bool) -> 'a1 -> 'a1 -> bool **)
 
 let cltb ceqb cleb x y =
   if cleb x y then cneqb ceqb x y else false
@@ -1435,19 +1396,17 @@ type 'c nFormula = 'c polC * op1
 let opMult o o' =
   match o with
   | Equal -> Some Equal
-  | NonEqual ->
-    (match o' with
-     | Equal -> Some Equal
-     | NonEqual -> Some NonEqual
-     | _ -> None)
+  | NonEqual -> (match o' with
+                 | Equal -> Some Equal
+                 | NonEqual -> Some NonEqual
+                 | _ -> None)
   | Strict -> (match o' with
                | NonEqual -> None
                | _ -> Some o')
-  | NonStrict ->
-    (match o' with
-     | Equal -> Some Equal
-     | NonEqual -> None
-     | _ -> Some NonStrict)
+  | NonStrict -> (match o' with
+                  | Equal -> Some Equal
+                  | NonEqual -> None
+                  | _ -> Some NonStrict)
 
 (** val opAdd : op1 -> op1 -> op1 option **)
 
@@ -1460,11 +1419,10 @@ let opAdd o o' =
   | Strict -> (match o' with
                | NonEqual -> None
                | _ -> Some Strict)
-  | NonStrict ->
-    (match o' with
-     | Equal -> Some NonStrict
-     | NonEqual -> None
-     | x -> Some x)
+  | NonStrict -> (match o' with
+                  | Equal -> Some NonStrict
+                  | NonEqual -> None
+                  | x -> Some x)
 
 type 'c psatz =
 | PsatzLet of 'c psatz * 'c psatz
@@ -1493,8 +1451,8 @@ let map_option2 f o o' =
   | None -> None
 
 (** val pexpr_times_nformula :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1
-    -> bool) -> 'a1 polC -> 'a1 nFormula -> 'a1 nFormula option **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1
+    polC -> 'a1 nFormula -> 'a1 nFormula option **)
 
 let pexpr_times_nformula cO cI cplus ctimes ceqb e = function
 | (ef, o) ->
@@ -1503,18 +1461,17 @@ let pexpr_times_nformula cO cI cplus ctimes ceqb e = function
    | _ -> None)
 
 (** val nformula_times_nformula :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1
-    -> bool) -> 'a1 nFormula -> 'a1 nFormula -> 'a1 nFormula option **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1
+    nFormula -> 'a1 nFormula -> 'a1 nFormula option **)
 
 let nformula_times_nformula cO cI cplus ctimes ceqb f1 f2 =
   let (e1, o1) = f1 in
   let (e2, o2) = f2 in
-  map_option (fun x -> Some ((pmul cO cI cplus ctimes ceqb e1 e2), x))
-    (opMult o1 o2)
+  map_option (fun x -> Some ((pmul cO cI cplus ctimes ceqb e1 e2), x)) (opMult o1 o2)
 
 (** val nformula_plus_nformula :
-    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 nFormula -> 'a1
-    nFormula -> 'a1 nFormula option **)
+    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 nFormula -> 'a1 nFormula ->
+    'a1 nFormula option **)
 
 let nformula_plus_nformula cO cplus ceqb f1 f2 =
   let (e1, o1) = f1 in
@@ -1522,9 +1479,8 @@ let nformula_plus_nformula cO cplus ceqb f1 f2 =
   map_option (fun x -> Some ((padd cO cplus ceqb e1 e2), x)) (opAdd o1 o2)
 
 (** val eval_Psatz :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1
-    -> bool) -> ('a1 -> 'a1 -> bool) -> 'a1 nFormula list -> 'a1 psatz -> 'a1
-    nFormula option **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> ('a1
+    -> 'a1 -> bool) -> 'a1 nFormula list -> 'a1 psatz -> 'a1 nFormula option **)
 
 let rec eval_Psatz cO cI cplus ctimes ceqb cleb l = function
 | PsatzLet (p2, p3) ->
@@ -1548,8 +1504,7 @@ let rec eval_Psatz cO cI cplus ctimes ceqb cleb l = function
 | PsatzZ -> Some ((Pc cO), Equal)
 
 (** val check_inconsistent :
-    'a1 -> ('a1 -> 'a1 -> bool) -> ('a1 -> 'a1 -> bool) -> 'a1 nFormula ->
-    bool **)
+    'a1 -> ('a1 -> 'a1 -> bool) -> ('a1 -> 'a1 -> bool) -> 'a1 nFormula -> bool **)
 
 let check_inconsistent cO ceqb cleb = function
 | (e, op) ->
@@ -1573,22 +1528,21 @@ type op2 =
 type 't formula = { flhs : 't pExpr; fop : op2; frhs : 't pExpr }
 
 (** val norm :
-    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1
-    -> 'a1) -> ('a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pExpr -> 'a1 pol **)
+    'a1 -> 'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1
+    -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pExpr -> 'a1 pol **)
 
 let norm =
   norm_aux
 
 (** val psub0 :
-    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1
-    -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol **)
+    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1) -> ('a1 -> 'a1 ->
+    bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol **)
 
 let psub0 =
   psub
 
 (** val padd0 :
-    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol
-    -> 'a1 pol **)
+    'a1 -> ('a1 -> 'a1 -> 'a1) -> ('a1 -> 'a1 -> bool) -> 'a1 pol -> 'a1 pol -> 'a1 pol **)
 
 let padd0 =
   padd
@@ -1650,24 +1604,22 @@ let xnormalise = function
 | (e, o) ->
   (match o with
    | Equal ->
-     Cons (((psub1 e (Pc (Zpos XH))), NonStrict), (Cons
-       (((psub1 (Pc (Zneg XH)) e), NonStrict), Nil)))
+     Cons (((psub1 e (Pc (Zpos XH))), NonStrict), (Cons (((psub1 (Pc (Zneg XH)) e),
+       NonStrict), Nil)))
    | NonEqual -> Cons ((e, Equal), Nil)
    | Strict -> Cons (((psub1 (Pc Z0) e), NonStrict), Nil)
    | NonStrict -> Cons (((psub1 (Pc (Zneg XH)) e), NonStrict), Nil))
 
-(** val cnf_of_list :
-    'a1 -> z nFormula list -> (z nFormula * 'a1) list list **)
+(** val cnf_of_list : 'a1 -> z nFormula list -> (z nFormula * 'a1) list list **)
 
 let cnf_of_list tg l =
-  fold_right (fun x acc ->
-    if zunsat x then acc else Cons ((Cons ((x, tg), Nil)), acc)) cnf_tt l
+  fold_right (fun x acc -> if zunsat x then acc else Cons ((Cons ((x, tg), Nil)), acc))
+    cnf_tt l
 
 (** val normalise : z formula -> 'a1 -> (z nFormula, 'a1) cnf **)
 
 let normalise t0 tg =
-  let f = xnnormalise t0 in
-  if zunsat f then cnf_ff else cnf_of_list tg (xnormalise f)
+  let f = xnnormalise t0 in if zunsat f then cnf_ff else cnf_of_list tg (xnormalise f)
 
 (** val xnegate : z nFormula -> z nFormula list **)
 
@@ -1675,24 +1627,22 @@ let xnegate = function
 | (e, o) ->
   (match o with
    | NonEqual ->
-     Cons (((psub1 e (Pc (Zpos XH))), NonStrict), (Cons
-       (((psub1 (Pc (Zneg XH)) e), NonStrict), Nil)))
+     Cons (((psub1 e (Pc (Zpos XH))), NonStrict), (Cons (((psub1 (Pc (Zneg XH)) e),
+       NonStrict), Nil)))
    | Strict -> Cons (((psub1 e (Pc (Zpos XH))), NonStrict), Nil)
    | x -> Cons ((e, x), Nil))
 
 (** val negate : z formula -> 'a1 -> (z nFormula, 'a1) cnf **)
 
 let negate t0 tg =
-  let f = xnnormalise t0 in
-  if zunsat f then cnf_tt else cnf_of_list tg (xnegate f)
+  let f = xnnormalise t0 in if zunsat f then cnf_tt else cnf_of_list tg (xnegate f)
 
 (** val ceiling : z -> z -> z **)
 
 let ceiling a b =
-  let (q, r) = Z.div_eucl a b in
-  (match r with
-   | Z0 -> q
-   | _ -> Z.add q (Zpos XH))
+  let (q, r) = Z.div_eucl a b in (match r with
+                                  | Z0 -> q
+                                  | _ -> Z.add q (Zpos XH))
 
 type zArithProof =
 | DoneProof
@@ -1713,8 +1663,7 @@ let rec zgcd_pol = function
 | Pc c -> (Z0, c)
 | Pinj (_, p2) -> zgcd_pol p2
 | PX (p2, _, q) ->
-  let (g1, c1) = zgcd_pol p2 in
-  let (g2, c2) = zgcd_pol q in ((zgcdM (zgcdM g1 c1) g2), c2)
+  let (g1, c1) = zgcd_pol p2 in let (g2, c2) = zgcd_pol q in ((zgcdM (zgcdM g1 c1) g2), c2)
 
 (** val zdiv_pol : z polC -> z -> z polC **)
 
@@ -1740,9 +1689,7 @@ let genCuttingPlane = function
    | Equal ->
      let (g, c) = zgcd_pol e in
      if if Z.gtb g Z0
-        then if negb (zeq_bool c Z0)
-             then negb (zeq_bool (Z.gcd g c) g)
-             else false
+        then if negb (zeq_bool c Z0) then negb (zeq_bool (Z.gcd g c) g) else false
         else false
      then None
      else Some ((makeCuttingPlane e), Equal)
@@ -1865,8 +1812,7 @@ let rec zChecker l = function
 (** val zTautoChecker : z formula bFormula -> zArithProof list -> bool **)
 
 let zTautoChecker f w =
-  tauto_checker zunsat zdeduce normalise negate (fun cl ->
-    zChecker (map fst cl)) f w
+  tauto_checker zunsat zdeduce normalise negate (fun cl -> zChecker (map fst cl)) f w
 
 (** val lsl0 : Uint63.t -> Uint63.t -> Uint63.t **)
 
@@ -1911,10 +1857,9 @@ let compare0 = (fun x y -> let c = Uint63.compare x y in if c = 0 then Eq else i
 (** val size : nat **)
 
 let size =
-  S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S
-    (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S
-    (S (S (S (S (S (S (S (S (S (S (S (S (S (S
-    O))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+  S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S
+    (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S (S
+    (S (S (S (S O))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
 
 (** val digits : Uint63.t **)
 
@@ -2017,11 +1962,10 @@ module Raw =
   let rec mem k = function
   | Nil -> false
   | Cons (p, l) ->
-    let (k', _) = p in
-    (match X.compare k k' with
-     | LT -> false
-     | EQ0 -> true
-     | GT -> mem k l)
+    let (k', _) = p in (match X.compare k k' with
+                        | LT -> false
+                        | EQ0 -> true
+                        | GT -> mem k l)
 
   (** val find : key -> 'a1 t -> 'a1 option **)
 
@@ -2097,32 +2041,26 @@ module Raw =
   | Nil -> Nil
   | Cons (p, m') -> let (k, e) = p in Cons ((k, (f k e)), (mapi f m'))
 
-  (** val option_cons :
-      key -> 'a1 option -> (key * 'a1) list -> (key * 'a1) list **)
+  (** val option_cons : key -> 'a1 option -> (key * 'a1) list -> (key * 'a1) list **)
 
   let option_cons k o l =
     match o with
     | Some e -> Cons ((k, e), l)
     | None -> l
 
-  (** val map2_l :
-      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a3 t **)
+  (** val map2_l : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a3 t **)
 
   let rec map2_l f = function
   | Nil -> Nil
-  | Cons (p, l) ->
-    let (k, e) = p in option_cons k (f (Some e) None) (map2_l f l)
+  | Cons (p, l) -> let (k, e) = p in option_cons k (f (Some e) None) (map2_l f l)
 
-  (** val map2_r :
-      ('a1 option -> 'a2 option -> 'a3 option) -> 'a2 t -> 'a3 t **)
+  (** val map2_r : ('a1 option -> 'a2 option -> 'a3 option) -> 'a2 t -> 'a3 t **)
 
   let rec map2_r f = function
   | Nil -> Nil
-  | Cons (p, l') ->
-    let (k, e') = p in option_cons k (f None (Some e')) (map2_r f l')
+  | Cons (p, l') -> let (k, e') = p in option_cons k (f None (Some e')) (map2_r f l')
 
-  (** val map2 :
-      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t **)
+  (** val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t **)
 
   let rec map2 f m = match m with
   | Nil -> map2_r f
@@ -2154,23 +2092,19 @@ module Raw =
        | GT -> Cons ((k', (None, (Some e'))), (combine_aux l')))
     in combine_aux
 
-  (** val fold_right_pair :
-      ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3 **)
+  (** val fold_right_pair : ('a1 -> 'a2 -> 'a3 -> 'a3) -> ('a1 * 'a2) list -> 'a3 -> 'a3 **)
 
   let fold_right_pair f l i =
     fold_right (fun p -> f (fst p) (snd p)) i l
 
   (** val map2_alt :
-      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t ->
-      (key * 'a3) list **)
+      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> (key * 'a3) list **)
 
   let map2_alt f m m' =
     let m0 = combine m m' in
-    let m1 = map (fun p -> f (fst p) (snd p)) m0 in
-    fold_right_pair option_cons m1 Nil
+    let m1 = map (fun p -> f (fst p) (snd p)) m0 in fold_right_pair option_cons m1 Nil
 
-  (** val at_least_one :
-      'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option **)
+  (** val at_least_one : 'a1 option -> 'a2 option -> ('a1 option * 'a2 option) option **)
 
   let at_least_one o o' =
     match o with
@@ -2180,8 +2114,7 @@ module Raw =
                | None -> None)
 
   (** val at_least_one_then_f :
-      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2 option ->
-      'a3 option **)
+      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 option -> 'a2 option -> 'a3 option **)
 
   let at_least_one_then_f f o o' =
     match o with
@@ -2324,22 +2257,20 @@ module Coq_Raw =
   | Node of 'elt tree * key * 'elt * 'elt tree * I.t
 
   (** val tree_rect :
-      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2)
-      -> 'a1 tree -> 'a2 **)
+      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2) -> 'a1 tree ->
+      'a2 **)
 
   let rec tree_rect f f0 = function
   | Leaf -> f
-  | Node (t1, k, y, t2, t3) ->
-    f0 t1 (tree_rect f f0 t1) k y t2 (tree_rect f f0 t2) t3
+  | Node (t1, k, y, t2, t3) -> f0 t1 (tree_rect f f0 t1) k y t2 (tree_rect f f0 t2) t3
 
   (** val tree_rec :
-      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2)
-      -> 'a1 tree -> 'a2 **)
+      'a2 -> ('a1 tree -> 'a2 -> key -> 'a1 -> 'a1 tree -> 'a2 -> I.t -> 'a2) -> 'a1 tree ->
+      'a2 **)
 
   let rec tree_rec f f0 = function
   | Leaf -> f
-  | Node (t1, k, y, t2, t3) ->
-    f0 t1 (tree_rec f f0 t1) k y t2 (tree_rec f f0 t2) t3
+  | Node (t1, k, y, t2, t3) -> f0 t1 (tree_rec f f0 t1) k y t2 (tree_rec f f0 t2) t3
 
   (** val height : 'a1 tree -> I.t **)
 
@@ -2436,14 +2367,12 @@ module Coq_Raw =
      | EQ0 -> Node (l, y, d, r, h)
      | GT -> bal l y d' (add x d r))
 
-  (** val remove_min :
-      'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree * (key * 'a1) **)
+  (** val remove_min : 'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree * (key * 'a1) **)
 
   let rec remove_min l x d r =
     match l with
     | Leaf -> (r, (x, d))
-    | Node (ll, lx, ld, lr, _) ->
-      let (l', m) = remove_min ll lx ld lr in ((bal l' x d r), m)
+    | Node (ll, lx, ld, lr, _) -> let (l', m) = remove_min ll lx ld lr in ((bal l' x d r), m)
 
   (** val merge : 'a1 tree -> 'a1 tree -> 'a1 tree **)
 
@@ -2454,8 +2383,7 @@ module Coq_Raw =
       (match s2 with
        | Leaf -> s1
        | Node (l2, x2, d2, r2, _) ->
-         let (s2', p) = remove_min l2 x2 d2 r2 in
-         let (x, d) = p in bal s1 x d s2')
+         let (s2', p) = remove_min l2 x2 d2 r2 in let (x, d) = p in bal s1 x d s2')
 
   (** val remove : X.t -> 'a1 tree -> 'a1 tree **)
 
@@ -2484,8 +2412,7 @@ module Coq_Raw =
             | Right -> create l x d r))
       in join_aux)
 
-  type 'elt triple = { t_left : 'elt tree; t_opt : 'elt option;
-                       t_right : 'elt tree }
+  type 'elt triple = { t_left : 'elt tree; t_opt : 'elt option; t_right : 'elt tree }
 
   (** val t_left : 'a1 triple -> 'a1 tree **)
 
@@ -2525,15 +2452,13 @@ module Coq_Raw =
       (match m2 with
        | Leaf -> m1
        | Node (l2, x2, d2, r2, _) ->
-         let (m2', xd) = remove_min l2 x2 d2 r2 in
-         join m1 (fst xd) (snd xd) m2')
+         let (m2', xd) = remove_min l2 x2 d2 r2 in join m1 (fst xd) (snd xd) m2')
 
   (** val elements_aux : (key * 'a1) list -> 'a1 tree -> (key * 'a1) list **)
 
   let rec elements_aux acc = function
   | Leaf -> acc
-  | Node (l, x, d, r, _) ->
-    elements_aux (Cons ((x, d), (elements_aux acc r))) l
+  | Node (l, x, d, r, _) -> elements_aux (Cons ((x, d), (elements_aux acc r))) l
 
   (** val elements : 'a1 tree -> (key * 'a1) list **)
 
@@ -2552,16 +2477,16 @@ module Coq_Raw =
   | More of key * 'elt * 'elt tree * 'elt enumeration
 
   (** val enumeration_rect :
-      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1
-      enumeration -> 'a2 **)
+      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1 enumeration ->
+      'a2 **)
 
   let rec enumeration_rect f f0 = function
   | End -> f
   | More (k, e0, t0, e1) -> f0 k e0 t0 e1 (enumeration_rect f f0 e1)
 
   (** val enumeration_rec :
-      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1
-      enumeration -> 'a2 **)
+      'a2 -> (key -> 'a1 -> 'a1 tree -> 'a1 enumeration -> 'a2 -> 'a2) -> 'a1 enumeration ->
+      'a2 **)
 
   let rec enumeration_rec f f0 = function
   | End -> f
@@ -2575,8 +2500,8 @@ module Coq_Raw =
     | Node (l, x, d, r, _) -> cons l (More (x, d, r, e))
 
   (** val equal_more :
-      ('a1 -> 'a1 -> bool) -> X.t -> 'a1 -> ('a1 enumeration -> bool) -> 'a1
-      enumeration -> bool **)
+      ('a1 -> 'a1 -> bool) -> X.t -> 'a1 -> ('a1 enumeration -> bool) -> 'a1 enumeration ->
+      bool **)
 
   let equal_more cmp x1 d1 cont = function
   | End -> false
@@ -2586,8 +2511,8 @@ module Coq_Raw =
      | _ -> false)
 
   (** val equal_cont :
-      ('a1 -> 'a1 -> bool) -> 'a1 tree -> ('a1 enumeration -> bool) -> 'a1
-      enumeration -> bool **)
+      ('a1 -> 'a1 -> bool) -> 'a1 tree -> ('a1 enumeration -> bool) -> 'a1 enumeration ->
+      bool **)
 
   let rec equal_cont cmp m1 cont e2 =
     match m1 with
@@ -2628,8 +2553,8 @@ module Coq_Raw =
      | None -> concat (map_option f l) (map_option f r))
 
   (** val map2_opt :
-      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-      ('a2 tree -> 'a3 tree) -> 'a1 tree -> 'a2 tree -> 'a3 tree **)
+      (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree -> 'a3
+      tree) -> 'a1 tree -> 'a2 tree -> 'a3 tree **)
 
   let rec map2_opt f mapl mapr m1 m2 =
     match m1 with
@@ -2640,19 +2565,14 @@ module Coq_Raw =
        | Node (_, _, _, _, _) ->
          let { t_left = l2'; t_opt = o2; t_right = r2' } = split x1 m2 in
          (match f x1 d1 o2 with
-          | Some e ->
-            join (map2_opt f mapl mapr l1 l2') x1 e
-              (map2_opt f mapl mapr r1 r2')
-          | None ->
-            concat (map2_opt f mapl mapr l1 l2') (map2_opt f mapl mapr r1 r2')))
+          | Some e -> join (map2_opt f mapl mapr l1 l2') x1 e (map2_opt f mapl mapr r1 r2')
+          | None -> concat (map2_opt f mapl mapr l1 l2') (map2_opt f mapl mapr r1 r2')))
 
   (** val map2 :
-      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 tree -> 'a2 tree -> 'a3
-      tree **)
+      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 tree -> 'a2 tree -> 'a3 tree **)
 
   let map2 f =
-    map2_opt (fun _ d o -> f (Some d) o)
-      (map_option (fun _ d -> f (Some d) None))
+    map2_opt (fun _ d o -> f (Some d) o) (map_option (fun _ d -> f (Some d) None))
       (map_option (fun _ d' -> f None (Some d')))
 
   module Proofs =
@@ -2665,136 +2585,115 @@ module Coq_Raw =
 
     type 'elt coq_R_mem =
     | R_mem_0 of 'elt tree
-    | R_mem_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 
-       bool * 'elt coq_R_mem
+    | R_mem_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * bool * 'elt coq_R_mem
     | R_mem_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-    | R_mem_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 
-       bool * 'elt coq_R_mem
+    | R_mem_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * bool * 'elt coq_R_mem
 
     (** val coq_R_mem_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2
-        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
-        __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2)
-        -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2 **)
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> ('a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem ->
+        'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2 **)
 
     let rec coq_R_mem_rect x f f0 f1 f2 _ _ = function
     | R_mem_0 m -> f m __
     | R_mem_1 (m, l, y, _x, r0, _x0, _res, r1) ->
-      f0 m l y _x r0 _x0 __ __ __ _res r1
-        (coq_R_mem_rect x f f0 f1 f2 l _res r1)
+      f0 m l y _x r0 _x0 __ __ __ _res r1 (coq_R_mem_rect x f f0 f1 f2 l _res r1)
     | R_mem_2 (m, l, y, _x, r0, _x0) -> f1 m l y _x r0 _x0 __ __ __
     | R_mem_3 (m, l, y, _x, r0, _x0, _res, r1) ->
-      f2 m l y _x r0 _x0 __ __ __ _res r1
-        (coq_R_mem_rect x f f0 f1 f2 r0 _res r1)
+      f2 m l y _x r0 _x0 __ __ __ _res r1 (coq_R_mem_rect x f f0 f1 f2 r0 _res r1)
 
     (** val coq_R_mem_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2
-        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
-        __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2)
-        -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2 **)
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem -> 'a2 -> 'a2) -> ('a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> bool -> 'a1 coq_R_mem ->
+        'a2 -> 'a2) -> 'a1 tree -> bool -> 'a1 coq_R_mem -> 'a2 **)
 
     let rec coq_R_mem_rec x f f0 f1 f2 _ _ = function
     | R_mem_0 m -> f m __
     | R_mem_1 (m, l, y, _x, r0, _x0, _res, r1) ->
-      f0 m l y _x r0 _x0 __ __ __ _res r1
-        (coq_R_mem_rec x f f0 f1 f2 l _res r1)
+      f0 m l y _x r0 _x0 __ __ __ _res r1 (coq_R_mem_rec x f f0 f1 f2 l _res r1)
     | R_mem_2 (m, l, y, _x, r0, _x0) -> f1 m l y _x r0 _x0 __ __ __
     | R_mem_3 (m, l, y, _x, r0, _x0, _res, r1) ->
-      f2 m l y _x r0 _x0 __ __ __ _res r1
-        (coq_R_mem_rec x f f0 f1 f2 r0 _res r1)
+      f2 m l y _x r0 _x0 __ __ __ _res r1 (coq_R_mem_rec x f f0 f1 f2 r0 _res r1)
 
     type 'elt coq_R_find =
     | R_find_0 of 'elt tree
-    | R_find_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt option * 'elt coq_R_find
+    | R_find_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt option
+       * 'elt coq_R_find
     | R_find_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-    | R_find_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt option * 'elt coq_R_find
+    | R_find_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt option
+       * 'elt coq_R_find
 
     (** val coq_R_find_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find
-        -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find
-        -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2 **)
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1
+        coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2 **)
 
     let rec coq_R_find_rect x f f0 f1 f2 _ _ = function
     | R_find_0 m -> f m __
     | R_find_1 (m, l, y, d, r0, _x, _res, r1) ->
-      f0 m l y d r0 _x __ __ __ _res r1
-        (coq_R_find_rect x f f0 f1 f2 l _res r1)
+      f0 m l y d r0 _x __ __ __ _res r1 (coq_R_find_rect x f f0 f1 f2 l _res r1)
     | R_find_2 (m, l, y, d, r0, _x) -> f1 m l y d r0 _x __ __ __
     | R_find_3 (m, l, y, d, r0, _x, _res, r1) ->
-      f2 m l y d r0 _x __ __ __ _res r1
-        (coq_R_find_rect x f f0 f1 f2 r0 _res r1)
+      f2 m l y d r0 _x __ __ __ _res r1 (coq_R_find_rect x f f0 f1 f2 r0 _res r1)
 
     (** val coq_R_find_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find
-        -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find
-        -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2 **)
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 option -> 'a1 coq_R_find -> 'a2 -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 option -> 'a1
+        coq_R_find -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 option -> 'a1 coq_R_find -> 'a2 **)
 
     let rec coq_R_find_rec x f f0 f1 f2 _ _ = function
     | R_find_0 m -> f m __
     | R_find_1 (m, l, y, d, r0, _x, _res, r1) ->
-      f0 m l y d r0 _x __ __ __ _res r1
-        (coq_R_find_rec x f f0 f1 f2 l _res r1)
+      f0 m l y d r0 _x __ __ __ _res r1 (coq_R_find_rec x f f0 f1 f2 l _res r1)
     | R_find_2 (m, l, y, d, r0, _x) -> f1 m l y d r0 _x __ __ __
     | R_find_3 (m, l, y, d, r0, _x, _res, r1) ->
-      f2 m l y d r0 _x __ __ __ _res r1
-        (coq_R_find_rec x f f0 f1 f2 r0 _res r1)
+      f2 m l y d r0 _x __ __ __ _res r1 (coq_R_find_rec x f f0 f1 f2 r0 _res r1)
 
     type 'elt coq_R_bal =
     | R_bal_0 of 'elt tree * key * 'elt * 'elt tree
-    | R_bal_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t
-    | R_bal_2 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t
-    | R_bal_3 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t * 'elt tree * key * 'elt * 'elt tree * 
-       I.t
+    | R_bal_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t
+    | R_bal_2 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t
+    | R_bal_3 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t * 'elt tree * key * 'elt * 'elt tree * I.t
     | R_bal_4 of 'elt tree * key * 'elt * 'elt tree
-    | R_bal_5 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t
-    | R_bal_6 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t
-    | R_bal_7 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 
-       'elt * 'elt tree * I.t * 'elt tree * key * 'elt * 'elt tree * 
-       I.t
+    | R_bal_5 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t
+    | R_bal_6 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t
+    | R_bal_7 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt * 'elt tree
+       * I.t * 'elt tree * key * 'elt * 'elt tree * I.t
     | R_bal_8 of 'elt tree * key * 'elt * 'elt tree
 
     (** val coq_R_bal_rect :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
-        tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ ->
-        'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __
-        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ ->
-        __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
-        __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __
-        -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __
-        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ ->
-        __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
-        __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2 **)
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __
+        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key
+        -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1
+        -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
+        __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 ->
+        'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
+        -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __
+        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
+        'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
+        -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2 **)
 
     let coq_R_bal_rect f f0 f1 f2 f3 f4 f5 f6 f7 _ _ _ _ _ = function
     | R_bal_0 (l, x, d, r) -> f l x d r __ __ __
-    | R_bal_1 (l, x, d, r, x0, x1, x2, x3, x4) ->
-      f0 l x d r __ __ x0 x1 x2 x3 x4 __ __ __
-    | R_bal_2 (l, x, d, r, x0, x1, x2, x3, x4) ->
-      f1 l x d r __ __ x0 x1 x2 x3 x4 __ __ __ __
+    | R_bal_1 (l, x, d, r, x0, x1, x2, x3, x4) -> f0 l x d r __ __ x0 x1 x2 x3 x4 __ __ __
+    | R_bal_2 (l, x, d, r, x0, x1, x2, x3, x4) -> f1 l x d r __ __ x0 x1 x2 x3 x4 __ __ __ __
     | R_bal_3 (l, x, d, r, x0, x1, x2, x3, x4, x5, x6, x7, x8, x9) ->
       f2 l x d r __ __ x0 x1 x2 x3 x4 __ __ __ x5 x6 x7 x8 x9 __
     | R_bal_4 (l, x, d, r) -> f3 l x d r __ __ __ __ __
@@ -2807,30 +2706,25 @@ module Coq_Raw =
     | R_bal_8 (l, x, d, r) -> f7 l x d r __ __ __ __
 
     (** val coq_R_bal_rec :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
-        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
-        tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ ->
-        'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __
-        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ ->
-        __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
-        __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __
-        -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __
-        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ ->
-        __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
-        __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1
-        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2 **)
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __
+        -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> 'a1 tree -> key
+        -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1
+        -> 'a1 tree -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ ->
+        __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2) -> ('a1 tree -> key ->
+        'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 ->
+        'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
+        -> __ -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __
+        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 ->
+        'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
+        -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> __ -> __ -> __ -> 'a2) ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_bal -> 'a2 **)
 
     let coq_R_bal_rec f f0 f1 f2 f3 f4 f5 f6 f7 _ _ _ _ _ = function
     | R_bal_0 (l, x, d, r) -> f l x d r __ __ __
-    | R_bal_1 (l, x, d, r, x0, x1, x2, x3, x4) ->
-      f0 l x d r __ __ x0 x1 x2 x3 x4 __ __ __
-    | R_bal_2 (l, x, d, r, x0, x1, x2, x3, x4) ->
-      f1 l x d r __ __ x0 x1 x2 x3 x4 __ __ __ __
+    | R_bal_1 (l, x, d, r, x0, x1, x2, x3, x4) -> f0 l x d r __ __ x0 x1 x2 x3 x4 __ __ __
+    | R_bal_2 (l, x, d, r, x0, x1, x2, x3, x4) -> f1 l x d r __ __ x0 x1 x2 x3 x4 __ __ __ __
     | R_bal_3 (l, x, d, r, x0, x1, x2, x3, x4, x5, x6, x7, x8, x9) ->
       f2 l x d r __ __ x0 x1 x2 x3 x4 __ __ __ x5 x6 x7 x8 x9 __
     | R_bal_4 (l, x, d, r) -> f3 l x d r __ __ __ __ __
@@ -2844,378 +2738,320 @@ module Coq_Raw =
 
     type 'elt coq_R_add =
     | R_add_0 of 'elt tree
-    | R_add_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt tree * 'elt coq_R_add
+    | R_add_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+       * 'elt coq_R_add
     | R_add_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-    | R_add_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt tree * 'elt coq_R_add
+    | R_add_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+       * 'elt coq_R_add
 
     (** val coq_R_add_rect :
-        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree ->
-        key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_add ->
-        'a2 **)
+        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree ->
+        'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_add -> 'a2 **)
 
     let rec coq_R_add_rect x d f f0 f1 f2 _ _ = function
     | R_add_0 m -> f m __
     | R_add_1 (m, l, y, d', r0, h, _res, r1) ->
-      f0 m l y d' r0 h __ __ __ _res r1
-        (coq_R_add_rect x d f f0 f1 f2 l _res r1)
+      f0 m l y d' r0 h __ __ __ _res r1 (coq_R_add_rect x d f f0 f1 f2 l _res r1)
     | R_add_2 (m, l, y, d', r0, h) -> f1 m l y d' r0 h __ __ __
     | R_add_3 (m, l, y, d', r0, h, _res, r1) ->
-      f2 m l y d' r0 h __ __ __ _res r1
-        (coq_R_add_rect x d f f0 f1 f2 r0 _res r1)
+      f2 m l y d' r0 h __ __ __ _res r1 (coq_R_add_rect x d f f0 f1 f2 r0 _res r1)
 
     (** val coq_R_add_rec :
-        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key
-        -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree ->
-        key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
-        coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_add ->
-        'a2 **)
+        key -> 'a1 -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1
+        tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_add -> 'a2 -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree ->
+        'a1 coq_R_add -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_add -> 'a2 **)
 
     let rec coq_R_add_rec x d f f0 f1 f2 _ _ = function
     | R_add_0 m -> f m __
     | R_add_1 (m, l, y, d', r0, h, _res, r1) ->
-      f0 m l y d' r0 h __ __ __ _res r1
-        (coq_R_add_rec x d f f0 f1 f2 l _res r1)
+      f0 m l y d' r0 h __ __ __ _res r1 (coq_R_add_rec x d f f0 f1 f2 l _res r1)
     | R_add_2 (m, l, y, d', r0, h) -> f1 m l y d' r0 h __ __ __
     | R_add_3 (m, l, y, d', r0, h, _res, r1) ->
-      f2 m l y d' r0 h __ __ __ _res r1
-        (coq_R_add_rec x d f f0 f1 f2 r0 _res r1)
+      f2 m l y d' r0 h __ __ __ _res r1 (coq_R_add_rec x d f f0 f1 f2 r0 _res r1)
 
     type 'elt coq_R_remove_min =
     | R_remove_min_0 of 'elt tree * key * 'elt * 'elt tree
-    | R_remove_min_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * 
-       key * 'elt * 'elt tree * I.t * ('elt tree * (key * 'elt))
-       * 'elt coq_R_remove_min * 'elt tree * (key * 'elt)
+    | R_remove_min_1 of 'elt tree * key * 'elt * 'elt tree * 'elt tree * key * 'elt
+       * 'elt tree * I.t * ('elt tree * (key * 'elt)) * 'elt coq_R_remove_min * 'elt tree
+       * (key * 'elt)
 
     (** val coq_R_remove_min_rect :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key
-        -> 'a1 -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 -> 'a1
-        tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 **)
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> ('a1 tree * (key * 'a1))
+        -> 'a1 coq_R_remove_min -> 'a2 -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree
+        -> key -> 'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 **)
 
     let rec coq_R_remove_min_rect f f0 _ _ _ _ _ = function
     | R_remove_min_0 (l, x, d, r) -> f l x d r __
     | R_remove_min_1 (l, x, d, r, ll, lx, ld, lr, _x, _res, r1, l', m) ->
-      f0 l x d r ll lx ld lr _x __ _res r1
-        (coq_R_remove_min_rect f f0 ll lx ld lr _res r1) l' m __
+      f0 l x d r ll lx ld lr _x __ _res r1 (coq_R_remove_min_rect f f0 ll lx ld lr _res r1)
+        l' m __
 
     (** val coq_R_remove_min_rec :
-        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key
-        -> 'a1 -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 -> 'a1
-        tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> key -> 'a1 -> 'a1
-        tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 **)
+        ('a1 tree -> key -> 'a1 -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> key -> 'a1 -> 'a1
+        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> ('a1 tree * (key * 'a1))
+        -> 'a1 coq_R_remove_min -> 'a2 -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree
+        -> key -> 'a1 -> 'a1 tree -> ('a1 tree * (key * 'a1)) -> 'a1 coq_R_remove_min -> 'a2 **)
 
     let rec coq_R_remove_min_rec f f0 _ _ _ _ _ = function
     | R_remove_min_0 (l, x, d, r) -> f l x d r __
     | R_remove_min_1 (l, x, d, r, ll, lx, ld, lr, _x, _res, r1, l', m) ->
-      f0 l x d r ll lx ld lr _x __ _res r1
-        (coq_R_remove_min_rec f f0 ll lx ld lr _res r1) l' m __
+      f0 l x d r ll lx ld lr _x __ _res r1 (coq_R_remove_min_rec f f0 ll lx ld lr _res r1)
+        l' m __
 
     type 'elt coq_R_merge =
     | R_merge_0 of 'elt tree * 'elt tree
-    | R_merge_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree
-       * I.t
-    | R_merge_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree
-       * I.t * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
-       * (key * 'elt) * key * 'elt
+    | R_merge_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+    | R_merge_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+       * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree * (key * 'elt) * key * 
+       'elt
 
     (** val coq_R_merge_rect :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree ->
-        (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1 tree
-        -> 'a1 tree -> 'a1 coq_R_merge -> 'a2 **)
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
+        __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1
+        tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2 **)
 
     let coq_R_merge_rect f f0 f1 _ _ _ = function
     | R_merge_0 (s1, s2) -> f s1 s2 __
-    | R_merge_1 (s1, s2, _x, _x0, _x1, _x2, _x3) ->
-      f0 s1 s2 _x _x0 _x1 _x2 _x3 __ __
-    | R_merge_2 (s1, s2, _x, _x0, _x1, _x2, _x3, l2, x2, d2, r2, _x4, s2', p,
-                 x, d) ->
+    | R_merge_1 (s1, s2, _x, _x0, _x1, _x2, _x3) -> f0 s1 s2 _x _x0 _x1 _x2 _x3 __ __
+    | R_merge_2 (s1, s2, _x, _x0, _x1, _x2, _x3, l2, x2, d2, r2, _x4, s2', p, x, d) ->
       f1 s1 s2 _x _x0 _x1 _x2 _x3 __ l2 x2 d2 r2 _x4 __ s2' p __ x d __
 
     (** val coq_R_merge_rec :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree ->
-        (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1 tree
-        -> 'a1 tree -> 'a1 coq_R_merge -> 'a2 **)
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
+        __ -> 'a1 tree -> (key * 'a1) -> __ -> key -> 'a1 -> __ -> 'a2) -> 'a1 tree -> 'a1
+        tree -> 'a1 tree -> 'a1 coq_R_merge -> 'a2 **)
 
     let coq_R_merge_rec f f0 f1 _ _ _ = function
     | R_merge_0 (s1, s2) -> f s1 s2 __
-    | R_merge_1 (s1, s2, _x, _x0, _x1, _x2, _x3) ->
-      f0 s1 s2 _x _x0 _x1 _x2 _x3 __ __
-    | R_merge_2 (s1, s2, _x, _x0, _x1, _x2, _x3, l2, x2, d2, r2, _x4, s2', p,
-                 x, d) ->
+    | R_merge_1 (s1, s2, _x, _x0, _x1, _x2, _x3) -> f0 s1 s2 _x _x0 _x1 _x2 _x3 __ __
+    | R_merge_2 (s1, s2, _x, _x0, _x1, _x2, _x3, l2, x2, d2, r2, _x4, s2', p, x, d) ->
       f1 s1 s2 _x _x0 _x1 _x2 _x3 __ l2 x2 d2 r2 _x4 __ s2' p __ x d __
 
     type 'elt coq_R_remove =
     | R_remove_0 of 'elt tree
-    | R_remove_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-       I.t * 'elt tree * 'elt coq_R_remove
+    | R_remove_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+       * 'elt coq_R_remove
     | R_remove_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-    | R_remove_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-       I.t * 'elt tree * 'elt coq_R_remove
+    | R_remove_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree
+       * 'elt coq_R_remove
 
     (** val coq_R_remove_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove
-        -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove
-        -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 **)
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
+        coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 **)
 
     let rec coq_R_remove_rect x f f0 f1 f2 _ _ = function
     | R_remove_0 m -> f m __
     | R_remove_1 (m, l, y, d, r0, _x, _res, r1) ->
-      f0 m l y d r0 _x __ __ __ _res r1
-        (coq_R_remove_rect x f f0 f1 f2 l _res r1)
+      f0 m l y d r0 _x __ __ __ _res r1 (coq_R_remove_rect x f f0 f1 f2 l _res r1)
     | R_remove_2 (m, l, y, d, r0, _x) -> f1 m l y d r0 _x __ __ __
     | R_remove_3 (m, l, y, d, r0, _x, _res, r1) ->
-      f2 m l y d r0 _x __ __ __ _res r1
-        (coq_R_remove_rect x f f0 f1 f2 r0 _res r1)
+      f2 m l y d r0 _x __ __ __ _res r1 (coq_R_remove_rect x f f0 f1 f2 r0 _res r1)
 
     (** val coq_R_remove_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove
-        -> 'a2 -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
-        I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove
-        -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 **)
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree ->
+        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 tree -> 'a1
+        coq_R_remove -> 'a2 -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 coq_R_remove -> 'a2 **)
 
     let rec coq_R_remove_rec x f f0 f1 f2 _ _ = function
     | R_remove_0 m -> f m __
     | R_remove_1 (m, l, y, d, r0, _x, _res, r1) ->
-      f0 m l y d r0 _x __ __ __ _res r1
-        (coq_R_remove_rec x f f0 f1 f2 l _res r1)
+      f0 m l y d r0 _x __ __ __ _res r1 (coq_R_remove_rec x f f0 f1 f2 l _res r1)
     | R_remove_2 (m, l, y, d, r0, _x) -> f1 m l y d r0 _x __ __ __
     | R_remove_3 (m, l, y, d, r0, _x, _res, r1) ->
-      f2 m l y d r0 _x __ __ __ _res r1
-        (coq_R_remove_rec x f f0 f1 f2 r0 _res r1)
+      f2 m l y d r0 _x __ __ __ _res r1 (coq_R_remove_rec x f f0 f1 f2 r0 _res r1)
 
     type 'elt coq_R_concat =
     | R_concat_0 of 'elt tree * 'elt tree
-    | R_concat_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-       * 'elt tree * I.t
-    | R_concat_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt
-       * 'elt tree * I.t * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt tree * (key * 'elt)
+    | R_concat_1 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+    | R_concat_2 of 'elt tree * 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
+       * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt tree * (key * 'elt)
 
     (** val coq_R_concat_rect :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree ->
-        (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1
-        coq_R_concat -> 'a2 **)
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
+        __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree ->
+        'a1 coq_R_concat -> 'a2 **)
 
     let coq_R_concat_rect f f0 f1 _ _ _ = function
     | R_concat_0 (m1, m2) -> f m1 m2 __
-    | R_concat_1 (m1, m2, _x, _x0, _x1, _x2, _x3) ->
-      f0 m1 m2 _x _x0 _x1 _x2 _x3 __ __
+    | R_concat_1 (m1, m2, _x, _x0, _x1, _x2, _x3) -> f0 m1 m2 _x _x0 _x1 _x2 _x3 __ __
     | R_concat_2 (m1, m2, _x, _x0, _x1, _x2, _x3, l2, x2, d2, r2, _x4, m2', xd) ->
       f1 m1 m2 _x _x0 _x1 _x2 _x3 __ l2 x2 d2 r2 _x4 __ m2' xd __
 
     (** val coq_R_concat_rec :
-        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1
-        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree ->
-        (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree -> 'a1
-        coq_R_concat -> 'a2 **)
+        ('a1 tree -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree -> key ->
+        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
+        __ -> 'a1 tree -> (key * 'a1) -> __ -> 'a2) -> 'a1 tree -> 'a1 tree -> 'a1 tree ->
+        'a1 coq_R_concat -> 'a2 **)
 
     let coq_R_concat_rec f f0 f1 _ _ _ = function
     | R_concat_0 (m1, m2) -> f m1 m2 __
-    | R_concat_1 (m1, m2, _x, _x0, _x1, _x2, _x3) ->
-      f0 m1 m2 _x _x0 _x1 _x2 _x3 __ __
+    | R_concat_1 (m1, m2, _x, _x0, _x1, _x2, _x3) -> f0 m1 m2 _x _x0 _x1 _x2 _x3 __ __
     | R_concat_2 (m1, m2, _x, _x0, _x1, _x2, _x3, l2, x2, d2, r2, _x4, m2', xd) ->
       f1 m1 m2 _x _x0 _x1 _x2 _x3 __ l2 x2 d2 r2 _x4 __ m2' xd __
 
     type 'elt coq_R_split =
     | R_split_0 of 'elt tree
-    | R_split_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt triple * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
+    | R_split_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt triple
+       * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
     | R_split_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-    | R_split_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t
-       * 'elt triple * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
+    | R_split_3 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'elt triple
+       * 'elt coq_R_split * 'elt tree * 'elt option * 'elt tree
 
     (** val coq_R_split_rect :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split
-        -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __
-        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
-        __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree ->
-        'a1 option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1
-        coq_R_split -> 'a2 **)
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+        option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree
+        -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree
+        -> I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+        option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split -> 'a2 **)
 
     let rec coq_R_split_rect x f f0 f1 f2 _ _ = function
     | R_split_0 m -> f m __
     | R_split_1 (m, l, y, d, r0, _x, _res, r1, ll, o, rl) ->
-      f0 m l y d r0 _x __ __ __ _res r1
-        (coq_R_split_rect x f f0 f1 f2 l _res r1) ll o rl __
+      f0 m l y d r0 _x __ __ __ _res r1 (coq_R_split_rect x f f0 f1 f2 l _res r1) ll o rl __
     | R_split_2 (m, l, y, d, r0, _x) -> f1 m l y d r0 _x __ __ __
     | R_split_3 (m, l, y, d, r0, _x, _res, r1, rl, o, rr) ->
-      f2 m l y d r0 _x __ __ __ _res r1
-        (coq_R_split_rect x f f0 f1 f2 r0 _res r1) rl o rr __
+      f2 m l y d r0 _x __ __ __ _res r1 (coq_R_split_rect x f f0 f1 f2 r0 _res r1) rl o rr __
 
     (** val coq_R_split_rec :
-        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1
-        -> 'a1 tree -> I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split
-        -> 'a2 -> 'a1 tree -> 'a1 option -> 'a1 tree -> __ -> 'a2) -> ('a1
-        tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> __
-        -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t ->
-        __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree ->
-        'a1 option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1
-        coq_R_split -> 'a2 **)
+        X.t -> ('a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree ->
+        I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+        option -> 'a1 tree -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree
+        -> I.t -> __ -> __ -> __ -> 'a2) -> ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree
+        -> I.t -> __ -> __ -> __ -> 'a1 triple -> 'a1 coq_R_split -> 'a2 -> 'a1 tree -> 'a1
+        option -> 'a1 tree -> __ -> 'a2) -> 'a1 tree -> 'a1 triple -> 'a1 coq_R_split -> 'a2 **)
 
     let rec coq_R_split_rec x f f0 f1 f2 _ _ = function
     | R_split_0 m -> f m __
     | R_split_1 (m, l, y, d, r0, _x, _res, r1, ll, o, rl) ->
-      f0 m l y d r0 _x __ __ __ _res r1
-        (coq_R_split_rec x f f0 f1 f2 l _res r1) ll o rl __
+      f0 m l y d r0 _x __ __ __ _res r1 (coq_R_split_rec x f f0 f1 f2 l _res r1) ll o rl __
     | R_split_2 (m, l, y, d, r0, _x) -> f1 m l y d r0 _x __ __ __
     | R_split_3 (m, l, y, d, r0, _x, _res, r1, rl, o, rr) ->
-      f2 m l y d r0 _x __ __ __ _res r1
-        (coq_R_split_rec x f f0 f1 f2 r0 _res r1) rl o rr __
+      f2 m l y d r0 _x __ __ __ _res r1 (coq_R_split_rec x f f0 f1 f2 r0 _res r1) rl o rr __
 
     type ('elt, 'x) coq_R_map_option =
     | R_map_option_0 of 'elt tree
-    | R_map_option_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-       I.t * 'x * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree
-       * ('elt, 'x) coq_R_map_option
-    | R_map_option_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * 
-       I.t * 'x tree * ('elt, 'x) coq_R_map_option * 'x tree
-       * ('elt, 'x) coq_R_map_option
+    | R_map_option_1 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'x * 
+       'x tree * ('elt, 'x) coq_R_map_option * 'x tree * ('elt, 'x) coq_R_map_option
+    | R_map_option_2 of 'elt tree * 'elt tree * key * 'elt * 'elt tree * I.t * 'x tree
+       * ('elt, 'x) coq_R_map_option * 'x tree * ('elt, 'x) coq_R_map_option
 
     (** val coq_R_map_option_rect :
-        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2
-        tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
-        coq_R_map_option -> 'a3 -> 'a3) -> ('a1 tree -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree -> ('a1, 'a2)
-        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-        'a3 -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-        'a3 **)
+        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2 tree -> ('a1, 'a2)
+        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree ->
+        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3
+        -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 **)
 
     let rec coq_R_map_option_rect f f0 f1 f2 _ _ = function
     | R_map_option_0 m -> f0 m __
     | R_map_option_1 (m, l, x, d, r0, _x, d', _res0, r1, _res, r2) ->
-      f1 m l x d r0 _x __ d' __ _res0 r1
-        (coq_R_map_option_rect f f0 f1 f2 l _res0 r1) _res r2
-        (coq_R_map_option_rect f f0 f1 f2 r0 _res r2)
+      f1 m l x d r0 _x __ d' __ _res0 r1 (coq_R_map_option_rect f f0 f1 f2 l _res0 r1) _res
+        r2 (coq_R_map_option_rect f f0 f1 f2 r0 _res r2)
     | R_map_option_2 (m, l, x, d, r0, _x, _res0, r1, _res, r2) ->
-      f2 m l x d r0 _x __ __ _res0 r1
-        (coq_R_map_option_rect f f0 f1 f2 l _res0 r1) _res r2
+      f2 m l x d r0 _x __ __ _res0 r1 (coq_R_map_option_rect f f0 f1 f2 l _res0 r1) _res r2
         (coq_R_map_option_rect f f0 f1 f2 r0 _res r2)
 
     (** val coq_R_map_option_rec :
-        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2
-        tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2)
-        coq_R_map_option -> 'a3 -> 'a3) -> ('a1 tree -> 'a1 tree -> key ->
-        'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree -> ('a1, 'a2)
-        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-        'a3 -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option ->
-        'a3 **)
+        (key -> 'a1 -> 'a2 option) -> ('a1 tree -> __ -> 'a3) -> ('a1 tree -> 'a1 tree ->
+        key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 -> __ -> 'a2 tree -> ('a1, 'a2)
+        coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a3) ->
+        ('a1 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a2 tree ->
+        ('a1, 'a2) coq_R_map_option -> 'a3 -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3
+        -> 'a3) -> 'a1 tree -> 'a2 tree -> ('a1, 'a2) coq_R_map_option -> 'a3 **)
 
     let rec coq_R_map_option_rec f f0 f1 f2 _ _ = function
     | R_map_option_0 m -> f0 m __
     | R_map_option_1 (m, l, x, d, r0, _x, d', _res0, r1, _res, r2) ->
-      f1 m l x d r0 _x __ d' __ _res0 r1
-        (coq_R_map_option_rec f f0 f1 f2 l _res0 r1) _res r2
-        (coq_R_map_option_rec f f0 f1 f2 r0 _res r2)
+      f1 m l x d r0 _x __ d' __ _res0 r1 (coq_R_map_option_rec f f0 f1 f2 l _res0 r1) _res
+        r2 (coq_R_map_option_rec f f0 f1 f2 r0 _res r2)
     | R_map_option_2 (m, l, x, d, r0, _x, _res0, r1, _res, r2) ->
-      f2 m l x d r0 _x __ __ _res0 r1
-        (coq_R_map_option_rec f f0 f1 f2 l _res0 r1) _res r2
+      f2 m l x d r0 _x __ __ _res0 r1 (coq_R_map_option_rec f f0 f1 f2 l _res0 r1) _res r2
         (coq_R_map_option_rec f f0 f1 f2 r0 _res r2)
 
     type ('elt, 'x0, 'x) coq_R_map2_opt =
     | R_map2_opt_0 of 'elt tree * 'x0 tree
-    | R_map2_opt_1 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-       * 'elt tree * I.t
-    | R_map2_opt_2 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-       * 'elt tree * I.t * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 'x0 tree
-       * 'x0 option * 'x0 tree * 'x * 'x tree
-       * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
+    | R_map2_opt_1 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree * I.t
+    | R_map2_opt_2 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree * I.t
+       * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 'x0 tree * 'x0 option * 'x0 tree * 
+       'x * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree
        * ('elt, 'x0, 'x) coq_R_map2_opt
-    | R_map2_opt_3 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt
-       * 'elt tree * I.t * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 'x0 tree
-       * 'x0 option * 'x0 tree * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt
-       * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt
+    | R_map2_opt_3 of 'elt tree * 'x0 tree * 'elt tree * key * 'elt * 'elt tree * I.t
+       * 'x0 tree * key * 'x0 * 'x0 tree * I.t * 'x0 tree * 'x0 option * 'x0 tree * 
+       'x tree * ('elt, 'x0, 'x) coq_R_map2_opt * 'x tree * ('elt, 'x0, 'x) coq_R_map2_opt
 
     (** val coq_R_map2_opt_rect :
-        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-        ('a2 tree -> 'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t ->
-        __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3
-        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
-        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key ->
-        'a2 -> 'a2 tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree ->
-        __ -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3
-        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree ->
+        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree ->
+        'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2 tree
+        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2
+        tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3
+        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3)
+        coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 ->
+        'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t -> __ -> 'a2 tree
+        -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree ->
         'a2 tree -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 **)
 
     let rec coq_R_map2_opt_rect f mapl mapr f0 f1 f2 f3 _ _ _ = function
     | R_map2_opt_0 (m1, m2) -> f0 m1 m2 __
-    | R_map2_opt_1 (m1, m2, l1, x1, d1, r1, _x) ->
-      f1 m1 m2 l1 x1 d1 r1 _x __ __
-    | R_map2_opt_2 (m1, m2, l1, x1, d1, r1, _x, _x0, _x1, _x2, _x3, _x4, l2',
-                    o2, r2', e, _res0, r0, _res, r2) ->
-      f2 m1 m2 l1 x1 d1 r1 _x __ _x0 _x1 _x2 _x3 _x4 __ l2' o2 r2' __ e __
-        _res0 r0
+    | R_map2_opt_1 (m1, m2, l1, x1, d1, r1, _x) -> f1 m1 m2 l1 x1 d1 r1 _x __ __
+    | R_map2_opt_2 (m1, m2, l1, x1, d1, r1, _x, _x0, _x1, _x2, _x3, _x4, l2', o2, r2', e,
+                    _res0, r0, _res, r2) ->
+      f2 m1 m2 l1 x1 d1 r1 _x __ _x0 _x1 _x2 _x3 _x4 __ l2' o2 r2' __ e __ _res0 r0
         (coq_R_map2_opt_rect f mapl mapr f0 f1 f2 f3 l1 l2' _res0 r0) _res r2
         (coq_R_map2_opt_rect f mapl mapr f0 f1 f2 f3 r1 r2' _res r2)
-    | R_map2_opt_3 (m1, m2, l1, x1, d1, r1, _x, _x0, _x1, _x2, _x3, _x4, l2',
-                    o2, r2', _res0, r0, _res, r2) ->
-      f3 m1 m2 l1 x1 d1 r1 _x __ _x0 _x1 _x2 _x3 _x4 __ l2' o2 r2' __ __
-        _res0 r0
+    | R_map2_opt_3 (m1, m2, l1, x1, d1, r1, _x, _x0, _x1, _x2, _x3, _x4, l2', o2, r2',
+                    _res0, r0, _res, r2) ->
+      f3 m1 m2 l1 x1 d1 r1 _x __ _x0 _x1 _x2 _x3 _x4 __ l2' o2 r2' __ __ _res0 r0
         (coq_R_map2_opt_rect f mapl mapr f0 f1 f2 f3 l1 l2' _res0 r0) _res r2
         (coq_R_map2_opt_rect f mapl mapr f0 f1 f2 f3 r1 r2' _res r2)
 
     (** val coq_R_map2_opt_rec :
-        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) ->
-        ('a2 tree -> 'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1
-        tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __
-        -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 ->
-        'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t ->
-        __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3
-        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1,
-        'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree ->
-        'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key ->
-        'a2 -> 'a2 tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree ->
-        __ -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3
-        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree ->
+        (key -> 'a1 -> 'a2 option -> 'a3 option) -> ('a1 tree -> 'a3 tree) -> ('a2 tree ->
+        'a3 tree) -> ('a1 tree -> 'a2 tree -> __ -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1
+        tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> __ -> 'a4) -> ('a1 tree -> 'a2 tree
+        -> 'a1 tree -> key -> 'a1 -> 'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2
+        tree -> I.t -> __ -> 'a2 tree -> 'a2 option -> 'a2 tree -> __ -> 'a3 -> __ -> 'a3
+        tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3)
+        coq_R_map2_opt -> 'a4 -> 'a4) -> ('a1 tree -> 'a2 tree -> 'a1 tree -> key -> 'a1 ->
+        'a1 tree -> I.t -> __ -> 'a2 tree -> key -> 'a2 -> 'a2 tree -> I.t -> __ -> 'a2 tree
+        -> 'a2 option -> 'a2 tree -> __ -> __ -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt
+        -> 'a4 -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 -> 'a4) -> 'a1 tree ->
         'a2 tree -> 'a3 tree -> ('a1, 'a2, 'a3) coq_R_map2_opt -> 'a4 **)
 
     let rec coq_R_map2_opt_rec f mapl mapr f0 f1 f2 f3 _ _ _ = function
     | R_map2_opt_0 (m1, m2) -> f0 m1 m2 __
-    | R_map2_opt_1 (m1, m2, l1, x1, d1, r1, _x) ->
-      f1 m1 m2 l1 x1 d1 r1 _x __ __
-    | R_map2_opt_2 (m1, m2, l1, x1, d1, r1, _x, _x0, _x1, _x2, _x3, _x4, l2',
-                    o2, r2', e, _res0, r0, _res, r2) ->
-      f2 m1 m2 l1 x1 d1 r1 _x __ _x0 _x1 _x2 _x3 _x4 __ l2' o2 r2' __ e __
-        _res0 r0 (coq_R_map2_opt_rec f mapl mapr f0 f1 f2 f3 l1 l2' _res0 r0)
-        _res r2 (coq_R_map2_opt_rec f mapl mapr f0 f1 f2 f3 r1 r2' _res r2)
-    | R_map2_opt_3 (m1, m2, l1, x1, d1, r1, _x, _x0, _x1, _x2, _x3, _x4, l2',
-                    o2, r2', _res0, r0, _res, r2) ->
-      f3 m1 m2 l1 x1 d1 r1 _x __ _x0 _x1 _x2 _x3 _x4 __ l2' o2 r2' __ __
-        _res0 r0 (coq_R_map2_opt_rec f mapl mapr f0 f1 f2 f3 l1 l2' _res0 r0)
-        _res r2 (coq_R_map2_opt_rec f mapl mapr f0 f1 f2 f3 r1 r2' _res r2)
+    | R_map2_opt_1 (m1, m2, l1, x1, d1, r1, _x) -> f1 m1 m2 l1 x1 d1 r1 _x __ __
+    | R_map2_opt_2 (m1, m2, l1, x1, d1, r1, _x, _x0, _x1, _x2, _x3, _x4, l2', o2, r2', e,
+                    _res0, r0, _res, r2) ->
+      f2 m1 m2 l1 x1 d1 r1 _x __ _x0 _x1 _x2 _x3 _x4 __ l2' o2 r2' __ e __ _res0 r0
+        (coq_R_map2_opt_rec f mapl mapr f0 f1 f2 f3 l1 l2' _res0 r0) _res r2
+        (coq_R_map2_opt_rec f mapl mapr f0 f1 f2 f3 r1 r2' _res r2)
+    | R_map2_opt_3 (m1, m2, l1, x1, d1, r1, _x, _x0, _x1, _x2, _x3, _x4, l2', o2, r2',
+                    _res0, r0, _res, r2) ->
+      f3 m1 m2 l1 x1 d1 r1 _x __ _x0 _x1 _x2 _x3 _x4 __ l2' o2 r2' __ __ _res0 r0
+        (coq_R_map2_opt_rec f mapl mapr f0 f1 f2 f3 l1 l2' _res0 r0) _res r2
+        (coq_R_map2_opt_rec f mapl mapr f0 f1 f2 f3 r1 r2' _res r2)
 
     (** val fold' : (key -> 'a1 -> 'a2 -> 'a2) -> 'a1 tree -> 'a2 -> 'a2 **)
 
@@ -3238,8 +3074,7 @@ module IntMake =
 
   module Raw = Coq_Raw(I)(X)
 
-  type 'elt bst =
-    'elt Raw.tree
+  type 'elt bst = 'elt Raw.tree
     (* singleton inductive, whose constructor was Bst *)
 
   (** val this : 'a1 bst -> 'a1 Raw.tree **)
@@ -3291,8 +3126,7 @@ module IntMake =
   let mapi =
     Raw.mapi
 
-  (** val map2 :
-      ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t **)
+  (** val map2 : ('a1 option -> 'a2 option -> 'a3 option) -> 'a1 t -> 'a2 t -> 'a3 t **)
 
   let map2 =
     Raw.map2
@@ -3366,8 +3200,7 @@ let default = function
 (** val set : 'a1 array -> Uint63.t -> 'a1 -> 'a1 array **)
 
 let set t0 i a =
-  let (td, l) = t0 in
-  if leb0 l i then t0 else let (t1, d) = td in (((Map.add i a t1), d), l)
+  let (td, l) = t0 in if leb0 l i then t0 else let (t1, d) = td in (((Map.add i a t1), d), l)
 
 (** val length0 : 'a1 array -> Uint63.t **)
 
@@ -3390,25 +3223,21 @@ let rec iter_int63_aux n0 i f =
 let iter_int63 i f x =
   iter_int63_aux size i f x
 
-(** val foldi :
-    (Uint63.t -> 'a1 -> 'a1) -> Uint63.t -> Uint63.t -> 'a1 -> 'a1 **)
+(** val foldi : (Uint63.t -> 'a1 -> 'a1) -> Uint63.t -> Uint63.t -> 'a1 -> 'a1 **)
 
 let foldi f from to0 a =
   if leb0 to0 from
   then a
   else let (_, r) =
          iter_int63 (sub0 to0 from) (fun jy ->
-           let (j, y) = jy in ((add0 j (Uint63.of_int (1))), (f j y))) (from,
-           a)
+           let (j, y) = jy in ((add0 j (Uint63.of_int (1))), (f j y))) (from, a)
        in
        r
 
 (** val to_list : 'a1 array -> 'a1 list **)
 
 let to_list t0 =
-  rev
-    (foldi (fun i l -> Cons ((get t0 i), l)) (Uint63.of_int (0)) (length0 t0)
-      Nil)
+  rev (foldi (fun i l -> Cons ((get t0 i), l)) (Uint63.of_int (0)) (length0 t0) Nil)
 
 (** val amapi : (Uint63.t -> 'a1 -> 'a2) -> 'a1 array -> 'a2 array **)
 
@@ -3435,10 +3264,8 @@ let afold_left default0 oP v =
 let afold_right default0 oP v =
   if eqb0 (length0 v) (Uint63.of_int (0))
   then default0
-  else foldi (fun i ->
-         oP (get v (sub0 (sub0 (length0 v) (Uint63.of_int (1))) i)))
-         (Uint63.of_int (1)) (length0 v)
-         (get v (sub0 (length0 v) (Uint63.of_int (1))))
+  else foldi (fun i -> oP (get v (sub0 (sub0 (length0 v) (Uint63.of_int (1))) i)))
+         (Uint63.of_int (1)) (length0 v) (get v (sub0 (length0 v) (Uint63.of_int (1))))
 
 (** val aexistsbi : (Uint63.t -> 'a1 -> bool) -> 'a1 array -> bool **)
 
@@ -3550,6 +3377,12 @@ module C =
   let is_false = function
   | Nil -> true
   | Cons (_, _) -> false
+
+  (** val has_true : t -> bool **)
+
+  let rec has_true = function
+  | Nil -> false
+  | Cons (l, c0) -> if eqb0 l Lit._true then true else has_true c0
 
   (** val or_aux : (t -> t -> t) -> Uint63.t -> t -> t -> Uint63.t list **)
 
@@ -3679,8 +3512,7 @@ module S =
     if eqb0 len (Uint63.of_int (0))
     then s
     else let c =
-           foldi (fun i c' -> C.resolve (get s (Coq__2.get r i)) c')
-             (Uint63.of_int (1)) len
+           foldi (fun i c' -> C.resolve (get s (Coq__2.get r i)) c') (Uint63.of_int (1)) len
              (get s (Coq__2.get r (Uint63.of_int (0))))
          in
          internal_set s pos c
@@ -3853,8 +3685,7 @@ module Atom =
   | BO_select of Typ.coq_type * Typ.coq_type
   | BO_diffarray of Typ.coq_type * Typ.coq_type
 
-  type nop =
-    Typ.coq_type
+  type nop = Typ.coq_type
     (* singleton inductive, whose constructor was NO_distinct *)
 
   type terop =
@@ -3880,8 +3711,7 @@ module Atom =
                 | _ -> false)
     | CO_BV (bv, s) ->
       (match o' with
-       | CO_BV (bv', s') ->
-         if N.eqb s s' then RAWBITVECTOR_LIST.beq_list bv bv' else false
+       | CO_BV (bv', s') -> if N.eqb s s' then RAWBITVECTOR_LIST.beq_list bv bv' else false
        | _ -> false)
 
   (** val uop_eqb : unop -> unop -> bool **)
@@ -3916,9 +3746,7 @@ module Atom =
     | UO_BVextr (i0, n00, n01) ->
       (match o' with
        | UO_BVextr (i1, n10, n11) ->
-         if if N.eqb i0 i1 then N.eqb n00 n10 else false
-         then N.eqb n01 n11
-         else false
+         if if N.eqb i0 i1 then N.eqb n00 n10 else false then N.eqb n01 n11 else false
        | _ -> false)
     | UO_BVzextn (s1, i1) ->
       (match o' with
@@ -3990,21 +3818,18 @@ module Atom =
                       | _ -> false)
     | BO_select (ti, te) ->
       (match o' with
-       | BO_select (ti', te') ->
-         if Typ.eqb ti ti' then Typ.eqb te te' else false
+       | BO_select (ti', te') -> if Typ.eqb ti ti' then Typ.eqb te te' else false
        | _ -> false)
     | BO_diffarray (ti, te) ->
       (match o' with
-       | BO_diffarray (ti', te') ->
-         if Typ.eqb ti ti' then Typ.eqb te te' else false
+       | BO_diffarray (ti', te') -> if Typ.eqb ti ti' then Typ.eqb te te' else false
        | _ -> false)
 
   (** val top_eqb : terop -> terop -> bool **)
 
   let top_eqb o o' =
     let TO_store (ti, te) = o in
-    let TO_store (ti', te') = o' in
-    if Typ.eqb ti ti' then Typ.eqb te te' else false
+    let TO_store (ti', te') = o' in if Typ.eqb ti ti' then Typ.eqb te te' else false
 
   (** val nop_eqb : nop -> nop -> bool **)
 
@@ -4025,23 +3850,18 @@ module Atom =
     | Abop (o, t1, t2) ->
       (match t' with
        | Abop (o', t1', t2') ->
-         if if bop_eqb o o' then eqb0 t1 t1' else false
-         then eqb0 t2 t2'
-         else false
+         if if bop_eqb o o' then eqb0 t1 t1' else false then eqb0 t2 t2' else false
        | _ -> false)
     | Atop (o, t1, t2, t3) ->
       (match t' with
        | Atop (o', t1', t2', t3') ->
-         if if if top_eqb o o' then eqb0 t1 t1' else false
-            then eqb0 t2 t2'
-            else false
+         if if if top_eqb o o' then eqb0 t1 t1' else false then eqb0 t2 t2' else false
          then eqb0 t3 t3'
          else false
        | _ -> false)
     | Anop (o, t1) ->
       (match t' with
-       | Anop (o', t'0) ->
-         if nop_eqb o o' then list_beq eqb0 t1 t'0 else false
+       | Anop (o', t'0) -> if nop_eqb o o' then list_beq eqb0 t1 t'0 else false
        | _ -> false)
     | Aapp (a, la) ->
       (match t' with
@@ -4075,23 +3895,21 @@ module Atom =
  end
 
 (** val get_eq :
-    Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t
-    -> C.t) -> C.t **)
+    Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t -> C.t) -> C.t **)
 
 let get_eq t_form t_atom x f =
   match get t_form x with
   | Form.Fatom xa ->
     (match get t_atom xa with
-     | Atom.Abop (b0, a, b) ->
-       (match b0 with
-        | Atom.BO_eq _ -> f a b
-        | _ -> C._true)
+     | Atom.Abop (b0, a, b) -> (match b0 with
+                                | Atom.BO_eq _ -> f a b
+                                | _ -> C._true)
      | _ -> C._true)
   | _ -> C._true
 
 (** val check_trans_aux :
-    Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> Uint63.t
-    list -> Uint63.t -> C.t -> C.t **)
+    Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> Uint63.t list -> Uint63.t
+    -> C.t -> C.t **)
 
 let rec check_trans_aux t_form t_atom t1 t2 eqs res clause0 =
   match eqs with
@@ -4107,14 +3925,12 @@ let rec check_trans_aux t_form t_atom t1 t2 eqs res clause0 =
     let xeq = Lit.blit leq in
     get_eq t_form t_atom xeq (fun t0 t' ->
       if eqb0 t2 t'
-      then check_trans_aux t_form t_atom t1 t0 eqs0 res (Cons
-             ((Lit.nlit xeq), clause0))
+      then check_trans_aux t_form t_atom t1 t0 eqs0 res (Cons ((Lit.nlit xeq), clause0))
       else if eqb0 t2 t0
-           then check_trans_aux t_form t_atom t1 t' eqs0 res (Cons
-                  ((Lit.nlit xeq), clause0))
+           then check_trans_aux t_form t_atom t1 t' eqs0 res (Cons ((Lit.nlit xeq), clause0))
            else if eqb0 t1 t'
-                then check_trans_aux t_form t_atom t0 t2 eqs0 res (Cons
-                       ((Lit.nlit xeq), clause0))
+                then check_trans_aux t_form t_atom t0 t2 eqs0 res (Cons ((Lit.nlit xeq),
+                       clause0))
                 else if eqb0 t1 t0
                      then check_trans_aux t_form t_atom t' t2 eqs0 res (Cons
                             ((Lit.nlit xeq), clause0))
@@ -4134,8 +3950,8 @@ let check_trans t_form t_atom res = function
     check_trans_aux t_form t_atom t1 t2 eqs0 res (Cons ((Lit.nlit xeq), Nil)))
 
 (** val build_congr :
-    Form.form array -> Atom.atom array -> Uint63.t option list -> Uint63.t
-    list -> Uint63.t list -> C.t -> C.t **)
+    Form.form array -> Atom.atom array -> Uint63.t option list -> Uint63.t list -> Uint63.t
+    list -> C.t -> C.t **)
 
 let rec build_congr t_form t_atom eqs l r c =
   match eqs with
@@ -4159,17 +3975,12 @@ let rec build_congr t_form t_atom eqs l r c =
                if if if eqb0 t1 t1' then eqb0 t2 t2' else false
                   then true
                   else if eqb0 t1 t2' then eqb0 t2 t1' else false
-               then build_congr t_form t_atom eqs0 l0 r0 (Cons
-                      ((Lit.nlit xeq), c))
+               then build_congr t_form t_atom eqs0 l0 r0 (Cons ((Lit.nlit xeq), c))
                else C._true)
-           | None ->
-             if eqb0 t1 t2
-             then build_congr t_form t_atom eqs0 l0 r0 c
-             else C._true)))
+           | None -> if eqb0 t1 t2 then build_congr t_form t_atom eqs0 l0 r0 c else C._true)))
 
 (** val check_congr :
-    Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t option list ->
-    C.t **)
+    Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t option list -> C.t **)
 
 let check_congr t_form t_atom leq eqs =
   let xeq = Lit.blit leq in
@@ -4179,31 +3990,29 @@ let check_congr t_form t_atom leq eqs =
       (match get t_atom t2 with
        | Atom.Auop (o2, b) ->
          if Atom.uop_eqb o1 o2
-         then build_congr t_form t_atom eqs (Cons (a, Nil)) (Cons (b, Nil))
-                (Cons ((Lit.lit xeq), Nil))
+         then build_congr t_form t_atom eqs (Cons (a, Nil)) (Cons (b, Nil)) (Cons
+                ((Lit.lit xeq), Nil))
          else C._true
        | _ -> C._true)
     | Atom.Abop (o1, a1, a2) ->
       (match get t_atom t2 with
        | Atom.Abop (o2, b1, b2) ->
          if Atom.bop_eqb o1 o2
-         then build_congr t_form t_atom eqs (Cons (a1, (Cons (a2, Nil))))
-                (Cons (b1, (Cons (b2, Nil)))) (Cons ((Lit.lit xeq), Nil))
+         then build_congr t_form t_atom eqs (Cons (a1, (Cons (a2, Nil)))) (Cons (b1, (Cons
+                (b2, Nil)))) (Cons ((Lit.lit xeq), Nil))
          else C._true
        | _ -> C._true)
     | Atom.Aapp (f1, args1) ->
       (match get t_atom t2 with
        | Atom.Aapp (f2, args2) ->
          if eqb0 f1 f2
-         then build_congr t_form t_atom eqs args1 args2 (Cons ((Lit.lit xeq),
-                Nil))
+         then build_congr t_form t_atom eqs args1 args2 (Cons ((Lit.lit xeq), Nil))
          else C._true
        | _ -> C._true)
     | _ -> C._true)
 
 (** val check_congr_pred :
-    Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> Uint63.t
-    option list -> C.t **)
+    Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> Uint63.t option list -> C.t **)
 
 let check_congr_pred t_form t_atom pA pB eqs =
   let xPA = Lit.blit pA in
@@ -4217,26 +4026,24 @@ let check_congr_pred t_form t_atom pA pB eqs =
            (match get t_atom pb with
             | Atom.Auop (o2, b) ->
               if Atom.uop_eqb o1 o2
-              then build_congr t_form t_atom eqs (Cons (a, Nil)) (Cons (b,
-                     Nil)) (Cons ((Lit.nlit xPA), (Cons ((Lit.lit xPB),
-                     Nil))))
+              then build_congr t_form t_atom eqs (Cons (a, Nil)) (Cons (b, Nil)) (Cons
+                     ((Lit.nlit xPA), (Cons ((Lit.lit xPB), Nil))))
               else C._true
             | _ -> C._true)
          | Atom.Abop (o1, a1, a2) ->
            (match get t_atom pb with
             | Atom.Abop (o2, b1, b2) ->
               if Atom.bop_eqb o1 o2
-              then build_congr t_form t_atom eqs (Cons (a1, (Cons (a2,
-                     Nil)))) (Cons (b1, (Cons (b2, Nil)))) (Cons
-                     ((Lit.nlit xPA), (Cons ((Lit.lit xPB), Nil))))
+              then build_congr t_form t_atom eqs (Cons (a1, (Cons (a2, Nil)))) (Cons (b1,
+                     (Cons (b2, Nil)))) (Cons ((Lit.nlit xPA), (Cons ((Lit.lit xPB), Nil))))
               else C._true
             | _ -> C._true)
          | Atom.Aapp (p, a) ->
            (match get t_atom pb with
             | Atom.Aapp (p', b) ->
               if eqb0 p p'
-              then build_congr t_form t_atom eqs a b (Cons ((Lit.nlit xPA),
-                     (Cons ((Lit.lit xPB), Nil))))
+              then build_congr t_form t_atom eqs a b (Cons ((Lit.nlit xPA), (Cons
+                     ((Lit.lit xPB), Nil))))
               else C._true
             | _ -> C._true)
          | _ -> C._true)
@@ -4260,8 +4067,8 @@ let build_positive_atom_aux build_positive0 = function
 (** val build_positive : Atom.atom array -> Uint63.t -> positive option **)
 
 let build_positive t_atom =
-  foldi (fun _ cont h -> build_positive_atom_aux cont (get t_atom h))
-    (Uint63.of_int (0)) (length0 t_atom) (fun _ -> None)
+  foldi (fun _ cont h -> build_positive_atom_aux cont (get t_atom h)) (Uint63.of_int (0))
+    (length0 t_atom) (fun _ -> None)
 
 (** val build_z_atom_aux : Atom.atom array -> Atom.atom -> z option **)
 
@@ -4283,14 +4090,12 @@ let build_z_atom =
 
 type vmap = positive * Atom.atom list
 
-(** val find_var_aux :
-    Atom.atom -> positive -> Atom.atom list -> positive option **)
+(** val find_var_aux : Atom.atom -> positive -> Atom.atom list -> positive option **)
 
 let rec find_var_aux h p = function
 | Nil -> None
 | Cons (h', l0) ->
-  let p2 = Coq_Pos.pred p in
-  if Atom.eqb h h' then Some p2 else find_var_aux h p2 l0
+  let p2 = Coq_Pos.pred p in if Atom.eqb h h' then Some p2 else find_var_aux h p2 l0
 
 (** val find_var : vmap -> Atom.atom -> vmap * positive **)
 
@@ -4306,8 +4111,8 @@ let empty_vmap =
   (XH, Nil)
 
 (** val build_pexpr_atom_aux :
-    Atom.atom array -> (vmap -> Uint63.t -> vmap * z pExpr) -> vmap ->
-    Atom.atom -> vmap * z pExpr **)
+    Atom.atom array -> (vmap -> Uint63.t -> vmap * z pExpr) -> vmap -> Atom.atom -> vmap * z
+    pExpr **)
 
 let build_pexpr_atom_aux t_atom build_pexpr0 vm h = match h with
 | Atom.Auop (u, a) ->
@@ -4337,13 +4142,11 @@ let build_pexpr_atom_aux t_atom build_pexpr0 vm h = match h with
    | Some z0 -> (vm, (PEc z0))
    | None -> let (vm0, p) = find_var vm h in (vm0, (PEX p)))
 
-(** val build_pexpr :
-    Atom.atom array -> vmap -> Uint63.t -> vmap * z pExpr **)
+(** val build_pexpr : Atom.atom array -> vmap -> Uint63.t -> vmap * z pExpr **)
 
 let build_pexpr t_atom =
-  foldi (fun _ cont vm h ->
-    build_pexpr_atom_aux t_atom cont vm (get t_atom h)) (Uint63.of_int (0))
-    (length0 t_atom) (fun vm _ -> (vm, (PEc Z0)))
+  foldi (fun _ cont vm h -> build_pexpr_atom_aux t_atom cont vm (get t_atom h))
+    (Uint63.of_int (0)) (length0 t_atom) (fun vm _ -> (vm, (PEc Z0)))
 
 (** val build_op2 : Atom.binop -> op2 option **)
 
@@ -4370,8 +4173,7 @@ let build_formula_atom t_atom vm = function
    | None -> None)
 | _ -> None
 
-(** val build_formula :
-    Atom.atom array -> vmap -> Uint63.t -> (vmap * z formula) option **)
+(** val build_formula : Atom.atom array -> vmap -> Uint63.t -> (vmap * z formula) option **)
 
 let build_formula t_atom vm h =
   build_formula_atom t_atom vm (get t_atom h)
@@ -4382,8 +4184,8 @@ let build_not2 i f =
   foldi (fun _ f' -> NOT (IsProp, (NOT (IsProp, f')))) (Uint63.of_int (0)) i f
 
 (** val build_hform :
-    Atom.atom array -> (vmap -> Uint63.t -> (vmap * z formula bFormula)
-    option) -> vmap -> Form.form -> (vmap * z formula bFormula) option **)
+    Atom.atom array -> (vmap -> Uint63.t -> (vmap * z formula bFormula) option) -> vmap ->
+    Form.form -> (vmap * z formula bFormula) option **)
 
 let build_hform t_atom build_var0 vm = function
 | Form.Fatom h ->
@@ -4397,8 +4199,7 @@ let build_hform t_atom build_var0 vm = function
    | Some p ->
      let (vm0, f0) = p in
      let f' = build_not2 i f0 in
-     let f'' = if Lit.is_pos l then f' else NOT (IsProp, f') in
-     Some (vm0, f'')
+     let f'' = if Lit.is_pos l then f' else NOT (IsProp, f') in Some (vm0, f'')
    | None -> None)
 | Form.Fand args ->
   afold_left (fun vm0 -> Some (vm0, (TT IsProp))) (fun a b vm0 ->
@@ -4412,8 +4213,7 @@ let build_hform t_atom build_var0 vm = function
     (amap (fun l vm0 ->
       match build_var0 vm0 (Lit.blit l) with
       | Some p ->
-        let (vm', f0) = p in
-        Some (vm', (if Lit.is_pos l then f0 else NOT (IsProp, f0)))
+        let (vm', f0) = p in Some (vm', (if Lit.is_pos l then f0 else NOT (IsProp, f0)))
       | None -> None) args) vm
 | Form.For args ->
   afold_left (fun vm0 -> Some (vm0, (FF IsProp))) (fun a b vm0 ->
@@ -4427,8 +4227,7 @@ let build_hform t_atom build_var0 vm = function
     (amap (fun l vm0 ->
       match build_var0 vm0 (Lit.blit l) with
       | Some p ->
-        let (vm', f0) = p in
-        Some (vm', (if Lit.is_pos l then f0 else NOT (IsProp, f0)))
+        let (vm', f0) = p in Some (vm', (if Lit.is_pos l then f0 else NOT (IsProp, f0)))
       | None -> None) args) vm
 | Form.Fimp args ->
   afold_right (fun vm0 -> Some (vm0, (TT IsProp))) (fun a b vm0 ->
@@ -4436,15 +4235,13 @@ let build_hform t_atom build_var0 vm = function
     | Some p ->
       let (vm2, f2) = p in
       (match a vm2 with
-       | Some p2 ->
-         let (vm1, f1) = p2 in Some (vm1, (IMPL (IsProp, f1, None, f2)))
+       | Some p2 -> let (vm1, f1) = p2 in Some (vm1, (IMPL (IsProp, f1, None, f2)))
        | None -> None)
     | None -> None)
     (amap (fun l vm0 ->
       match build_var0 vm0 (Lit.blit l) with
       | Some p ->
-        let (vm', f0) = p in
-        Some (vm', (if Lit.is_pos l then f0 else NOT (IsProp, f0)))
+        let (vm', f0) = p in Some (vm', (if Lit.is_pos l then f0 else NOT (IsProp, f0)))
       | None -> None) args) vm
 | Form.Fxor (a, b) ->
   (match build_var0 vm (Lit.blit a) with
@@ -4455,8 +4252,8 @@ let build_hform t_atom build_var0 vm = function
         let (vm2, f2) = p2 in
         let f1' = if Lit.is_pos a then f1 else NOT (IsProp, f1) in
         let f2' = if Lit.is_pos b then f2 else NOT (IsProp, f2) in
-        Some (vm2, (AND (IsProp, (OR (IsProp, f1', f2')), (OR (IsProp, (NOT
-        (IsProp, f1')), (NOT (IsProp, f2')))))))
+        Some (vm2, (AND (IsProp, (OR (IsProp, f1', f2')), (OR (IsProp, (NOT (IsProp, f1')),
+        (NOT (IsProp, f2')))))))
       | None -> None)
    | None -> None)
 | Form.Fiff (a, b) ->
@@ -4468,8 +4265,8 @@ let build_hform t_atom build_var0 vm = function
         let (vm2, f2) = p2 in
         let f1' = if Lit.is_pos a then f1 else NOT (IsProp, f1) in
         let f2' = if Lit.is_pos b then f2 else NOT (IsProp, f2) in
-        Some (vm2, (AND (IsProp, (OR (IsProp, f1', (NOT (IsProp, f2')))), (OR
-        (IsProp, (NOT (IsProp, f1')), f2')))))
+        Some (vm2, (AND (IsProp, (OR (IsProp, f1', (NOT (IsProp, f2')))), (OR (IsProp, (NOT
+        (IsProp, f1')), f2')))))
       | None -> None)
    | None -> None)
 | Form.Fite (a, b, c) ->
@@ -4485,31 +4282,31 @@ let build_hform t_atom build_var0 vm = function
            let f1' = if Lit.is_pos a then f1 else NOT (IsProp, f1) in
            let f2' = if Lit.is_pos b then f2 else NOT (IsProp, f2) in
            let f3' = if Lit.is_pos c then f3 else NOT (IsProp, f3) in
-           Some (vm3, (OR (IsProp, (AND (IsProp, f1', f2')), (AND (IsProp,
-           (NOT (IsProp, f1')), f3')))))
+           Some (vm3, (OR (IsProp, (AND (IsProp, f1', f2')), (AND (IsProp, (NOT (IsProp,
+           f1')), f3')))))
          | None -> None)
       | None -> None)
    | None -> None)
 | Form.FbbT (_, _) -> None
 
 (** val build_var :
-    Form.form array -> Atom.atom array -> vmap -> Uint63.t -> (vmap * z
-    formula bFormula) option **)
+    Form.form array -> Atom.atom array -> vmap -> Uint63.t -> (vmap * z formula bFormula)
+    option **)
 
 let build_var t_form t_atom =
-  foldi (fun _ cont vm h -> build_hform t_atom cont vm (get t_form h))
-    (Uint63.of_int (0)) (length0 t_form) (fun _ _ -> None)
+  foldi (fun _ cont vm h -> build_hform t_atom cont vm (get t_form h)) (Uint63.of_int (0))
+    (length0 t_form) (fun _ _ -> None)
 
 (** val build_form :
-    Form.form array -> Atom.atom array -> vmap -> Form.form -> (vmap * z
-    formula bFormula) option **)
+    Form.form array -> Atom.atom array -> vmap -> Form.form -> (vmap * z formula bFormula)
+    option **)
 
 let build_form t_form t_atom =
   build_hform t_atom (build_var t_form t_atom)
 
 (** val build_nlit :
-    Form.form array -> Atom.atom array -> vmap -> Uint63.t -> (vmap * z
-    formula bFormula) option **)
+    Form.form array -> Atom.atom array -> vmap -> Uint63.t -> (vmap * z formula bFormula)
+    option **)
 
 let build_nlit t_form t_atom vm l =
   let l0 = Lit.neg l in
@@ -4520,8 +4317,8 @@ let build_nlit t_form t_atom vm l =
    | None -> None)
 
 (** val build_clause_aux :
-    Form.form array -> Atom.atom array -> vmap -> Uint63.t list -> (vmap * z
-    formula bFormula) option **)
+    Form.form array -> Atom.atom array -> vmap -> Uint63.t list -> (vmap * z formula
+    bFormula) option **)
 
 let rec build_clause_aux t_form t_atom vm = function
 | Nil -> None
@@ -4533,66 +4330,58 @@ let rec build_clause_aux t_form t_atom vm = function
       | Some p ->
         let (vm0, bf1) = p in
         (match build_clause_aux t_form t_atom vm0 cl0 with
-         | Some p2 ->
-           let (vm1, bf2) = p2 in Some (vm1, (AND (IsProp, bf1, bf2)))
+         | Some p2 -> let (vm1, bf2) = p2 in Some (vm1, (AND (IsProp, bf1, bf2)))
          | None -> None)
       | None -> None))
 
 (** val build_clause :
-    Form.form array -> Atom.atom array -> vmap -> Uint63.t list -> (vmap * (z
-    formula, eKind, unit0, unit0) gFormula) option **)
+    Form.form array -> Atom.atom array -> vmap -> Uint63.t list -> (vmap * (z formula,
+    eKind, unit0, unit0) gFormula) option **)
 
 let build_clause t_form t_atom vm cl =
   match build_clause_aux t_form t_atom vm cl with
-  | Some p ->
-    let (vm0, bf) = p in Some (vm0, (IMPL (IsProp, bf, None, (FF IsProp))))
+  | Some p -> let (vm0, bf) = p in Some (vm0, (IMPL (IsProp, bf, None, (FF IsProp))))
   | None -> None
 
 (** val get_eq0 :
-    Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t
-    -> C.t) -> C.t **)
+    Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t -> C.t) -> C.t **)
 
 let get_eq0 t_form t_atom l f =
   if Lit.is_pos l
   then (match get t_form (Lit.blit l) with
         | Form.Fatom xa ->
           (match get t_atom xa with
-           | Atom.Abop (b0, a, b) ->
-             (match b0 with
-              | Atom.BO_eq _ -> f a b
-              | _ -> C._true)
+           | Atom.Abop (b0, a, b) -> (match b0 with
+                                      | Atom.BO_eq _ -> f a b
+                                      | _ -> C._true)
            | _ -> C._true)
         | _ -> C._true)
   else C._true
 
 (** val get_not_le :
-    Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t
-    -> C.t) -> C.t **)
+    Form.form array -> Atom.atom array -> Uint63.t -> (Uint63.t -> Uint63.t -> C.t) -> C.t **)
 
 let get_not_le t_form t_atom l f =
   if negb (Lit.is_pos l)
   then (match get t_form (Lit.blit l) with
         | Form.Fatom xa ->
           (match get t_atom xa with
-           | Atom.Abop (b0, a, b) ->
-             (match b0 with
-              | Atom.BO_Zle -> f a b
-              | _ -> C._true)
+           | Atom.Abop (b0, a, b) -> (match b0 with
+                                      | Atom.BO_Zle -> f a b
+                                      | _ -> C._true)
            | _ -> C._true)
         | _ -> C._true)
   else C._true
 
 (** val check_micromega :
-    Form.form array -> Atom.atom array -> Uint63.t list -> zArithProof list
-    -> C.t **)
+    Form.form array -> Atom.atom array -> Uint63.t list -> zArithProof list -> C.t **)
 
 let check_micromega t_form t_atom cl c =
   match build_clause t_form t_atom empty_vmap cl with
   | Some p -> let (_, bf) = p in if zTautoChecker bf c then cl else C._true
   | None -> C._true
 
-(** val check_diseq :
-    Form.form array -> Atom.atom array -> Uint63.t -> C.t **)
+(** val check_diseq : Form.form array -> Atom.atom array -> Uint63.t -> C.t **)
 
 let check_diseq t_form t_atom l =
   match get t_form (Lit.blit l) with
@@ -4604,9 +4393,7 @@ let check_diseq t_form t_atom l =
          get_eq0 t_form t_atom a_eq_b (fun a0 b ->
            get_not_le t_form t_atom not_a_le_b (fun a' b' ->
              get_not_le t_form t_atom not_b_le_a (fun b'' a'' ->
-               if if if if eqb0 a0 a' then eqb0 a0 a'' else false
-                     then eqb0 b b'
-                     else false
+               if if if if eqb0 a0 a' then eqb0 a0 a'' else false then eqb0 b b' else false
                   then eqb0 b b''
                   else false
                then Cons ((Lit.lit (Lit.blit l)), Nil)
@@ -4621,15 +4408,13 @@ let check_diseq t_form t_atom l =
   | _ -> C._true
 
 (** val check_atom_aux :
-    Atom.atom array -> (Uint63.t -> Uint63.t -> bool) -> Atom.atom ->
-    Atom.atom -> bool **)
+    Atom.atom array -> (Uint63.t -> Uint63.t -> bool) -> Atom.atom -> Atom.atom -> bool **)
 
 let check_atom_aux t_atom check_hatom0 a b =
   match a with
-  | Atom.Acop o1 ->
-    (match b with
-     | Atom.Acop o2 -> Atom.cop_eqb o1 o2
-     | _ -> false)
+  | Atom.Acop o1 -> (match b with
+                     | Atom.Acop o2 -> Atom.cop_eqb o1 o2
+                     | _ -> false)
   | Atom.Auop (o1, a0) ->
     (match o1 with
      | Atom.UO_Zneg ->
@@ -4660,8 +4445,7 @@ let check_atom_aux t_atom check_hatom0 a b =
         | _ -> false)
      | _ ->
        (match b with
-        | Atom.Auop (o2, b0) ->
-          if Atom.uop_eqb o1 o2 then check_hatom0 a0 b0 else false
+        | Atom.Auop (o2, b0) -> if Atom.uop_eqb o1 o2 then check_hatom0 a0 b0 else false
         | _ -> false))
   | Atom.Abop (o1, a1, a2) ->
     (match b with
@@ -4676,8 +4460,7 @@ let check_atom_aux t_atom check_hatom0 a b =
            | _ -> false)
         | Atom.BO_Zminus ->
           (match o2 with
-           | Atom.BO_Zminus ->
-             if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
+           | Atom.BO_Zminus -> if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
            | _ -> false)
         | Atom.BO_Zmult ->
           (match o2 with
@@ -4688,31 +4471,23 @@ let check_atom_aux t_atom check_hatom0 a b =
            | _ -> false)
         | Atom.BO_Zlt ->
           (match o2 with
-           | Atom.BO_Zlt ->
-             if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
-           | Atom.BO_Zgt ->
-             if check_hatom0 a1 b2 then check_hatom0 a2 b1 else false
+           | Atom.BO_Zlt -> if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
+           | Atom.BO_Zgt -> if check_hatom0 a1 b2 then check_hatom0 a2 b1 else false
            | _ -> false)
         | Atom.BO_Zle ->
           (match o2 with
-           | Atom.BO_Zle ->
-             if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
-           | Atom.BO_Zge ->
-             if check_hatom0 a1 b2 then check_hatom0 a2 b1 else false
+           | Atom.BO_Zle -> if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
+           | Atom.BO_Zge -> if check_hatom0 a1 b2 then check_hatom0 a2 b1 else false
            | _ -> false)
         | Atom.BO_Zge ->
           (match o2 with
-           | Atom.BO_Zle ->
-             if check_hatom0 a1 b2 then check_hatom0 a2 b1 else false
-           | Atom.BO_Zge ->
-             if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
+           | Atom.BO_Zle -> if check_hatom0 a1 b2 then check_hatom0 a2 b1 else false
+           | Atom.BO_Zge -> if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
            | _ -> false)
         | Atom.BO_Zgt ->
           (match o2 with
-           | Atom.BO_Zlt ->
-             if check_hatom0 a1 b2 then check_hatom0 a2 b1 else false
-           | Atom.BO_Zgt ->
-             if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
+           | Atom.BO_Zlt -> if check_hatom0 a1 b2 then check_hatom0 a2 b1 else false
+           | Atom.BO_Zgt -> if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
            | _ -> false)
         | Atom.BO_eq t1 ->
           (match o2 with
@@ -4720,9 +4495,7 @@ let check_atom_aux t_atom check_hatom0 a b =
              if Typ.eqb t1 t2
              then if if check_hatom0 a1 b1 then check_hatom0 a2 b2 else false
                   then true
-                  else if check_hatom0 a1 b2
-                       then check_hatom0 a2 b1
-                       else false
+                  else if check_hatom0 a1 b2 then check_hatom0 a2 b1 else false
              else false
            | _ -> false)
         | Atom.BO_BVand s1 ->
@@ -4744,8 +4517,7 @@ let check_atom_aux t_atom check_hatom0 a b =
   | Atom.Atop (_, _, _, _) -> false
   | Atom.Anop (o1, l1) ->
     (match b with
-     | Atom.Anop (o2, l2) ->
-       if Typ.eqb o1 o2 then list_beq check_hatom0 l1 l2 else false
+     | Atom.Anop (o2, l2) -> if Typ.eqb o1 o2 then list_beq check_hatom0 l1 l2 else false
      | _ -> false)
   | Atom.Aapp (f1, aargs) ->
     (match b with
@@ -4757,9 +4529,7 @@ let check_atom_aux t_atom check_hatom0 a b =
 
 let check_hatom t_atom h1 h2 =
   foldi (fun _ cont h3 h4 ->
-    if eqb0 h3 h4
-    then true
-    else check_atom_aux t_atom cont (get t_atom h3) (get t_atom h4))
+    if eqb0 h3 h4 then true else check_atom_aux t_atom cont (get t_atom h3) (get t_atom h4))
     (Uint63.of_int (0)) (length0 t_atom) (fun _ _ -> false) h1 h2
 
 (** val check_neg_hatom : Atom.atom array -> Uint63.t -> Uint63.t -> bool **)
@@ -4773,46 +4543,30 @@ let check_neg_hatom t_atom h1 h2 =
         | Atom.BO_Zlt ->
           (match op4 with
            | Atom.BO_Zle ->
-             if check_hatom t_atom a1 b2
-             then check_hatom t_atom a2 b1
-             else false
+             if check_hatom t_atom a1 b2 then check_hatom t_atom a2 b1 else false
            | Atom.BO_Zge ->
-             if check_hatom t_atom a1 b1
-             then check_hatom t_atom a2 b2
-             else false
+             if check_hatom t_atom a1 b1 then check_hatom t_atom a2 b2 else false
            | _ -> false)
         | Atom.BO_Zle ->
           (match op4 with
            | Atom.BO_Zlt ->
-             if check_hatom t_atom a1 b2
-             then check_hatom t_atom a2 b1
-             else false
+             if check_hatom t_atom a1 b2 then check_hatom t_atom a2 b1 else false
            | Atom.BO_Zgt ->
-             if check_hatom t_atom a1 b1
-             then check_hatom t_atom a2 b2
-             else false
+             if check_hatom t_atom a1 b1 then check_hatom t_atom a2 b2 else false
            | _ -> false)
         | Atom.BO_Zge ->
           (match op4 with
            | Atom.BO_Zlt ->
-             if check_hatom t_atom a1 b1
-             then check_hatom t_atom a2 b2
-             else false
+             if check_hatom t_atom a1 b1 then check_hatom t_atom a2 b2 else false
            | Atom.BO_Zgt ->
-             if check_hatom t_atom a1 b2
-             then check_hatom t_atom a2 b1
-             else false
+             if check_hatom t_atom a1 b2 then check_hatom t_atom a2 b1 else false
            | _ -> false)
         | Atom.BO_Zgt ->
           (match op4 with
            | Atom.BO_Zle ->
-             if check_hatom t_atom a1 b1
-             then check_hatom t_atom a2 b2
-             else false
+             if check_hatom t_atom a1 b1 then check_hatom t_atom a2 b2 else false
            | Atom.BO_Zge ->
-             if check_hatom t_atom a1 b2
-             then check_hatom t_atom a2 b1
-             else false
+             if check_hatom t_atom a1 b2 then check_hatom t_atom a2 b1 else false
            | _ -> false)
         | _ -> false)
      | _ -> false)
@@ -4846,41 +4600,37 @@ let get_or t_form l =
   else None
 
 (** val flatten_op_body :
-    (Uint63.t -> Uint63.t array option) -> (Uint63.t list -> Uint63.t ->
-    Uint63.t list) -> Uint63.t list -> Uint63.t -> Uint63.t list **)
+    (Uint63.t -> Uint63.t array option) -> (Uint63.t list -> Uint63.t -> Uint63.t list) ->
+    Uint63.t list -> Uint63.t -> Uint63.t list **)
 
 let flatten_op_body get_op frec largs l =
   match get_op l with
-  | Some a ->
-    foldi (fun i x -> frec x (get a i)) (Uint63.of_int (0)) (length0 a) largs
+  | Some a -> foldi (fun i x -> frec x (get a i)) (Uint63.of_int (0)) (length0 a) largs
   | None -> Cons (l, largs)
 
 (** val flatten_op_lit :
-    (Uint63.t -> Uint63.t array option) -> Uint63.t -> Uint63.t list ->
-    Uint63.t -> Uint63.t list **)
+    (Uint63.t -> Uint63.t array option) -> Uint63.t -> Uint63.t list -> Uint63.t -> Uint63.t
+    list **)
 
 let flatten_op_lit get_op max0 =
-  foldi (fun _ -> flatten_op_body get_op) (Uint63.of_int (0)) max0
-    (fun largs l -> Cons (l, largs))
+  foldi (fun _ -> flatten_op_body get_op) (Uint63.of_int (0)) max0 (fun largs l -> Cons (l,
+    largs))
 
 (** val flatten_and : Form.form array -> Uint63.t array -> Uint63.t list **)
 
 let flatten_and t_form t0 =
-  foldi (fun i x ->
-    flatten_op_lit (get_and t_form) (length0 t_form) x (get t0 i))
+  foldi (fun i x -> flatten_op_lit (get_and t_form) (length0 t_form) x (get t0 i))
     (Uint63.of_int (0)) (length0 t0) Nil
 
 (** val flatten_or : Form.form array -> Uint63.t array -> Uint63.t list **)
 
 let flatten_or t_form t0 =
-  foldi (fun i x ->
-    flatten_op_lit (get_or t_form) (length0 t_form) x (get t0 i))
+  foldi (fun i x -> flatten_op_lit (get_or t_form) (length0 t_form) x (get t0 i))
     (Uint63.of_int (0)) (length0 t0) Nil
 
 (** val check_flatten_body :
-    Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t ->
-    Uint63.t -> bool) -> (Uint63.t -> Uint63.t -> bool) -> Uint63.t ->
-    Uint63.t -> bool **)
+    Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t -> Uint63.t -> bool) ->
+    (Uint63.t -> Uint63.t -> bool) -> Uint63.t -> Uint63.t -> bool **)
 
 let check_flatten_body t_form check_atom0 check_neg_atom frec l lf =
   let l0 = remove_not t_form l in
@@ -4905,15 +4655,13 @@ let check_flatten_body t_form check_atom0 check_neg_atom frec l lf =
                (match get t_form (Lit.blit lf0) with
                 | Form.Fand args2 ->
                   let args3 = flatten_and t_form args1 in
-                  let args4 = flatten_and t_form args2 in
-                  forallb2 frec args3 args4
+                  let args4 = flatten_and t_form args2 in forallb2 frec args3 args4
                 | _ -> false)
              | Form.For args1 ->
                (match get t_form (Lit.blit lf0) with
                 | Form.For args2 ->
                   let args3 = flatten_or t_form args1 in
-                  let args4 = flatten_or t_form args2 in
-                  forallb2 frec args3 args4
+                  let args4 = flatten_or t_form args2 in forallb2 frec args3 args4
                 | _ -> false)
              | Form.Fimp args1 ->
                (match get t_form (Lit.blit lf0) with
@@ -4924,20 +4672,16 @@ let check_flatten_body t_form check_atom0 check_neg_atom frec l lf =
                 | _ -> false)
              | Form.Fxor (l1, l2) ->
                (match get t_form (Lit.blit lf0) with
-                | Form.Fxor (lf1, lf2) ->
-                  if frec l1 lf1 then frec l2 lf2 else false
+                | Form.Fxor (lf1, lf2) -> if frec l1 lf1 then frec l2 lf2 else false
                 | _ -> false)
              | Form.Fiff (l1, l2) ->
                (match get t_form (Lit.blit lf0) with
-                | Form.Fiff (lf1, lf2) ->
-                  if frec l1 lf1 then frec l2 lf2 else false
+                | Form.Fiff (lf1, lf2) -> if frec l1 lf1 then frec l2 lf2 else false
                 | _ -> false)
              | Form.Fite (l1, l2, l3) ->
                (match get t_form (Lit.blit lf0) with
                 | Form.Fite (lf1, lf2, lf3) ->
-                  if if frec l1 lf1 then frec l2 lf2 else false
-                  then frec l3 lf3
-                  else false
+                  if if frec l1 lf1 then frec l2 lf2 else false then frec l3 lf3 else false
                 | _ -> false)
              | _ -> false)
        else (match get t_form (Lit.blit l0) with
@@ -4948,16 +4692,16 @@ let check_flatten_body t_form check_atom0 check_neg_atom frec l lf =
              | _ -> false)
 
 (** val check_flatten_aux :
-    Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t ->
-    Uint63.t -> bool) -> Uint63.t -> Uint63.t -> bool **)
+    Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t -> Uint63.t -> bool) ->
+    Uint63.t -> Uint63.t -> bool **)
 
 let check_flatten_aux t_form check_atom0 check_neg_atom l lf =
-  foldi (fun _ -> check_flatten_body t_form check_atom0 check_neg_atom)
-    (Uint63.of_int (0)) (length0 t_form) (fun _ _ -> false) l lf
+  foldi (fun _ -> check_flatten_body t_form check_atom0 check_neg_atom) (Uint63.of_int (0))
+    (length0 t_form) (fun _ _ -> false) l lf
 
 (** val check_flatten :
-    Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t ->
-    Uint63.t -> bool) -> S.t -> Uint63.t -> Uint63.t -> C.t **)
+    Form.form array -> (Uint63.t -> Uint63.t -> bool) -> (Uint63.t -> Uint63.t -> bool) ->
+    S.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_flatten t_form check_atom0 check_neg_atom s cid lf =
   match S.get s cid with
@@ -4971,8 +4715,8 @@ let check_flatten t_form check_atom0 check_neg_atom s cid lf =
      | Cons (_, _) -> C._true)
 
 (** val check_spl_arith :
-    Form.form array -> Atom.atom array -> Uint63.t list -> Uint63.t ->
-    zArithProof list -> C.t **)
+    Form.form array -> Atom.atom array -> Uint63.t list -> Uint63.t -> zArithProof list ->
+    C.t **)
 
 let check_spl_arith t_form t_atom orig res l =
   match orig with
@@ -4983,8 +4727,7 @@ let check_spl_arith t_form t_atom orig res l =
        let cl = Cons ((Lit.neg li), (Cons (res, Nil))) in
        (match build_clause t_form t_atom empty_vmap cl with
         | Some p ->
-          let (_, bf) = p in
-          if zTautoChecker bf l then Cons (res, Nil) else C._true
+          let (_, bf) = p in if zTautoChecker bf l then Cons (res, Nil) else C._true
         | None -> C._true)
      | Cons (_, _) -> C._true)
 
@@ -5019,13 +4762,11 @@ let rec check_diseqs_complete dist t0 =
   match dist with
   | Nil -> true
   | Cons (a, q) ->
-    if check_diseqs_complete_aux a q t0
-    then check_diseqs_complete q t0
-    else false
+    if check_diseqs_complete_aux a q t0 then check_diseqs_complete q t0 else false
 
 (** val check_diseqs :
-    Form.form array -> Atom.atom array -> Typ.coq_type -> Uint63.t list ->
-    Uint63.t array -> bool **)
+    Form.form array -> Atom.atom array -> Typ.coq_type -> Uint63.t list -> Uint63.t array ->
+    bool **)
 
 let check_diseqs t_form t_atom ty dist diseq =
   let t0 =
@@ -5047,9 +4788,7 @@ let check_diseqs t_form t_atom ty dist diseq =
                   | Atom.BO_Zge -> None
                   | Atom.BO_Zgt -> None
                   | Atom.BO_eq a0 ->
-                    if if if if Typ.eqb ty a0
-                             then negb (eqb0 h1 h2)
-                             else false
+                    if if if if Typ.eqb ty a0 then negb (eqb0 h1 h2) else false
                           then check_in h1 dist
                           else false
                        then check_in h2 dist
@@ -5109,8 +4848,8 @@ let check_distinct_two_args t_form t_atom f1 f2 =
   | _ -> false
 
 (** val check_lit :
-    Form.form array -> Atom.atom array -> (Uint63.t -> Uint63.t -> bool) ->
-    Uint63.t -> Uint63.t -> bool **)
+    Form.form array -> Atom.atom array -> (Uint63.t -> Uint63.t -> bool) -> Uint63.t ->
+    Uint63.t -> bool **)
 
 let check_lit t_form t_atom check_var l1 l2 =
   if if eqb0 l1 l2
@@ -5124,8 +4863,8 @@ let check_lit t_form t_atom check_var l1 l2 =
        else false
 
 (** val check_form_aux :
-    Form.form array -> Atom.atom array -> (Uint63.t -> Uint63.t -> bool) ->
-    Form.form -> Form.form -> bool **)
+    Form.form array -> Atom.atom array -> (Uint63.t -> Uint63.t -> bool) -> Form.form ->
+    Form.form -> bool **)
 
 let check_form_aux t_form t_atom check_var a b =
   match a with
@@ -5149,24 +4888,21 @@ let check_form_aux t_form t_atom check_var a b =
     (match b with
      | Form.Fand a2 ->
        if eqb0 (length0 a1) (length0 a2)
-       then aforallbi (fun i l ->
-              check_lit t_form t_atom check_var l (get a2 i)) a1
+       then aforallbi (fun i l -> check_lit t_form t_atom check_var l (get a2 i)) a1
        else false
      | _ -> false)
   | Form.For a1 ->
     (match b with
      | Form.For a2 ->
        if eqb0 (length0 a1) (length0 a2)
-       then aforallbi (fun i l ->
-              check_lit t_form t_atom check_var l (get a2 i)) a1
+       then aforallbi (fun i l -> check_lit t_form t_atom check_var l (get a2 i)) a1
        else false
      | _ -> false)
   | Form.Fimp a1 ->
     (match b with
      | Form.Fimp a2 ->
        if eqb0 (length0 a1) (length0 a2)
-       then aforallbi (fun i l ->
-              check_lit t_form t_atom check_var l (get a2 i)) a1
+       then aforallbi (fun i l -> check_lit t_form t_atom check_var l (get a2 i)) a1
        else false
      | _ -> false)
   | Form.Fxor (l1, l2) ->
@@ -5194,8 +4930,7 @@ let check_form_aux t_form t_atom check_var a b =
      | _ -> false)
   | Form.FbbT (_, _) -> false
 
-(** val check_hform :
-    Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> bool **)
+(** val check_hform : Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> bool **)
 
 let check_hform t_form t_atom h1 h2 =
   foldi (fun _ cont h3 h4 ->
@@ -5204,15 +4939,13 @@ let check_hform t_form t_atom h1 h2 =
     else check_form_aux t_form t_atom cont (get t_form h3) (get t_form h4))
     (Uint63.of_int (0)) (length0 t_form) (fun _ _ -> false) h1 h2
 
-(** val check_lit' :
-    Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> bool **)
+(** val check_lit' : Form.form array -> Atom.atom array -> Uint63.t -> Uint63.t -> bool **)
 
 let check_lit' t_form t_atom =
   check_lit t_form t_atom (check_hform t_form t_atom)
 
 (** val check_distinct_elim :
-    Form.form array -> Atom.atom array -> Uint63.t list -> Uint63.t ->
-    Uint63.t list **)
+    Form.form array -> Atom.atom array -> Uint63.t list -> Uint63.t -> Uint63.t list **)
 
 let rec check_distinct_elim t_form t_atom input res =
   match input with
@@ -5244,8 +4977,7 @@ let check_BuildDef t_form l =
   match get t_form (Lit.blit l) with
   | Form.Fand args ->
     if Lit.is_pos l then Cons (l, (map Lit.neg (to_list args))) else C._true
-  | Form.For args ->
-    if Lit.is_pos l then C._true else Cons (l, (to_list args))
+  | Form.For args -> if Lit.is_pos l then C._true else Cons (l, (to_list args))
   | Form.Fimp args ->
     if Lit.is_pos l
     then C._true
@@ -5275,15 +5007,12 @@ let check_ImmBuildDef t_form s pos =
     (match l0 with
      | Nil ->
        (match get t_form (Lit.blit l) with
-        | Form.Fand args ->
-          if Lit.is_pos l then C._true else map Lit.neg (to_list args)
+        | Form.Fand args -> if Lit.is_pos l then C._true else map Lit.neg (to_list args)
         | Form.For args -> if Lit.is_pos l then to_list args else C._true
         | Form.Fimp args ->
           if eqb0 (length0 args) (Uint63.of_int (0))
           then C._true
-          else if Lit.is_pos l
-               then let args0 = or_of_imp args in to_list args0
-               else C._true
+          else if Lit.is_pos l then let args0 = or_of_imp args in to_list args0 else C._true
         | Form.Fxor (a, b) ->
           if Lit.is_pos l
           then Cons (a, (Cons (b, Nil)))
@@ -5363,8 +5092,7 @@ let check_BuildProj t_form l i =
      else C._true
    | _ -> C._true)
 
-(** val check_ImmBuildProj :
-    Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t **)
+(** val check_ImmBuildProj : Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_ImmBuildProj t_form s pos i =
   match S.get s pos with
@@ -5410,8 +5138,7 @@ let rec check_bbc t_form a_bv bs =
              | _ -> false)
        else false)
 
-(** val check_bbConst :
-    Atom.atom array -> Form.form array -> Uint63.t -> C.t **)
+(** val check_bbConst : Atom.atom array -> Form.form array -> Uint63.t -> C.t **)
 
 let check_bbConst t_atom t_form lres =
   if Lit.is_pos lres
@@ -5421,9 +5148,7 @@ let check_bbConst t_atom t_form lres =
            | Atom.Acop c ->
              (match c with
               | Atom.CO_BV (bv, n0) ->
-                if if check_bbc t_form bv bs
-                   then N.eqb (N.of_nat (length bv)) n0
-                   else false
+                if if check_bbc t_form bv bs then N.eqb (N.of_nat (length bv)) n0 else false
                 then Cons (lres, Nil)
                 else C._true
               | _ -> C._true)
@@ -5432,8 +5157,7 @@ let check_bbConst t_atom t_form lres =
   else C._true
 
 (** val check_bb :
-    Atom.atom array -> Form.form array -> Uint63.t -> Uint63.t list -> nat ->
-    nat -> bool **)
+    Atom.atom array -> Form.form array -> Uint63.t -> Uint63.t list -> nat -> nat -> bool **)
 
 let rec check_bb t_atom t_form a bs i n0 =
   match bs with
@@ -5456,16 +5180,13 @@ let rec check_bb t_atom t_form a bs i n0 =
           | _ -> false)
     else false
 
-(** val check_bbVar :
-    Atom.atom array -> Form.form array -> Uint63.t -> C.t **)
+(** val check_bbVar : Atom.atom array -> Form.form array -> Uint63.t -> C.t **)
 
 let check_bbVar t_atom t_form lres =
   if Lit.is_pos lres
   then (match get t_form (Lit.blit lres) with
         | Form.FbbT (a, bs) ->
-          if check_bb t_atom t_form a bs O (length bs)
-          then Cons (lres, Nil)
-          else C._true
+          if check_bb t_atom t_form a bs O (length bs) then Cons (lres, Nil) else C._true
         | _ -> C._true)
   else C._true
 
@@ -5479,8 +5200,7 @@ let rec check_not bs br =
   | Cons (b, bs0) ->
     (match br with
      | Nil -> false
-     | Cons (r, br0) ->
-       if eqb0 r (Lit.neg b) then check_not bs0 br0 else false)
+     | Cons (r, br0) -> if eqb0 r (Lit.neg b) then check_not bs0 br0 else false)
 
 (** val check_bbNot :
     Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t **)
@@ -5513,8 +5233,7 @@ let check_bbNot t_atom t_form s pos lres =
      | Cons (_, _) -> C._true)
 
 (** val check_symopp :
-    Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list ->
-    Atom.binop -> bool **)
+    Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> Atom.binop -> bool **)
 
 let rec check_symopp t_form bs1 bs2 bsres bvop =
   match bs1 with
@@ -5546,14 +5265,10 @@ let rec check_symopp t_form bs1 bs2 bsres bvop =
                        else false
                      in
                      let bvop0 = Atom.BO_BVand (N.sub n0 (Npos XH)) in
-                     if ires
-                     then check_symopp t_form bs3 bs4 bsres0 bvop0
-                     else false
+                     if ires then check_symopp t_form bs3 bs4 bsres0 bvop0 else false
                    | _ ->
                      let ires = false in
-                     if ires
-                     then check_symopp t_form bs3 bs4 bsres0 bvop
-                     else false)
+                     if ires then check_symopp t_form bs3 bs4 bsres0 bvop else false)
                 | Form.For args ->
                   (match bvop with
                    | Atom.BO_BVor n0 ->
@@ -5567,14 +5282,10 @@ let rec check_symopp t_form bs1 bs2 bsres bvop =
                        else false
                      in
                      let bvop0 = Atom.BO_BVor (N.sub n0 (Npos XH)) in
-                     if ires
-                     then check_symopp t_form bs3 bs4 bsres0 bvop0
-                     else false
+                     if ires then check_symopp t_form bs3 bs4 bsres0 bvop0 else false
                    | _ ->
                      let ires = false in
-                     if ires
-                     then check_symopp t_form bs3 bs4 bsres0 bvop
-                     else false)
+                     if ires then check_symopp t_form bs3 bs4 bsres0 bvop else false)
                 | Form.Fxor (a1, a2) ->
                   (match bvop with
                    | Atom.BO_BVxor n0 ->
@@ -5584,14 +5295,10 @@ let rec check_symopp t_form bs1 bs2 bsres bvop =
                        else if eqb0 a1 b2 then eqb0 a2 b1 else false
                      in
                      let bvop0 = Atom.BO_BVxor (N.sub n0 (Npos XH)) in
-                     if ires
-                     then check_symopp t_form bs3 bs4 bsres0 bvop0
-                     else false
+                     if ires then check_symopp t_form bs3 bs4 bsres0 bvop0 else false
                    | _ ->
                      let ires = false in
-                     if ires
-                     then check_symopp t_form bs3 bs4 bsres0 bvop
-                     else false)
+                     if ires then check_symopp t_form bs3 bs4 bsres0 bvop else false)
                 | Form.Fiff (a1, a2) ->
                   (match bvop with
                    | Atom.BO_eq t0 ->
@@ -5603,29 +5310,20 @@ let rec check_symopp t_form bs1 bs2 bsres bvop =
                           else if eqb0 a1 b2 then eqb0 a2 b1 else false
                         in
                         let bvop0 = Atom.BO_eq (Typ.TBV n0) in
-                        if ires
-                        then check_symopp t_form bs3 bs4 bsres0 bvop0
-                        else false
+                        if ires then check_symopp t_form bs3 bs4 bsres0 bvop0 else false
                       | _ ->
                         let ires = false in
-                        if ires
-                        then check_symopp t_form bs3 bs4 bsres0 bvop
-                        else false)
+                        if ires then check_symopp t_form bs3 bs4 bsres0 bvop else false)
                    | _ ->
                      let ires = false in
-                     if ires
-                     then check_symopp t_form bs3 bs4 bsres0 bvop
-                     else false)
+                     if ires then check_symopp t_form bs3 bs4 bsres0 bvop else false)
                 | _ ->
                   let ires = false in
-                  if ires
-                  then check_symopp t_form bs3 bs4 bsres0 bvop
-                  else false)
+                  if ires then check_symopp t_form bs3 bs4 bsres0 bvop else false)
           else false))
 
 (** val check_bbOp :
-    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-    Uint63.t -> C.t **)
+    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_bbOp t_atom t_form s pos1 pos2 lres =
   match S.get s pos1 with
@@ -5651,45 +5349,33 @@ let check_bbOp t_atom t_form s pos1 pos2 lres =
                             | Atom.Abop (b, a1', a2') ->
                               (match b with
                                | Atom.BO_BVand n0 ->
-                                 if if if if if eqb0 a1 a1'
-                                             then eqb0 a2 a2'
-                                             else false
+                                 if if if if if eqb0 a1 a1' then eqb0 a2 a2' else false
                                           then true
-                                          else if eqb0 a1 a2'
-                                               then eqb0 a2 a1'
-                                               else false
-                                       then check_symopp t_form bs1 bs2 bsres
-                                              (Atom.BO_BVand n0)
+                                          else if eqb0 a1 a2' then eqb0 a2 a1' else false
+                                       then check_symopp t_form bs1 bs2 bsres (Atom.BO_BVand
+                                              n0)
                                        else false
                                     then N.eqb (N.of_nat (length bs1)) n0
                                     else false
                                  then Cons (lres, Nil)
                                  else C._true
                                | Atom.BO_BVor n0 ->
-                                 if if if if if eqb0 a1 a1'
-                                             then eqb0 a2 a2'
-                                             else false
+                                 if if if if if eqb0 a1 a1' then eqb0 a2 a2' else false
                                           then true
-                                          else if eqb0 a1 a2'
-                                               then eqb0 a2 a1'
-                                               else false
-                                       then check_symopp t_form bs1 bs2 bsres
-                                              (Atom.BO_BVor n0)
+                                          else if eqb0 a1 a2' then eqb0 a2 a1' else false
+                                       then check_symopp t_form bs1 bs2 bsres (Atom.BO_BVor
+                                              n0)
                                        else false
                                     then N.eqb (N.of_nat (length bs1)) n0
                                     else false
                                  then Cons (lres, Nil)
                                  else C._true
                                | Atom.BO_BVxor n0 ->
-                                 if if if if if eqb0 a1 a1'
-                                             then eqb0 a2 a2'
-                                             else false
+                                 if if if if if eqb0 a1 a1' then eqb0 a2 a2' else false
                                           then true
-                                          else if eqb0 a1 a2'
-                                               then eqb0 a2 a1'
-                                               else false
-                                       then check_symopp t_form bs1 bs2 bsres
-                                              (Atom.BO_BVxor n0)
+                                          else if eqb0 a1 a2' then eqb0 a2 a1' else false
+                                       then check_symopp t_form bs1 bs2 bsres (Atom.BO_BVxor
+                                              n0)
                                        else false
                                     then N.eqb (N.of_nat (length bs1)) n0
                                     else false
@@ -5762,18 +5448,12 @@ let rec check_eq t_form bs1 bs2 bsres =
                               then let ires =
                                      match get t_form (Lit.blit bres0) with
                                      | Form.Fiff (a1, a2) ->
-                                       if if eqb0 a1 b1
-                                          then eqb0 a2 b2
-                                          else false
+                                       if if eqb0 a1 b1 then eqb0 a2 b2 else false
                                        then true
-                                       else if eqb0 a1 b2
-                                            then eqb0 a2 b1
-                                            else false
+                                       else if eqb0 a1 b2 then eqb0 a2 b1 else false
                                      | _ -> false
                                    in
-                                   if ires
-                                   then check_eq t_form bs3 bs4 bsres1
-                                   else false
+                                   if ires then check_eq t_form bs3 bs4 bsres1 else false
                               else false)
                          | _ -> false)
                    else false
@@ -5791,8 +5471,7 @@ let rec check_eq t_form bs1 bs2 bsres =
                    else false)))))
 
 (** val check_bbEq :
-    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-    Uint63.t -> C.t **)
+    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_bbEq t_atom t_form s pos1 pos2 lres =
   match S.get s pos1 with
@@ -5830,12 +5509,10 @@ let check_bbEq t_atom t_form s pos1 pos2 lres =
                                                      else if eqb0 a1 a2'
                                                           then eqb0 a2 a1'
                                                           else false
-                                                  then check_eq t_form bs1
-                                                         bs2 (Cons (lbb, Nil))
+                                                  then check_eq t_form bs1 bs2 (Cons (lbb,
+                                                         Nil))
                                                   else false
-                                               then N.eqb
-                                                      (N.of_nat (length bs1))
-                                                      n0
+                                               then N.eqb (N.of_nat (length bs1)) n0
                                                else false
                                             then Cons (lres, Nil)
                                             else C._true
@@ -5876,9 +5553,7 @@ let rec eq_carry_lit t_form carry0 c =
         | Cxor (c1, c2) ->
           (match get t_form (Lit.blit c) with
            | Form.Fxor (a1, a2) ->
-             if eq_carry_lit t_form c1 a1
-             then eq_carry_lit t_form c2 a2
-             else false
+             if eq_carry_lit t_form c1 a1 then eq_carry_lit t_form c2 a2 else false
            | _ -> false)
         | Cor (c1, c2) ->
           (match get t_form (Lit.blit c) with
@@ -5892,17 +5567,14 @@ let rec eq_carry_lit t_form carry0 c =
         | Ciff (c1, c2) ->
           (match get t_form (Lit.blit c) with
            | Form.Fiff (a1, a2) ->
-             if eq_carry_lit t_form c1 a1
-             then eq_carry_lit t_form c2 a2
-             else false
+             if eq_carry_lit t_form c1 a1 then eq_carry_lit t_form c2 a2 else false
            | _ -> false))
   else (match carry0 with
         | Clit l -> eqb0 l c
         | _ -> false)
 
 (** val check_add :
-    Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list ->
-    carry -> bool **)
+    Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t list -> carry -> bool **)
 
 let rec check_add t_form bs1 bs2 bsres carry0 =
   match bs1 with
@@ -5925,8 +5597,8 @@ let rec check_add t_form bs1 bs2 bsres carry0 =
                   if Lit.is_pos xab
                   then (match get t_form (Lit.blit xab) with
                         | Form.Fxor (a1, a2) ->
-                          let carry' = Cor ((Cand ((Clit b1), (Clit b2))),
-                            (Cand ((Cxor ((Clit b1), (Clit b2))), carry0)))
+                          let carry' = Cor ((Cand ((Clit b1), (Clit b2))), (Cand ((Cxor
+                            ((Clit b1), (Clit b2))), carry0)))
                           in
                           if if if if eqb0 a1 b1 then eqb0 a2 b2 else false
                                 then true
@@ -5941,8 +5613,7 @@ let rec check_add t_form bs1 bs2 bsres carry0 =
           else false))
 
 (** val check_bbAdd :
-    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-    Uint63.t -> C.t **)
+    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_bbAdd t_atom t_form s pos1 pos2 lres =
   match S.get s pos1 with
@@ -5968,15 +5639,10 @@ let check_bbAdd t_atom t_form s pos1 pos2 lres =
                             | Atom.Abop (b, a1', a2') ->
                               (match b with
                                | Atom.BO_BVadd n0 ->
-                                 if if if if if eqb0 a1 a1'
-                                             then eqb0 a2 a2'
-                                             else false
+                                 if if if if if eqb0 a1 a1' then eqb0 a2 a2' else false
                                           then true
-                                          else if eqb0 a1 a2'
-                                               then eqb0 a2 a1'
-                                               else false
-                                       then check_add t_form bs1 bs2 bsres
-                                              (Clit Lit._false)
+                                          else if eqb0 a1 a2' then eqb0 a2 a1' else false
+                                       then check_add t_form bs1 bs2 bsres (Clit Lit._false)
                                        else false
                                     then N.eqb (N.of_nat (length bs1)) n0
                                     else false
@@ -5991,8 +5657,7 @@ let check_bbAdd t_atom t_form s pos1 pos2 lres =
            | Cons (_, _) -> C._true))
      | Cons (_, _) -> C._true)
 
-(** val check_neg :
-    Form.form array -> Uint63.t list -> Uint63.t list -> bool **)
+(** val check_neg : Form.form array -> Uint63.t list -> Uint63.t list -> bool **)
 
 let check_neg t_form bs br =
   let z0 = map (fun _ -> Lit._false) bs in
@@ -6016,9 +5681,7 @@ let check_bbNeg t_atom t_form s pos lres =
                    | Atom.Auop (u, a') ->
                      (match u with
                       | Atom.UO_BVneg n0 ->
-                        if if if eqb0 a a'
-                              then check_neg t_form bs br
-                              else false
+                        if if if eqb0 a a' then check_neg t_form bs br else false
                            then N.eqb (N.of_nat (length bs)) n0
                            else false
                         then Cons (lres, Nil)
@@ -6035,11 +5698,9 @@ let check_bbNeg t_atom t_form s pos lres =
 let rec and_with_bit a bt =
   match a with
   | Nil -> Nil
-  | Cons (ai, a') ->
-    Cons ((Cand ((Clit bt), (Clit ai))), (and_with_bit a' bt))
+  | Cons (ai, a') -> Cons ((Cand ((Clit bt), (Clit ai))), (and_with_bit a' bt))
 
-(** val mult_step_k_h :
-    carry list -> carry list -> carry -> z -> carry list **)
+(** val mult_step_k_h : carry list -> carry list -> carry -> z -> carry list **)
 
 let rec mult_step_k_h a b c k =
   match a with
@@ -6049,8 +5710,7 @@ let rec mult_step_k_h a b c k =
      | Nil -> Cons (ai, (mult_step_k_h a' b c k))
      | Cons (bi, b') ->
        if Z.ltb (Z.sub k (Zpos XH)) Z0
-       then let carry_out = Cor ((Cand (ai, bi)), (Cand ((Cxor (ai, bi)), c)))
-            in
+       then let carry_out = Cor ((Cand (ai, bi)), (Cand ((Cxor (ai, bi)), c))) in
             let curr = Cxor ((Cxor (ai, bi)), c) in
             Cons (curr, (mult_step_k_h a' b' carry_out (Z.sub k (Zpos XH))))
        else Cons (ai, (mult_step_k_h a' b c (Z.sub k (Zpos XH)))))
@@ -6066,8 +5726,7 @@ let rec mult_step a b res k k' =
    | O -> res'
    | S pk' -> mult_step a b res' (S k) pk')
 
-(** val bblast_bvmult :
-    Uint63.t list -> Uint63.t list -> nat -> carry list **)
+(** val bblast_bvmult : Uint63.t list -> Uint63.t list -> nat -> carry list **)
 
 let bblast_bvmult a b n0 =
   let res = and_with_bit a (nth O b Lit._false) in
@@ -6087,8 +5746,7 @@ let check_mult t_form bs1 bs2 bsres =
   else false
 
 (** val check_bbMult :
-    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-    Uint63.t -> C.t **)
+    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_bbMult t_atom t_form s pos1 pos2 lres =
   match S.get s pos1 with
@@ -6114,9 +5772,7 @@ let check_bbMult t_atom t_form s pos1 pos2 lres =
                             | Atom.Abop (b, a1', a2') ->
                               (match b with
                                | Atom.BO_BVmult n0 ->
-                                 if if if if eqb0 a1 a1'
-                                          then eqb0 a2 a2'
-                                          else false
+                                 if if if if eqb0 a1 a1' then eqb0 a2 a2' else false
                                        then check_mult t_form bs1 bs2 bsres
                                        else false
                                     then N.eqb (N.of_nat (length bs1)) n0
@@ -6146,33 +5802,27 @@ let rec ult_big_endian_lit_list bs1 bs2 =
           (match y' with
            | Nil -> Cand ((Clit (Lit.neg xi)), (Clit yi))
            | Cons (_, _) ->
-             Cor ((Cand ((Ciff ((Clit xi), (Clit yi))),
-               (ult_big_endian_lit_list x' y'))), (Cand ((Clit (Lit.neg xi)),
-               (Clit yi))))))
+             Cor ((Cand ((Ciff ((Clit xi), (Clit yi))), (ult_big_endian_lit_list x' y'))),
+               (Cand ((Clit (Lit.neg xi)), (Clit yi))))))
      | Cons (_, _) ->
        (match bs2 with
         | Nil -> Clit Lit._false
         | Cons (yi, y') ->
-          Cor ((Cand ((Ciff ((Clit xi), (Clit yi))),
-            (ult_big_endian_lit_list x' y'))), (Cand ((Clit (Lit.neg xi)),
-            (Clit yi))))))
+          Cor ((Cand ((Ciff ((Clit xi), (Clit yi))), (ult_big_endian_lit_list x' y'))),
+            (Cand ((Clit (Lit.neg xi)), (Clit yi))))))
 
 (** val ult_lit_list : Uint63.t list -> Uint63.t list -> carry **)
 
 let ult_lit_list x y =
   ult_big_endian_lit_list (rev x) (rev y)
 
-(** val check_ult :
-    Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t -> bool **)
+(** val check_ult : Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t -> bool **)
 
 let check_ult t_form bs1 bs2 bsres =
-  if Lit.is_pos bsres
-  then eq_carry_lit t_form (ult_lit_list bs1 bs2) bsres
-  else false
+  if Lit.is_pos bsres then eq_carry_lit t_form (ult_lit_list bs1 bs2) bsres else false
 
 (** val check_bbUlt :
-    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-    Uint63.t -> C.t **)
+    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_bbUlt t_atom t_form s pos1 pos2 lres =
   match S.get s pos1 with
@@ -6204,15 +5854,11 @@ let check_bbUlt t_atom t_form s pos1 pos2 lres =
                                          if if if if if eqb0 a1 a1'
                                                      then eqb0 a2 a2'
                                                      else false
-                                                  then check_ult t_form bs1
-                                                         bs2 lbb
+                                                  then check_ult t_form bs1 bs2 lbb
                                                   else false
-                                               then N.eqb
-                                                      (N.of_nat (length bs1))
-                                                      n0
+                                               then N.eqb (N.of_nat (length bs1)) n0
                                                else false
-                                            then N.eqb
-                                                   (N.of_nat (length bs2)) n0
+                                            then N.eqb (N.of_nat (length bs2)) n0
                                             else false
                                          then Cons (lres, Nil)
                                          else C._true
@@ -6241,33 +5887,27 @@ let slt_big_endian_lit_list x y =
           (match y' with
            | Nil -> Cand ((Clit xi), (Clit (Lit.neg yi)))
            | Cons (_, _) ->
-             Cor ((Cand ((Ciff ((Clit xi), (Clit yi))),
-               (ult_big_endian_lit_list x' y'))), (Cand ((Clit xi), (Clit
-               (Lit.neg yi)))))))
+             Cor ((Cand ((Ciff ((Clit xi), (Clit yi))), (ult_big_endian_lit_list x' y'))),
+               (Cand ((Clit xi), (Clit (Lit.neg yi)))))))
      | Cons (_, _) ->
        (match y with
         | Nil -> Clit Lit._false
         | Cons (yi, y') ->
-          Cor ((Cand ((Ciff ((Clit xi), (Clit yi))),
-            (ult_big_endian_lit_list x' y'))), (Cand ((Clit xi), (Clit
-            (Lit.neg yi)))))))
+          Cor ((Cand ((Ciff ((Clit xi), (Clit yi))), (ult_big_endian_lit_list x' y'))),
+            (Cand ((Clit xi), (Clit (Lit.neg yi)))))))
 
 (** val slt_lit_list : Uint63.t list -> Uint63.t list -> carry **)
 
 let slt_lit_list x y =
   slt_big_endian_lit_list (rev x) (rev y)
 
-(** val check_slt :
-    Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t -> bool **)
+(** val check_slt : Form.form array -> Uint63.t list -> Uint63.t list -> Uint63.t -> bool **)
 
 let check_slt t_form bs1 bs2 bsres =
-  if Lit.is_pos bsres
-  then eq_carry_lit t_form (slt_lit_list bs1 bs2) bsres
-  else false
+  if Lit.is_pos bsres then eq_carry_lit t_form (slt_lit_list bs1 bs2) bsres else false
 
 (** val check_bbSlt :
-    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-    Uint63.t -> C.t **)
+    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_bbSlt t_atom t_form s pos1 pos2 lres =
   match S.get s pos1 with
@@ -6299,15 +5939,11 @@ let check_bbSlt t_atom t_form s pos1 pos2 lres =
                                          if if if if if eqb0 a1 a1'
                                                      then eqb0 a2 a2'
                                                      else false
-                                                  then check_slt t_form bs1
-                                                         bs2 lbb
+                                                  then check_slt t_form bs1 bs2 lbb
                                                   else false
-                                               then N.eqb
-                                                      (N.of_nat (length bs1))
-                                                      n0
+                                               then N.eqb (N.of_nat (length bs1)) n0
                                                else false
-                                            then N.eqb
-                                                   (N.of_nat (length bs2)) n0
+                                            then N.eqb (N.of_nat (length bs2)) n0
                                             else false
                                          then Cons (lres, Nil)
                                          else C._true
@@ -6335,8 +5971,7 @@ let check_concat t_form bs1 bs2 bsres =
   forallb2 (eq_carry_lit t_form) (lit_to_carry (app bs2 bs1)) bsres
 
 (** val check_bbConcat :
-    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-    Uint63.t -> C.t **)
+    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_bbConcat t_atom t_form s pos1 pos2 lres =
   match S.get s pos1 with
@@ -6362,11 +5997,8 @@ let check_bbConcat t_atom t_form s pos1 pos2 lres =
                             | Atom.Abop (b, a1', a2') ->
                               (match b with
                                | Atom.BO_BVconcat (n0, m) ->
-                                 if if if if if eqb0 a1 a1'
-                                             then eqb0 a2 a2'
-                                             else false
-                                          then check_concat t_form bs1 bs2
-                                                 bsres
+                                 if if if if if eqb0 a1 a1' then eqb0 a2 a2' else false
+                                          then check_concat t_form bs1 bs2 bsres
                                           else false
                                        then N.eqb (N.of_nat (length bs1)) n0
                                        else false
@@ -6398,8 +6030,7 @@ let rec list_diseqb a b =
        then if eqb xb false then list_diseqb xsa xsb else true
        else if eqb xb true then list_diseqb xsa xsb else true)
 
-(** val check_bbDiseq :
-    Atom.atom array -> Form.form array -> Uint63.t -> C.t **)
+(** val check_bbDiseq : Atom.atom array -> Form.form array -> Uint63.t -> C.t **)
 
 let check_bbDiseq t_atom t_form lres =
   if negb (Lit.is_pos lres)
@@ -6420,8 +6051,7 @@ let check_bbDiseq t_atom t_form lres =
                             (match c0 with
                              | Atom.CO_BV (bv2, n2) ->
                                if if if if if list_diseqb bv1 bv2
-                                           then N.eqb (N.of_nat (length bv1))
-                                                  n0
+                                           then N.eqb (N.of_nat (length bv1)) n0
                                            else false
                                         then N.eqb (N.of_nat (length bv2)) n0
                                         else false
@@ -6483,8 +6113,7 @@ let check_bbExtract t_atom t_form s pos lres =
                      (match u with
                       | Atom.UO_BVextr (i, n0, n1) ->
                         if if if if eqb0 a1 a1'
-                                 then check_extract t_form bs bsres i
-                                        (N.add n0 i)
+                                 then check_extract t_form bs bsres i (N.add n0 i)
                                  else false
                               then N.eqb (N.of_nat (length bs)) n1
                               else false
@@ -6511,12 +6140,10 @@ let rec extend_lit x i b =
 let zextend_lit x i =
   extend_lit x i Lit._false
 
-(** val check_zextend :
-    Form.form array -> Uint63.t list -> Uint63.t list -> n -> bool **)
+(** val check_zextend : Form.form array -> Uint63.t list -> Uint63.t list -> n -> bool **)
 
 let check_zextend t_form bs bsres i =
-  forallb2 (eq_carry_lit t_form) (lit_to_carry (zextend_lit bs (N.to_nat i)))
-    bsres
+  forallb2 (eq_carry_lit t_form) (lit_to_carry (zextend_lit bs (N.to_nat i))) bsres
 
 (** val check_bbZextend :
     Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t **)
@@ -6536,9 +6163,7 @@ let check_bbZextend t_atom t_form s pos lres =
                    | Atom.Auop (u, a1') ->
                      (match u with
                       | Atom.UO_BVzextn (n0, i) ->
-                        if if if eqb0 a1 a1'
-                              then check_zextend t_form bs bsres i
-                              else false
+                        if if if eqb0 a1 a1' then check_zextend t_form bs bsres i else false
                            then N.eqb (N.of_nat (length bs)) n0
                            else false
                         then Cons (lres, Nil)
@@ -6563,12 +6188,10 @@ let sextend_lit x i =
   | Nil -> mk_list_lit_false i
   | Cons (xb, _) -> extend_lit x i xb
 
-(** val check_sextend :
-    Form.form array -> Uint63.t list -> Uint63.t list -> n -> bool **)
+(** val check_sextend : Form.form array -> Uint63.t list -> Uint63.t list -> n -> bool **)
 
 let check_sextend t_form bs bsres i =
-  forallb2 (eq_carry_lit t_form) (lit_to_carry (sextend_lit bs (N.to_nat i)))
-    bsres
+  forallb2 (eq_carry_lit t_form) (lit_to_carry (sextend_lit bs (N.to_nat i))) bsres
 
 (** val check_bbSextend :
     Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> C.t **)
@@ -6588,9 +6211,7 @@ let check_bbSextend t_atom t_form s pos lres =
                    | Atom.Auop (u, a1') ->
                      (match u with
                       | Atom.UO_BVsextn (n0, i) ->
-                        if if if eqb0 a1 a1'
-                              then check_sextend t_form bs bsres i
-                              else false
+                        if if if eqb0 a1 a1' then check_sextend t_form bs bsres i else false
                            then N.eqb (N.of_nat (length bs)) n0
                            else false
                         then Cons (lres, Nil)
@@ -6624,13 +6245,11 @@ let shl_lit_be a b =
 
 let check_shl t_form bs1 bs2 bsres =
   if Nat.eqb (length bs1) (length bs2)
-  then forallb2 (eq_carry_lit t_form) (lit_to_carry (shl_lit_be bs1 bs2))
-         bsres
+  then forallb2 (eq_carry_lit t_form) (lit_to_carry (shl_lit_be bs1 bs2)) bsres
   else false
 
 (** val check_bbShl :
-    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-    Uint63.t -> C.t **)
+    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_bbShl t_atom t_form s pos1 pos2 lres =
   match S.get s pos1 with
@@ -6663,15 +6282,11 @@ let check_bbShl t_atom t_form s pos1 pos2 lres =
                                        if if if if if if eqb0 a1 a1'
                                                       then eqb0 a2 a2'
                                                       else false
-                                                   then check_shl t_form bs1
-                                                          bv2 bsres
+                                                   then check_shl t_form bs1 bv2 bsres
                                                    else false
-                                                then N.eqb
-                                                       (N.of_nat (length bs1))
-                                                       n0
+                                                then N.eqb (N.of_nat (length bs1)) n0
                                                 else false
-                                             then N.eqb
-                                                    (N.of_nat (length bv2)) n0
+                                             then N.eqb (N.of_nat (length bv2)) n0
                                              else false
                                           then N.eqb n2 n0
                                           else false
@@ -6710,13 +6325,11 @@ let shr_lit_be a b =
 
 let check_shr t_form bs1 bs2 bsres =
   if Nat.eqb (length bs1) (length bs2)
-  then forallb2 (eq_carry_lit t_form) (lit_to_carry (shr_lit_be bs1 bs2))
-         bsres
+  then forallb2 (eq_carry_lit t_form) (lit_to_carry (shr_lit_be bs1 bs2)) bsres
   else false
 
 (** val check_bbShr :
-    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t ->
-    Uint63.t -> C.t **)
+    Atom.atom array -> Form.form array -> S.t -> Uint63.t -> Uint63.t -> Uint63.t -> C.t **)
 
 let check_bbShr t_atom t_form s pos1 pos2 lres =
   match S.get s pos1 with
@@ -6749,15 +6362,11 @@ let check_bbShr t_atom t_form s pos1 pos2 lres =
                                        if if if if if if eqb0 a1 a1'
                                                       then eqb0 a2 a2'
                                                       else false
-                                                   then check_shr t_form bs1
-                                                          bv2 bsres
+                                                   then check_shr t_form bs1 bv2 bsres
                                                    else false
-                                                then N.eqb
-                                                       (N.of_nat (length bs1))
-                                                       n0
+                                                then N.eqb (N.of_nat (length bs1)) n0
                                                 else false
-                                             then N.eqb
-                                                    (N.of_nat (length bv2)) n0
+                                             then N.eqb (N.of_nat (length bv2)) n0
                                              else false
                                           then N.eqb n2 n0
                                           else false
@@ -6774,8 +6383,7 @@ let check_bbShr t_atom t_form s pos1 pos2 lres =
            | Cons (_, _) -> C._true))
      | Cons (_, _) -> C._true)
 
-(** val check_roweq :
-    Form.form array -> Atom.atom array -> Uint63.t -> C.t **)
+(** val check_roweq : Form.form array -> Atom.atom array -> Uint63.t -> C.t **)
 
 let check_roweq t_form t_atom lres =
   if Lit.is_pos lres
@@ -6792,9 +6400,7 @@ let check_roweq t_form t_atom lres =
                       (match get t_atom sa with
                        | Atom.Atop (t0, _, j, v2) ->
                          let Atom.TO_store (ti2, te2) = t0 in
-                         if if if if if Typ.eqb ti1 ti2
-                                     then Typ.eqb te te1
-                                     else false
+                         if if if if if Typ.eqb ti1 ti2 then Typ.eqb te te1 else false
                                   then Typ.eqb te te2
                                   else false
                                then eqb0 i j
@@ -6812,18 +6418,16 @@ let check_roweq t_form t_atom lres =
   else C._true
 
 (** val store_of_me :
-    Atom.atom array -> Uint63.t -> Uint63.t ->
-    ((Typ.coq_type * Typ.coq_type) * Uint63.t) option **)
+    Atom.atom array -> Uint63.t -> Uint63.t -> ((Typ.coq_type * Typ.coq_type) * Uint63.t)
+    option **)
 
 let store_of_me t_atom a b =
   match get t_atom b with
   | Atom.Atop (t0, a', i, _) ->
-    let Atom.TO_store (ti, te) = t0 in
-    if eqb0 a' a then Some ((ti, te), i) else None
+    let Atom.TO_store (ti, te) = t0 in if eqb0 a' a then Some ((ti, te), i) else None
   | _ -> None
 
-(** val check_rowneq :
-    Form.form array -> Atom.atom array -> Uint63.t list -> C.t **)
+(** val check_rowneq : Form.form array -> Atom.atom array -> Uint63.t list -> C.t **)
 
 let check_rowneq t_form t_atom cl = match cl with
 | Nil -> C._true
@@ -6861,67 +6465,48 @@ let check_rowneq t_form t_atom cl = match cl with
                                                  else false
                                               then Typ.eqb te te2
                                               else false
-                                           then (match store_of_me t_atom sa
-                                                         sa2 with
+                                           then (match store_of_me t_atom sa sa2 with
                                                  | Some p ->
                                                    let (p2, i1) = p in
                                                    let (ti3, te3) = p2 in
-                                                   (match store_of_me t_atom
-                                                            sa2 sa with
+                                                   (match store_of_me t_atom sa2 sa with
                                                     | Some _ -> C._true
                                                     | None ->
                                                       if if if Typ.eqb ti ti3
-                                                            then Typ.eqb te
-                                                                   te3
+                                                            then Typ.eqb te te3
                                                             else false
-                                                         then if if if 
-                                                                    eqb0 i1 i
-                                                                    then 
-                                                                    eqb0 j1 j
+                                                         then if if if eqb0 i1 i
+                                                                    then eqb0 j1 j
                                                                     else false
-                                                                 then 
-                                                                   eqb0 j2 j
+                                                                 then eqb0 j2 j
                                                                  else false
                                                               then true
-                                                              else if 
-                                                                    if 
-                                                                    eqb0 i1 j
-                                                                    then 
-                                                                    eqb0 j1 i
-                                                                    else false
-                                                                   then 
-                                                                    eqb0 j2 i
+                                                              else if if eqb0 i1 j
+                                                                      then eqb0 j1 i
+                                                                      else false
+                                                                   then eqb0 j2 i
                                                                    else false
                                                          else false
                                                       then cl
                                                       else C._true)
                                                  | None ->
-                                                   (match store_of_me t_atom
-                                                            sa2 sa with
+                                                   (match store_of_me t_atom sa2 sa with
                                                     | Some p ->
                                                       let (p2, i1) = p in
                                                       let (ti3, te3) = p2 in
                                                       if if if Typ.eqb ti ti3
-                                                            then Typ.eqb te
-                                                                   te3
+                                                            then Typ.eqb te te3
                                                             else false
-                                                         then if if if 
-                                                                    eqb0 i1 i
-                                                                    then 
-                                                                    eqb0 j1 j
+                                                         then if if if eqb0 i1 i
+                                                                    then eqb0 j1 j
                                                                     else false
-                                                                 then 
-                                                                   eqb0 j2 j
+                                                                 then eqb0 j2 j
                                                                  else false
                                                               then true
-                                                              else if 
-                                                                    if 
-                                                                    eqb0 i1 j
-                                                                    then 
-                                                                    eqb0 j1 i
-                                                                    else false
-                                                                   then 
-                                                                    eqb0 j2 i
+                                                              else if if eqb0 i1 j
+                                                                      then eqb0 j1 i
+                                                                      else false
+                                                                   then eqb0 j2 i
                                                                    else false
                                                          else false
                                                       then cl
@@ -6942,8 +6527,8 @@ let check_rowneq t_form t_atom cl = match cl with
       | Cons (_, _) -> C._true))
 
 (** val eq_sel_sym :
-    Atom.atom array -> Typ.coq_type -> Typ.coq_type -> Uint63.t -> Uint63.t
-    -> Uint63.t -> Uint63.t -> bool **)
+    Atom.atom array -> Typ.coq_type -> Typ.coq_type -> Uint63.t -> Uint63.t -> Uint63.t ->
+    Uint63.t -> bool **)
 
 let eq_sel_sym t_atom ti te a b sela selb =
   match get t_atom sela with
@@ -6954,9 +6539,7 @@ let eq_sel_sym t_atom ti te a b sela selb =
         | Atom.Abop (b1, b', d2) ->
           (match b1 with
            | Atom.BO_select (ti2, te2) ->
-             if if if if if if if Typ.eqb ti ti1
-                               then Typ.eqb ti ti2
-                               else false
+             if if if if if if if Typ.eqb ti ti1 then Typ.eqb ti ti2 else false
                             then Typ.eqb te te1
                             else false
                          then Typ.eqb te te2
@@ -7009,11 +6592,9 @@ let check_ext t_form t_atom lres =
                                       (match b1 with
                                        | Atom.BO_eq te' ->
                                          if if Typ.eqb te te'
-                                            then if eq_sel_sym t_atom ti te a
-                                                      b sela selb
+                                            then if eq_sel_sym t_atom ti te a b sela selb
                                                  then true
-                                                 else eq_sel_sym t_atom ti te
-                                                        b a sela selb
+                                                 else eq_sel_sym t_atom ti te b a sela selb
                                             else false
                                          then Cons (lres, Nil)
                                          else C._true
@@ -7032,29 +6613,24 @@ let check_ext t_form t_atom lres =
 type 'step _trace_ = 'step list * 'step
 
 (** val _checker_ :
-    (S.t -> 'a1 -> S.t) -> (C.t -> bool) -> S.t -> 'a1 _trace_ -> Uint63.t ->
-    bool **)
+    (S.t -> 'a1 -> S.t) -> (C.t -> bool) -> S.t -> 'a1 _trace_ -> Uint63.t -> bool **)
 
 let _checker_ check_step is_false0 s t0 confl =
   let s' = fold_left check_step (fst t0) s in is_false0 (S.get s' confl)
 
 module Euf_Checker =
  struct
-  (** val add_roots :
-      S.t -> Uint63.t array -> Uint63.t array option -> S.t **)
+  (** val add_roots : S.t -> Uint63.t array -> Uint63.t array option -> S.t **)
 
   let add_roots s d = function
   | Some ur ->
     foldi (fun i s0 ->
-      let c =
-        if ltb0 (get ur i) (length0 d)
-        then Cons ((get d (get ur i)), Nil)
-        else C._true
+      let c = if ltb0 (get ur i) (length0 d) then Cons ((get d (get ur i)), Nil) else C._true
       in
       S.set_clause s0 i c) (Uint63.of_int (0)) (length0 ur) s
   | None ->
-    foldi (fun i s0 -> S.set_clause s0 i (Cons ((get d i), Nil)))
-      (Uint63.of_int (0)) (length0 d) s
+    foldi (fun i s0 -> S.set_clause s0 i (Cons ((get d i), Nil))) (Uint63.of_int (0))
+      (length0 d) s
  end
 
 module Checker_Ext =
@@ -7099,33 +6675,26 @@ module Checker_Ext =
   | RowNeq of Uint63.t * C.t
   | Ext of Uint63.t * Uint63.t
 
-  (** val step_checker :
-      Atom.atom array -> Form.form array -> S.t -> step -> S.t **)
+  (** val step_checker : Atom.atom array -> Form.form array -> S.t -> step -> S.t **)
 
   let step_checker t_atom t_form s = function
   | Res (pos, res) -> S.set_resolve s pos res
   | Weaken (pos, cid, cl) -> S.set_weaken s pos cid cl
   | ImmFlatten (pos, cid, lf) ->
     S.set_clause s pos
-      (check_flatten t_form (check_hatom t_atom) (check_neg_hatom t_atom) s
-        cid lf)
+      (check_flatten t_form (check_hatom t_atom) (check_neg_hatom t_atom) s cid lf)
   | CTrue pos -> S.set_clause s pos check_True
   | CFalse pos -> S.set_clause s pos check_False
   | BuildDef (pos, l) -> S.set_clause s pos (check_BuildDef t_form l)
   | BuildDef2 (pos, l) -> S.set_clause s pos (check_BuildDef2 t_form l)
   | BuildProj (pos, l, i) -> S.set_clause s pos (check_BuildProj t_form l i)
-  | ImmBuildDef (pos, cid) ->
-    S.set_clause s pos (check_ImmBuildDef t_form s cid)
-  | ImmBuildDef2 (pos, cid) ->
-    S.set_clause s pos (check_ImmBuildDef2 t_form s cid)
-  | ImmBuildProj (pos, cid, i) ->
-    S.set_clause s pos (check_ImmBuildProj t_form s cid i)
+  | ImmBuildDef (pos, cid) -> S.set_clause s pos (check_ImmBuildDef t_form s cid)
+  | ImmBuildDef2 (pos, cid) -> S.set_clause s pos (check_ImmBuildDef2 t_form s cid)
+  | ImmBuildProj (pos, cid, i) -> S.set_clause s pos (check_ImmBuildProj t_form s cid i)
   | EqTr (pos, l, fl) -> S.set_clause s pos (check_trans t_form t_atom l fl)
   | EqCgr (pos, l, fl) -> S.set_clause s pos (check_congr t_form t_atom l fl)
-  | EqCgrP (pos, l1, l2, fl) ->
-    S.set_clause s pos (check_congr_pred t_form t_atom l1 l2 fl)
-  | LiaMicromega (pos, cl, c) ->
-    S.set_clause s pos (check_micromega t_form t_atom cl c)
+  | EqCgrP (pos, l1, l2, fl) -> S.set_clause s pos (check_congr_pred t_form t_atom l1 l2 fl)
+  | LiaMicromega (pos, cl, c) -> S.set_clause s pos (check_micromega t_form t_atom cl c)
   | LiaDiseq (pos, l) -> S.set_clause s pos (check_diseq t_form t_atom l)
   | SplArith (pos, orig, res, l) ->
     S.set_clause s pos (check_spl_arith t_form t_atom (S.get s orig) res l)
@@ -7135,10 +6704,8 @@ module Checker_Ext =
   | BBConst (pos, res) -> S.set_clause s pos (check_bbConst t_atom t_form res)
   | BBOp (pos, orig1, orig2, res) ->
     S.set_clause s pos (check_bbOp t_atom t_form s orig1 orig2 res)
-  | BBNot (pos, orig, res) ->
-    S.set_clause s pos (check_bbNot t_atom t_form s orig res)
-  | BBNeg (pos, orig, res) ->
-    S.set_clause s pos (check_bbNeg t_atom t_form s orig res)
+  | BBNot (pos, orig, res) -> S.set_clause s pos (check_bbNot t_atom t_form s orig res)
+  | BBNeg (pos, orig, res) -> S.set_clause s pos (check_bbNeg t_atom t_form s orig res)
   | BBAdd (pos, orig1, orig2, res) ->
     S.set_clause s pos (check_bbAdd t_atom t_form s orig1 orig2 res)
   | BBConcat (pos, orig1, orig2, res) ->
@@ -7167,8 +6734,8 @@ module Checker_Ext =
   | Ext (pos, res) -> S.set_clause s pos (check_ext t_form t_atom res)
 
   (** val checker :
-      Atom.atom array -> Form.form array -> (C.t -> bool) -> S.t -> step
-      _trace_ -> Uint63.t -> bool **)
+      Atom.atom array -> Form.form array -> (C.t -> bool) -> S.t -> step _trace_ -> Uint63.t
+      -> bool **)
 
   let checker t_atom t_form s t0 =
     _checker_ (step_checker t_atom t_form) s t0
@@ -7177,8 +6744,8 @@ module Checker_Ext =
   | Certif of Uint63.t * step _trace_ * Uint63.t
 
   (** val checker_ext :
-      Atom.atom array -> Form.form array -> Uint63.t array -> Uint63.t array
-      option -> certif -> bool **)
+      Atom.atom array -> Form.form array -> Uint63.t array -> Uint63.t array option ->
+      certif -> bool **)
 
   let checker_ext t_atom t_form d used_roots = function
   | Certif (nclauses, t0, confl) ->
@@ -7186,4 +6753,77 @@ module Checker_Ext =
     then checker t_atom t_form C.is_false
            (Euf_Checker.add_roots (S.make nclauses) d used_roots) t0 confl
     else false
+
+  (** val ignore_true_step : step -> bool **)
+
+  let ignore_true_step _ =
+    false
+
+  (** val position_of_step : step -> Uint63.t **)
+
+  let position_of_step = function
+  | Res (pos, _) -> pos
+  | Weaken (pos, _, _) -> pos
+  | ImmFlatten (pos, _, _) -> pos
+  | CTrue pos -> pos
+  | CFalse pos -> pos
+  | BuildDef (pos, _) -> pos
+  | BuildDef2 (pos, _) -> pos
+  | BuildProj (pos, _, _) -> pos
+  | ImmBuildDef (pos, _) -> pos
+  | ImmBuildDef2 (pos, _) -> pos
+  | ImmBuildProj (pos, _, _) -> pos
+  | EqTr (pos, _, _) -> pos
+  | EqCgr (pos, _, _) -> pos
+  | EqCgrP (pos, _, _, _) -> pos
+  | LiaMicromega (pos, _, _) -> pos
+  | LiaDiseq (pos, _) -> pos
+  | SplArith (pos, _, _, _) -> pos
+  | SplDistinctElim (pos, _, _) -> pos
+  | BBVar (pos, _) -> pos
+  | BBConst (pos, _) -> pos
+  | BBOp (pos, _, _, _) -> pos
+  | BBNot (pos, _, _) -> pos
+  | BBNeg (pos, _, _) -> pos
+  | BBAdd (pos, _, _, _) -> pos
+  | BBConcat (pos, _, _, _) -> pos
+  | BBMul (pos, _, _, _) -> pos
+  | BBUlt (pos, _, _, _) -> pos
+  | BBSlt (pos, _, _, _) -> pos
+  | BBEq (pos, _, _, _) -> pos
+  | BBDiseq (pos, _) -> pos
+  | BBExtract (pos, _, _) -> pos
+  | BBZextend (pos, _, _) -> pos
+  | BBSextend (pos, _, _) -> pos
+  | BBShl (pos, _, _, _) -> pos
+  | BBShr (pos, _, _, _) -> pos
+  | RowEq (pos, _) -> pos
+  | RowNeq (pos, _) -> pos
+  | Ext (pos, _) -> pos
+
+  (** val checker_ext_debug :
+      Atom.atom array -> Form.form array -> Uint63.t array -> Uint63.t array option ->
+      certif -> (nat * step) option **)
+
+  let checker_ext_debug t_atom t_form d used_roots = function
+  | Certif (nclauses, t0, _) ->
+    let s = Euf_Checker.add_roots (S.make nclauses) d used_roots in
+    let (p, failure) =
+      fold_left (fun acc st ->
+        let (y, y0) = acc in
+        let (s0, nb) = y in
+        (match y0 with
+         | Some _ -> acc
+         | None ->
+           let nb0 = S nb in
+           let s1 = step_checker t_atom t_form s0 st in
+           if if negb (ignore_true_step st)
+              then C.has_true (S.get s1 (position_of_step st))
+              else false
+           then ((s1, nb0), (Some st))
+           else ((s1, nb0), None))) (fst t0) ((s, O), None)
+    in
+    let (_, nb) = p in (match failure with
+                        | Some st -> Some (nb, st)
+                        | None -> None)
  end
