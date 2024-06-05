@@ -1,9 +1,22 @@
+/**************************************************************************/
+/*                                                                        */
+/*     SMTCoq                                                             */
+/*     Copyright (C) 2011 - 2024                                          */
+/*                                                                        */
+/*     See file "AUTHORS" for the list of authors                         */
+/*                                                                        */
+/*   This file is distributed under the terms of the CeCILL-C licence     */
+/*                                                                        */
+/**************************************************************************/
+
+
 #include <stdio.h>
 #include <assert.h>
 
 #include <caml/callback.h>
 
 
+#include "c/types.h"
 #include "c/checker.h"
 
 

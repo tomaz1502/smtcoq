@@ -17,6 +17,7 @@
 #include <caml/alloc.h>
 #include <caml/callback.h>
 
+#include "types.h"
 #include "checker.h"
 
 
@@ -128,14 +129,6 @@ FUNSYMS funsyms(size_t nb, FUNSYM* data) {
 ASSERTIONS assertions(size_t nb, FORM* data) {
   return value_array(nb, data);
 }
-
-/* ASSERTIONS assertion(FORM data) { */
-/*   CAMLparam1(data); */
-/*   CAMLlocal1(res); */
-/*   res = caml_alloc(1, 0); */
-/*   Store_field(res, 0, data); */
-/*   CAMLreturn(res); */
-/* } */
 
 SMTLIB2 smtlib2(SORTS s, FUNSYMS f, ASSERTIONS a) {
   CAMLparam3(s, f, a);
