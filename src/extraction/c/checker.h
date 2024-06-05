@@ -64,7 +64,7 @@ FUNSYMS funsyms(size_t nb, FUNSYM* data);
 
 typedef value ASSERTIONS;
 ASSERTIONS assertions(size_t nb, FORM* data);
-ASSERTIONS assertion(FORM data);
+/* ASSERTIONS assertion(FORM data); */
 
 typedef value SMTLIB2;
 SMTLIB2 smtlib2(SORTS s, FUNSYMS f, ASSERTIONS a);

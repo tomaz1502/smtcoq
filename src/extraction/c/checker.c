@@ -39,6 +39,7 @@ value value_array(size_t nb, const value* elem) {
   for (int i = 0; i < nb; i++) {
     Store_field(res, i, *(elem+i));
   }
+  return res;
 }
 
 
@@ -128,13 +129,13 @@ ASSERTIONS assertions(size_t nb, FORM* data) {
   return value_array(nb, data);
 }
 
-ASSERTIONS assertion(FORM data) {
-  CAMLparam1(data);
-  CAMLlocal1(res);
-  res = caml_alloc(1, 0);
-  Store_field(res, 0, data);
-  CAMLreturn(res);
-}
+/* ASSERTIONS assertion(FORM data) { */
+/*   CAMLparam1(data); */
+/*   CAMLlocal1(res); */
+/*   res = caml_alloc(1, 0); */
+/*   Store_field(res, 0, data); */
+/*   CAMLreturn(res); */
+/* } */
 
 SMTLIB2 smtlib2(SORTS s, FUNSYMS f, ASSERTIONS a) {
   CAMLparam3(s, f, a);

@@ -13,10 +13,7 @@ int test01() {
   SORTS s = sorts(0, NULL);
   FUNSYMS f = funsyms(0, NULL);
   FORM ff = ffalse();
-  ASSERTIONS a = assertion(ff);
-  /* FORM foo[1] = {ff}; */
-  /* ASSERTIONS a = assertions(1, foo); */
-  /* ASSERTIONS a = assertions(1, &ff); */
+  ASSERTIONS a = assertions(1, &ff);
   SMTLIB2 smt = smtlib2(s, f, a);
 
   // Proof
