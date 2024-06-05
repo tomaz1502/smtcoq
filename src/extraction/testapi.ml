@@ -13,7 +13,21 @@
 open Smtcoq_extr
 
 
+(* Incorrect proof (to make sure that the checker does something) *)
+
+let test00 =
+  let smt =
+    let sorts = [] in
+    let funs = [] in
+    let ass = [|Api.FFalse|] in
+    (sorts, funs, ass)
+  in
+  let proof = Api.CResolution [Api.CFalse; Api.CFalse] in
+  Api.checker smt proof
+
+
 (* Proofs of unsatisfiability of `False` *)
+
 let test01 =
   let smt =
     let sorts = [] in
@@ -36,6 +50,7 @@ let test02 =
 
 
 (* Proofs of unsatisfiability of `a ∧ ¬a` *)
+
 let test03 =
   let smt =
     let sorts = [] in
@@ -62,6 +77,7 @@ let test04 =
 
 
 let _ =
+  assert (not test00);
   assert test01;
   assert test02;
   assert test03;
