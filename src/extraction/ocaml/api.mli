@@ -13,10 +13,15 @@
 open Smtcoq_plugin
 
 
+(** SMT-LIB2 sorts and function symbols **)
+type sort = string
+type funsym = string * sort list * sort
+
+
 (** SMT-LIB2 terms and formulas **)
 (*** Terms ***)
 type term =
-  | TFun of string * term list
+  | TFun of funsym * term list
 
 (*** Formulas ***)
 type form =
@@ -27,11 +32,9 @@ type form =
 
 (** SMT-LIB2 commands **)
 (*** Sort declarations ***)
-type sort = string
 type sorts = sort list
 
 (*** Function symbols declarations ***)
-type funsym = string * sort list * sort
 type funsyms = funsym list
 
 (*** Assertions ***)

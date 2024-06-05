@@ -61,7 +61,7 @@ $(PROGRAM): $(LIB) $(USERCMI) $(USERCMX)
 
 
 # C API
-CFILES=c/checker.c c/apiwrap.c
+CFILES=c/checker.c
 OFILES=$(CFILES:%.c=%.o)
 MLOFILE=c/capicaml.o
 CMAIN=main.c

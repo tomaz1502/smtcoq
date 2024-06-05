@@ -39,8 +39,9 @@ let test02 =
 let test03 =
   let smt =
     let sorts = [] in
-    let funs = [("a", [], "Bool")] in
-    let a = Api.FTerm (Api.TFun ("a", [])) in
+    let fa = ("a", [], "Bool") in
+    let funs = [fa] in
+    let a = Api.FTerm (Api.TFun (fa, [])) in
     let ass = [|a; Api.FNeg a|] in
     (sorts, funs, ass)
   in
@@ -50,8 +51,9 @@ let test03 =
 let test04 =
   let smt =
     let sorts = [] in
-    let funs = [("a", [], "Bool")] in
-    let a = Api.FTerm (Api.TFun ("a", [])) in
+    let fa = ("a", [], "Bool") in
+    let funs = [fa] in
+    let a = Api.FTerm (Api.TFun (fa, [])) in
     let ass = [|a; Api.FNeg a|] in
     (sorts, funs, ass)
   in

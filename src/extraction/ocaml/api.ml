@@ -13,14 +13,19 @@
 open Smtcoq_plugin
 
 
+(** SMT-LIB2 sorts and function symbols **)
+type sort = string
+type funsym = string * sort list * sort
+
+
 (** SMT-LIB2 terms and formulas **)
 (*** Terms ***)
 type term =
-  | TFun of string * term list
+  | TFun of funsym * term list
 
 (* From smtlib2_genConstr.ml *)
 let rec make_term ra rf = function
-  | TFun (f, l) ->
+  | TFun ((f, _, _), l) ->
      let op = SmtMaps.get_fun f in
      let l' = List.map (make_term ra rf) l in
      SmtAtom.Atom.get ra (Aapp (op, Array.of_list l'))
@@ -44,8 +49,6 @@ let make_form ra rf f =
 
 (** SMT-LIB2 commands **)
 (*** Sort declarations ***)
-(* TODO with arrays: take parameters *)
-type sort = string
 type sorts = sort list
 
 let declare_sorts (sl:sorts) =
@@ -56,7 +59,6 @@ let declare_sorts (sl:sorts) =
 
 
 (*** Function symbols declarations ***)
-type funsym = string * sort list * sort
 type funsyms = funsym list
 
 let declare_funsyms (fl:funsyms) =
