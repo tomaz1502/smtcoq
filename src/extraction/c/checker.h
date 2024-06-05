@@ -29,7 +29,7 @@ typedef struct FUNSYM_t {
   size_t arity;
 } FUNSYM;
 
-FUNSYM funsym(char* name, size_t arity, SORT* domain, SORT codomain);
+FUNSYM funsym(char* name, size_t arity, const SORT* domain, SORT codomain);
 
 
 /** Terms of first-order logic **/

@@ -51,14 +51,16 @@ SORT sort(char* s) {
 
 /** Function symbols of first-order logic **/
 
-FUNSYM funsym(char* name, size_t arity, SORT* domain, SORT codomain) {
-  value res = caml_alloc(3, 0);
+FUNSYM funsym(char* name, size_t arity, const SORT* domain, SORT codomain) {
+  CAMLparam1(codomain);
+  CAMLlocal2(res, d);
+  res = caml_alloc(3, 0);
   Store_field(res, 0, caml_alloc_initialized_string(strlen(name), name));
-  value d = value_list(arity, domain);
+  d = value_list(arity, domain);
   Store_field(res, 1, d);
   Store_field(res, 2, codomain);
   FUNSYM f = {res, arity};
-  return f;
+  CAMLreturnT(FUNSYM, f);
 }
 
 
@@ -86,7 +88,8 @@ TERM tfun(FUNSYM fun, const TERM* args) {
 /* Terms */
 FORM fterm(TERM term) {
   CAMLparam1(term);
-  value res = caml_alloc(1, FTERM);
+  CAMLlocal1(res);
+  res = caml_alloc(1, FTERM);
   Store_field(res, 0, term);
   CAMLreturn(res);
 }
@@ -126,17 +129,21 @@ ASSERTIONS assertions(size_t nb, FORM* data) {
 }
 
 ASSERTIONS assertion(FORM data) {
-  value res = caml_alloc(1, 0);
+  CAMLparam1(data);
+  CAMLlocal1(res);
+  res = caml_alloc(1, 0);
   Store_field(res, 0, data);
-  return res;
+  CAMLreturn(res);
 }
 
 SMTLIB2 smtlib2(SORTS s, FUNSYMS f, ASSERTIONS a) {
-  value res = caml_alloc(3, 0);
+  CAMLparam3(s, f, a);
+  CAMLlocal1(res);
+  res = caml_alloc(3, 0);
   Store_field(res, 0, s);
   Store_field(res, 1, f);
   Store_field(res, 2, a);
-  return res;
+  CAMLreturn(res);
 }
 
 
@@ -174,6 +181,8 @@ CERTIF cresolution(size_t nb, const CERTIF* premisses) {
 extern int checker();
 
 int checker(SMTLIB2 smt, CERTIF proof) {
+  CAMLparam2(smt, proof);
+
   // Get the OCaml function
   static const value * checker_closure = NULL;
   if (checker_closure == NULL)
