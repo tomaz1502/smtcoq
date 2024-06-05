@@ -38,6 +38,19 @@ int test00() {
   return checker(smt, proof);
 }
 
+int test00b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  assertf(ffalse());
+
+  // Proof
+  CERTIF r[2] = {cfalse(), cfalse()};
+  CERTIF proof = cresolution(2, r);
+
+  // Proof checking
+  return check_proof(proof);
+}
+
 /** Proofs of unsatisfiability of ⊥ **/
 
 int test01() {
@@ -56,6 +69,19 @@ int test01() {
   return checker(smt, proof);
 }
 
+int test01b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  assertf(ffalse());
+
+  // Proof
+  CERTIF r[2] = {cassert(0), cfalse()};
+  CERTIF proof = cresolution(2, r);
+
+  // Proof checking
+  return check_proof(proof);
+}
+
 int test02() {
   // SMT-LIB2 problem
   SORTS s = sorts(0, NULL);
@@ -70,6 +96,19 @@ int test02() {
 
   // Proof checking
   return checker(smt, proof);
+}
+
+int test02b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  assertf(ffalse());
+
+  // Proof
+  CERTIF r[2] = {cfalse(), cassert(0)};
+  CERTIF proof = cresolution(2, r);
+
+  // Proof checking
+  return check_proof(proof);
 }
 
 
@@ -93,6 +132,23 @@ int test03() {
   return checker(smt, proof);
 }
 
+int test03b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  FUNSYM fa = funsym("a", 0, NULL, sort("Bool"));
+  declare_fun(fa);
+  FORM a = fterm(tfun(fa, NULL));
+  assertf(a);
+  assertf(fneg(a));
+
+  // Proof
+  CERTIF r[2] = {cassert(0), cassert(1)};
+  CERTIF proof = cresolution(2, r);
+
+  // Proof checking
+  return check_proof(proof);
+}
+
 int test04() {
   // SMT-LIB2 problem
   SORTS s = sorts(0, NULL);
@@ -111,6 +167,23 @@ int test04() {
   return checker(smt, proof);
 }
 
+int test04b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  FUNSYM fa = funsym("a", 0, NULL, sort("Bool"));
+  declare_fun(fa);
+  FORM a = fterm(tfun(fa, NULL));
+  assertf(a);
+  assertf(fneg(a));
+
+  // Proof
+  CERTIF r[2] = {cassert(1), cassert(0)};
+  CERTIF proof = cresolution(2, r);
+
+  // Proof checking
+  return check_proof(proof);
+}
+
 
 /** Main program **/
 
@@ -121,10 +194,15 @@ int main(int argc, char ** argv)
 
   // Run tests
   assert(!test00());
+  assert(!test00b());
   assert(test01());
+  assert(test01b());
   assert(test02());
+  assert(test02b());
   assert(test03());
+  assert(test03b());
   assert(test04());
+  assert(test04b());
   printf("All tests suceeded\n");
 
   return 0;

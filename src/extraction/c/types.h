@@ -39,7 +39,7 @@ typedef value TERM;
 typedef value FORM;
 
 
-/** SMT-LIB2 commands **/
+/** SMT-LIB2 commands, functional **/
 
 typedef value SORTS;
 typedef value FUNSYMS;

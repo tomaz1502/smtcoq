@@ -46,14 +46,6 @@ FORM ffalse();
 FORM fneg(FORM form);
 
 
-/** SMT-LIB2 commands **/
-
-SORTS sorts(size_t nb, SORT* data);
-FUNSYMS funsyms(size_t nb, FUNSYM* data);
-ASSERTIONS assertions(size_t nb, FORM* data);
-SMTLIB2 smtlib2(SORTS s, FUNSYMS f, ASSERTIONS a);
-
-
 /** Certificates **/
 
 /* Refer to an assertion */
@@ -66,7 +58,21 @@ CERTIF cfalse();
 CERTIF cresolution(size_t nb, const CERTIF* premisses);
 
 
-/** The checker **/
+/** SMT-LIB2 commands and proof checker, imperative **/
+
+void start_smt2();
+void declare_sort(SORT s);
+void declare_fun(FUNSYM f);
+void assertf(FORM f);
+int check_proof(CERTIF proof);
+
+
+/** SMT-LIB2 commands and proof checker, functional **/
+
+SORTS sorts(size_t nb, SORT* data);
+FUNSYMS funsyms(size_t nb, FUNSYM* data);
+ASSERTIONS assertions(size_t nb, FORM* data);
+SMTLIB2 smtlib2(SORTS s, FUNSYMS f, ASSERTIONS a);
 
 int checker(SMTLIB2 smt, CERTIF proof);
 
