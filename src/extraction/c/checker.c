@@ -170,7 +170,7 @@ int checker(SMTLIB2 smt, CERTIF proof) {
     checker_closure = caml_named_value("checker");
 
   // Call the OCaml function
-  return Bool_val(caml_callback2(*checker_closure, smt, proof));
+  CAMLreturnT(int, Bool_val(caml_callback2(*checker_closure, smt, proof)));
 }
 
 
@@ -185,6 +185,7 @@ void debug_checker(SMTLIB2 smt, CERTIF proof) {
   // Call the OCaml function
   char* str = strdup(String_val(caml_callback2(*debug_checker_closure, smt, proof)));
   printf(str);
+  CAMLreturn0;
 }
 
 
@@ -262,6 +263,7 @@ void declare_sort(SORT s) {
     *(icommands.sorts + icommands.nb_sorts) = s;
   }
   icommands.nb_sorts++;
+  CAMLreturn0;
 }
 
 void declare_fun(FUNSYM f) {
@@ -293,6 +295,7 @@ void assertf(FORM f) {
     *(icommands.asserts + icommands.nb_asserts) = f;
   }
   icommands.nb_asserts++;
+  CAMLreturn0;
 }
 
 int check_proof(CERTIF proof) {
@@ -317,4 +320,5 @@ void debug_check_proof(CERTIF proof) {
   debug_checker(smt, proof);
   /* TODO: find why it fails */
   /* reset_commands(); */
+  CAMLreturn0;
 }
