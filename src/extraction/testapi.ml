@@ -95,14 +95,14 @@ let _ =
   assert (let (smt, proof) = test05 in Api.checker smt proof);
   Printf.printf "All tests suceeded\nNow testing the debugging checker:\n";
   Printf.printf "test00:\n";
-  let (smt, proof) = test00 in Debug_checker.debug_checker smt proof;
+  let (smt, proof) = test00 in Debug_checker.debug_checker_stdout smt proof;
   Printf.printf "test01:\n";
-  let (smt, proof) = test01 in Debug_checker.debug_checker smt proof;
+  let (smt, proof) = test01 in Debug_checker.debug_checker_stdout smt proof;
   Printf.printf "test02:\n";
-  let (smt, proof) = test02 in Debug_checker.debug_checker smt proof;
+  let (smt, proof) = test02 in Debug_checker.debug_checker_stdout smt proof;
   Printf.printf "test03:\n";
-  let (smt, proof) = test03 in Debug_checker.debug_checker smt proof;
+  let (smt, proof) = test03 in Debug_checker.debug_checker_stdout smt proof;
   Printf.printf "test04:\n";
-  let (smt, proof) = test04 in Debug_checker.debug_checker smt proof;
+  let (smt, proof) = test04 in Debug_checker.debug_checker_stdout smt proof;
   Printf.printf "test05:\n";
-  let (smt, proof) = test05 in Debug_checker.debug_checker smt proof
+  let (smt, proof) = test05 in Debug_checker.debug_checker_stdout smt proof

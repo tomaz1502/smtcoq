@@ -67,7 +67,9 @@ void start_smt2();
 void declare_sort(SORT s);
 void declare_fun(FUNSYM f);
 void assertf(FORM f);
+
 int check_proof(CERTIF proof);
+void debug_check_proof(CERTIF proof);
 
 
 /** SMT-LIB2 commands and proof checker, functional **/
@@ -78,6 +80,7 @@ ASSERTIONS assertions(size_t nb, FORM* data);
 SMTLIB2 smtlib2(SORTS s, FUNSYMS f, ASSERTIONS a);
 
 int checker(SMTLIB2 smt, CERTIF proof);
+void debug_checker(SMTLIB2 smt, CERTIF proof);
 
 
 #endif

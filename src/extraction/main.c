@@ -38,6 +38,22 @@ int test00() {
   return checker(smt, proof);
 }
 
+void testd00() {
+  // SMT-LIB2 problem
+  SORTS s = sorts(0, NULL);
+  FUNSYMS f = funsyms(0, NULL);
+  FORM ff = ffalse();
+  ASSERTIONS a = assertions(1, &ff);
+  SMTLIB2 smt = smtlib2(s, f, a);
+
+  // Proof
+  CERTIF r[2] = {cfalse("t1"), cfalse("t2")};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_checker(smt, proof);
+}
+
 int test00b() {
   // SMT-LIB2 problem
   start_smt2();
@@ -49,6 +65,19 @@ int test00b() {
 
   // Proof checking
   return check_proof(proof);
+}
+
+void testd00b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  assertf(ffalse());
+
+  // Proof
+  CERTIF r[2] = {cfalse("t1"), cfalse("t2")};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_check_proof(proof);
 }
 
 /** Proofs of unsatisfiability of ⊥ **/
@@ -69,6 +98,22 @@ int test02() {
   return checker(smt, proof);
 }
 
+void testd02() {
+  // SMT-LIB2 problem
+  SORTS s = sorts(0, NULL);
+  FUNSYMS f = funsyms(0, NULL);
+  FORM ff = ffalse();
+  ASSERTIONS a = assertions(1, &ff);
+  SMTLIB2 smt = smtlib2(s, f, a);
+
+  // Proof
+  CERTIF r[2] = {cassert("t1", 0), cfalse("t2")};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_checker(smt, proof);
+}
+
 int test02b() {
   // SMT-LIB2 problem
   start_smt2();
@@ -80,6 +125,19 @@ int test02b() {
 
   // Proof checking
   return check_proof(proof);
+}
+
+void testd02b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  assertf(ffalse());
+
+  // Proof
+  CERTIF r[2] = {cassert("t1", 0), cfalse("t2")};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_check_proof(proof);
 }
 
 int test03() {
@@ -98,6 +156,22 @@ int test03() {
   return checker(smt, proof);
 }
 
+void testd03() {
+  // SMT-LIB2 problem
+  SORTS s = sorts(0, NULL);
+  FUNSYMS f = funsyms(0, NULL);
+  FORM ff = ffalse();
+  ASSERTIONS a = assertions(1, &ff);
+  SMTLIB2 smt = smtlib2(s, f, a);
+
+  // Proof
+  CERTIF r[2] = {cfalse("t1"), cassert("t2", 0)};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_checker(smt, proof);
+}
+
 int test03b() {
   // SMT-LIB2 problem
   start_smt2();
@@ -109,6 +183,19 @@ int test03b() {
 
   // Proof checking
   return check_proof(proof);
+}
+
+void testd03b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  assertf(ffalse());
+
+  // Proof
+  CERTIF r[2] = {cfalse("t1"), cassert("t2", 0)};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_check_proof(proof);
 }
 
 
@@ -132,6 +219,24 @@ int test04() {
   return checker(smt, proof);
 }
 
+void testd04() {
+  // SMT-LIB2 problem
+  SORTS s = sorts(0, NULL);
+  FUNSYM fa = funsym("a", 0, NULL, sort("Bool"));
+  FUNSYMS f = funsyms(1, &fa);
+  FORM a = fterm(tfun(fa, NULL));
+  FORM as[2] = {a, fneg(a)};
+  ASSERTIONS ass = assertions(2, as);
+  SMTLIB2 smt = smtlib2(s, f, ass);
+
+  // Proof
+  CERTIF r[2] = {cassert("t1", 0), cassert("t2", 1)};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_checker(smt, proof);
+}
+
 int test04b() {
   // SMT-LIB2 problem
   start_smt2();
@@ -147,6 +252,23 @@ int test04b() {
 
   // Proof checking
   return check_proof(proof);
+}
+
+void testd04b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  FUNSYM fa = funsym("a", 0, NULL, sort("Bool"));
+  declare_fun(fa);
+  FORM a = fterm(tfun(fa, NULL));
+  assertf(a);
+  assertf(fneg(a));
+
+  // Proof
+  CERTIF r[2] = {cassert("t1", 0), cassert("t2", 1)};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_check_proof(proof);
 }
 
 int test05() {
@@ -167,6 +289,24 @@ int test05() {
   return checker(smt, proof);
 }
 
+void testd05() {
+  // SMT-LIB2 problem
+  SORTS s = sorts(0, NULL);
+  FUNSYM fa = funsym("a", 0, NULL, sort("Bool"));
+  FUNSYMS f = funsyms(1, &fa);
+  FORM a = fterm(tfun(fa, NULL));
+  FORM as[2] = {a, fneg(a)};
+  ASSERTIONS ass = assertions(2, as);
+  SMTLIB2 smt = smtlib2(s, f, ass);
+
+  // Proof
+  CERTIF r[2] = {cassert("t1", 1), cassert("t2", 0)};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_checker(smt, proof);
+}
+
 int test05b() {
   // SMT-LIB2 problem
   start_smt2();
@@ -182,6 +322,23 @@ int test05b() {
 
   // Proof checking
   return check_proof(proof);
+}
+
+void testd05b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  FUNSYM fa = funsym("a", 0, NULL, sort("Bool"));
+  declare_fun(fa);
+  FORM a = fterm(tfun(fa, NULL));
+  assertf(a);
+  assertf(fneg(a));
+
+  // Proof
+  CERTIF r[2] = {cassert("t1", 1), cassert("t2", 0)};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_check_proof(proof);
 }
 
 
@@ -203,7 +360,27 @@ int main(int argc, char ** argv)
   assert(test04b());
   assert(test05());
   assert(test05b());
-  printf("All tests suceeded\n");
+  printf("All tests suceeded\nNow testing the debugging checker:\n");
+  printf("test00:\n");
+  testd00();
+  /* printf("test00b:\n"); */
+  /* testd00b(); */
+  /* printf("test02:\n"); */
+  /* testd02(); */
+  /* printf("test02b:\n"); */
+  /* testd02b(); */
+  /* printf("test03:\n"); */
+  /* testd03(); */
+  /* printf("test03b:\n"); */
+  /* testd03b(); */
+  /* printf("test04:\n"); */
+  /* testd04(); */
+  /* printf("test04b:\n"); */
+  /* testd04b(); */
+  /* printf("test05:\n"); */
+  /* testd05(); */
+  /* printf("test05b:\n"); */
+  /* testd05b(); */
 
   return 0;
 }

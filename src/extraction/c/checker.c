@@ -159,10 +159,7 @@ CERTIF cresolution(char* name, size_t nb, const CERTIF* premisses) {
 }
 
 
-/** The checker **/
-
-/* TODO: try to remove [extern] */
-extern int checker();
+/** The checkers **/
 
 int checker(SMTLIB2 smt, CERTIF proof) {
   CAMLparam2(smt, proof);
@@ -174,6 +171,20 @@ int checker(SMTLIB2 smt, CERTIF proof) {
 
   // Call the OCaml function
   return Bool_val(caml_callback2(*checker_closure, smt, proof));
+}
+
+
+void debug_checker(SMTLIB2 smt, CERTIF proof) {
+  CAMLparam2(smt, proof);
+
+  // Get the OCaml function
+  static const value * debug_checker_closure = NULL;
+  if (debug_checker_closure == NULL)
+    debug_checker_closure = caml_named_value("debug_checker_string");
+
+  // Call the OCaml function
+  char* str = strdup(String_val(caml_callback2(*debug_checker_closure, smt, proof)));
+  printf(str);
 }
 
 
@@ -296,4 +307,15 @@ int check_proof(CERTIF proof) {
   int res = checker(smt, proof);
   reset_commands();
   CAMLreturnT(int, res);
+}
+
+void debug_check_proof(CERTIF proof) {
+  CAMLparam1(proof);
+  CAMLlocal4(s, f, a, smt);
+  s = sorts     (icommands.nb_sorts,   icommands.sorts);
+  f = funsyms   (icommands.nb_funsyms, icommands.funsyms);
+  a = assertions(icommands.nb_asserts, icommands.asserts);
+  smt = smtlib2(s, f, a);
+  debug_checker(smt, proof);
+  reset_commands();
 }
