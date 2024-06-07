@@ -31,8 +31,8 @@ int test00() {
   SMTLIB2 smt = smtlib2(s, f, a);
 
   // Proof
-  CERTIF r[2] = {cfalse(), cfalse()};
-  CERTIF proof = cresolution(2, r);
+  CERTIF r[2] = {cfalse("t1"), cfalse("t2")};
+  CERTIF proof = cresolution("t3", 2, r);
 
   // Proof checking
   return checker(smt, proof);
@@ -44,43 +44,14 @@ int test00b() {
   assertf(ffalse());
 
   // Proof
-  CERTIF r[2] = {cfalse(), cfalse()};
-  CERTIF proof = cresolution(2, r);
+  CERTIF r[2] = {cfalse("t1"), cfalse("t2")};
+  CERTIF proof = cresolution("t3", 2, r);
 
   // Proof checking
   return check_proof(proof);
 }
 
 /** Proofs of unsatisfiability of ⊥ **/
-
-int test01() {
-  // SMT-LIB2 problem
-  SORTS s = sorts(0, NULL);
-  FUNSYMS f = funsyms(0, NULL);
-  FORM ff = ffalse();
-  ASSERTIONS a = assertions(1, &ff);
-  SMTLIB2 smt = smtlib2(s, f, a);
-
-  // Proof
-  CERTIF r[2] = {cassert(0), cfalse()};
-  CERTIF proof = cresolution(2, r);
-
-  // Proof checking
-  return checker(smt, proof);
-}
-
-int test01b() {
-  // SMT-LIB2 problem
-  start_smt2();
-  assertf(ffalse());
-
-  // Proof
-  CERTIF r[2] = {cassert(0), cfalse()};
-  CERTIF proof = cresolution(2, r);
-
-  // Proof checking
-  return check_proof(proof);
-}
 
 int test02() {
   // SMT-LIB2 problem
@@ -91,8 +62,8 @@ int test02() {
   SMTLIB2 smt = smtlib2(s, f, a);
 
   // Proof
-  CERTIF r[2] = {cfalse(), cassert(0)};
-  CERTIF proof = cresolution(2, r);
+  CERTIF r[2] = {cassert("t1", 0), cfalse("t2")};
+  CERTIF proof = cresolution("t3", 2, r);
 
   // Proof checking
   return checker(smt, proof);
@@ -104,29 +75,24 @@ int test02b() {
   assertf(ffalse());
 
   // Proof
-  CERTIF r[2] = {cfalse(), cassert(0)};
-  CERTIF proof = cresolution(2, r);
+  CERTIF r[2] = {cassert("t1", 0), cfalse("t2")};
+  CERTIF proof = cresolution("t3", 2, r);
 
   // Proof checking
   return check_proof(proof);
 }
 
-
-/** Proofs of unsatisfiability of `a ∧ ¬a` **/
-
 int test03() {
   // SMT-LIB2 problem
   SORTS s = sorts(0, NULL);
-  FUNSYM fa = funsym("a", 0, NULL, sort("Bool"));
-  FUNSYMS f = funsyms(1, &fa);
-  FORM a = fterm(tfun(fa, NULL));
-  FORM as[2] = {a, fneg(a)};
-  ASSERTIONS ass = assertions(2, as);
-  SMTLIB2 smt = smtlib2(s, f, ass);
+  FUNSYMS f = funsyms(0, NULL);
+  FORM ff = ffalse();
+  ASSERTIONS a = assertions(1, &ff);
+  SMTLIB2 smt = smtlib2(s, f, a);
 
   // Proof
-  CERTIF r[2] = {cassert(0), cassert(1)};
-  CERTIF proof = cresolution(2, r);
+  CERTIF r[2] = {cfalse("t1"), cassert("t2", 0)};
+  CERTIF proof = cresolution("t3", 2, r);
 
   // Proof checking
   return checker(smt, proof);
@@ -135,19 +101,18 @@ int test03() {
 int test03b() {
   // SMT-LIB2 problem
   start_smt2();
-  FUNSYM fa = funsym("a", 0, NULL, sort("Bool"));
-  declare_fun(fa);
-  FORM a = fterm(tfun(fa, NULL));
-  assertf(a);
-  assertf(fneg(a));
+  assertf(ffalse());
 
   // Proof
-  CERTIF r[2] = {cassert(0), cassert(1)};
-  CERTIF proof = cresolution(2, r);
+  CERTIF r[2] = {cfalse("t1"), cassert("t2", 0)};
+  CERTIF proof = cresolution("t3", 2, r);
 
   // Proof checking
   return check_proof(proof);
 }
+
+
+/** Proofs of unsatisfiability of `a ∧ ¬a` **/
 
 int test04() {
   // SMT-LIB2 problem
@@ -160,8 +125,8 @@ int test04() {
   SMTLIB2 smt = smtlib2(s, f, ass);
 
   // Proof
-  CERTIF r[2] = {cassert(1), cassert(0)};
-  CERTIF proof = cresolution(2, r);
+  CERTIF r[2] = {cassert("t1", 0), cassert("t2", 1)};
+  CERTIF proof = cresolution("t3", 2, r);
 
   // Proof checking
   return checker(smt, proof);
@@ -177,8 +142,43 @@ int test04b() {
   assertf(fneg(a));
 
   // Proof
-  CERTIF r[2] = {cassert(1), cassert(0)};
-  CERTIF proof = cresolution(2, r);
+  CERTIF r[2] = {cassert("t1", 0), cassert("t2", 1)};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  return check_proof(proof);
+}
+
+int test05() {
+  // SMT-LIB2 problem
+  SORTS s = sorts(0, NULL);
+  FUNSYM fa = funsym("a", 0, NULL, sort("Bool"));
+  FUNSYMS f = funsyms(1, &fa);
+  FORM a = fterm(tfun(fa, NULL));
+  FORM as[2] = {a, fneg(a)};
+  ASSERTIONS ass = assertions(2, as);
+  SMTLIB2 smt = smtlib2(s, f, ass);
+
+  // Proof
+  CERTIF r[2] = {cassert("t1", 1), cassert("t2", 0)};
+  CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  return checker(smt, proof);
+}
+
+int test05b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  FUNSYM fa = funsym("a", 0, NULL, sort("Bool"));
+  declare_fun(fa);
+  FORM a = fterm(tfun(fa, NULL));
+  assertf(a);
+  assertf(fneg(a));
+
+  // Proof
+  CERTIF r[2] = {cassert("t1", 1), cassert("t2", 0)};
+  CERTIF proof = cresolution("t3", 2, r);
 
   // Proof checking
   return check_proof(proof);
@@ -195,14 +195,14 @@ int main(int argc, char ** argv)
   // Run tests
   assert(!test00());
   assert(!test00b());
-  assert(test01());
-  assert(test01b());
   assert(test02());
   assert(test02b());
   assert(test03());
   assert(test03b());
   assert(test04());
   assert(test04b());
+  assert(test05());
+  assert(test05b());
   printf("All tests suceeded\n");
 
   return 0;

@@ -13,7 +13,7 @@
 open Smtcoq_extr
 
 
-(* Incorrect proof (to make sure that the checker does something) *)
+(* Incorrect proofs *)
 
 let test00 =
   let smt =
@@ -22,11 +22,8 @@ let test00 =
     let ass = [|Api.FFalse|] in
     (sorts, funs, ass)
   in
-  let proof = Api.CResolution [Api.CFalse; Api.CFalse] in
-  Api.checker smt proof
-
-
-(* Proofs of unsatisfiability of `False` *)
+  let proof = ("t3", Api.CResolution [("t1", Api.CFalse); ("t2", Api.CFalse)]) in
+  (smt, proof)
 
 let test01 =
   let smt =
@@ -35,8 +32,11 @@ let test01 =
     let ass = [|Api.FFalse|] in
     (sorts, funs, ass)
   in
-  let proof = Api.CResolution [Api.CAssert 0; Api.CFalse] in
-  Api.checker smt proof
+  let proof = ("t1", Api.CFalse) in
+  (smt, proof)
+
+
+(* Proofs of unsatisfiability of `False` *)
 
 let test02 =
   let smt =
@@ -45,23 +45,21 @@ let test02 =
     let ass = [|Api.FFalse|] in
     (sorts, funs, ass)
   in
-  let proof = Api.CResolution [Api.CFalse; Api.CAssert 0] in
-  Api.checker smt proof
-
-
-(* Proofs of unsatisfiability of `a ∧ ¬a` *)
+  let proof = ("t3", Api.CResolution [("t1", Api.CAssert 0); ("t2", Api.CFalse)]) in
+  (smt, proof)
 
 let test03 =
   let smt =
     let sorts = [] in
-    let fa = ("a", [], "Bool") in
-    let funs = [fa] in
-    let a = Api.FTerm (Api.TFun (fa, [])) in
-    let ass = [|a; Api.FNeg a|] in
+    let funs = [] in
+    let ass = [|Api.FFalse|] in
     (sorts, funs, ass)
   in
-  let proof = Api.CResolution [Api.CAssert 0; Api.CAssert 1] in
-  Api.checker smt proof
+  let proof = ("t3", Api.CResolution [("t1", Api.CFalse); ("t2", Api.CAssert 0)]) in
+  (smt, proof)
+
+
+(* Proofs of unsatisfiability of `a ∧ ¬a` *)
 
 let test04 =
   let smt =
@@ -72,14 +70,39 @@ let test04 =
     let ass = [|a; Api.FNeg a|] in
     (sorts, funs, ass)
   in
-  let proof = Api.CResolution [Api.CAssert 1; Api.CAssert 0] in
-  Api.checker smt proof
+  let proof = ("t3", Api.CResolution [("t1", Api.CAssert 0); ("t2", Api.CAssert 1)]) in
+  (smt, proof)
+
+let test05 =
+  let smt =
+    let sorts = [] in
+    let fa = ("a", [], "Bool") in
+    let funs = [fa] in
+    let a = Api.FTerm (Api.TFun (fa, [])) in
+    let ass = [|a; Api.FNeg a|] in
+    (sorts, funs, ass)
+  in
+  let proof = ("t3", Api.CResolution [("t1", Api.CAssert 1); ("t2", Api.CAssert 0)]) in
+  (smt, proof)
 
 
 let _ =
-  assert (not test00);
-  assert test01;
-  assert test02;
-  assert test03;
-  assert test04;
-  Printf.printf "All tests suceeded\n"
+  assert (let (smt, proof) = test00 in not (Api.checker smt proof));
+  assert (let (smt, proof) = test01 in not (Api.checker smt proof));
+  assert (let (smt, proof) = test02 in Api.checker smt proof);
+  assert (let (smt, proof) = test03 in Api.checker smt proof);
+  assert (let (smt, proof) = test04 in Api.checker smt proof);
+  assert (let (smt, proof) = test05 in Api.checker smt proof);
+  Printf.printf "All tests suceeded\nNow testing the debugging checker:\n";
+  Printf.printf "test00:\n";
+  let (smt, proof) = test00 in Debug_checker.debug_checker smt proof;
+  Printf.printf "test01:\n";
+  let (smt, proof) = test01 in Debug_checker.debug_checker smt proof;
+  Printf.printf "test02:\n";
+  let (smt, proof) = test02 in Debug_checker.debug_checker smt proof;
+  Printf.printf "test03:\n";
+  let (smt, proof) = test03 in Debug_checker.debug_checker smt proof;
+  Printf.printf "test04:\n";
+  let (smt, proof) = test04 in Debug_checker.debug_checker smt proof;
+  Printf.printf "test05:\n";
+  let (smt, proof) = test05 in Debug_checker.debug_checker smt proof

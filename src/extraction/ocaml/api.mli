@@ -45,11 +45,19 @@ type smtlib2 = sorts * funsyms * assertions
 
 
 (** Certificate **)
-type certif =
+type node =
   | CAssert of int
   | CFalse
   | CResolution of certif list
+and certif = string * node
 
 
 (** The API checker **)
 val checker : smtlib2 -> certif -> bool
+
+
+(** Pretty-printers **)
+val pp_sort : Format.formatter -> sort -> unit
+val pp_funsym : Format.formatter -> funsym -> unit
+val pp_term : Format.formatter -> term -> unit
+val pp_form : Format.formatter -> form -> unit

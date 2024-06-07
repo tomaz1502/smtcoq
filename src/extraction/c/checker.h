@@ -48,14 +48,17 @@ FORM fneg(FORM form);
 
 /** Certificates **/
 
+/* In all the smart constructors, the first parameter is a name given to
+   the step, used for debugging */
+
 /* Refer to an assertion */
-CERTIF cassert(size_t num);
+CERTIF cassert(char* name, size_t num);
 
 /* Proof of the clause {(not false)} */
-CERTIF cfalse();
+CERTIF cfalse(char* name);
 
 /* Resolution chain */
-CERTIF cresolution(size_t nb, const CERTIF* premisses);
+CERTIF cresolution(char* name, size_t nb, const CERTIF* premisses);
 
 
 /** SMT-LIB2 commands and proof checker, imperative **/

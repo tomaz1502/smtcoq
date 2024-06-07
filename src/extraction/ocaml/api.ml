@@ -96,10 +96,11 @@ let declare_smtlib2 ra rf (smt:smtlib2) =
 
 
 (** Certificate **)
-type certif =
+type node =
   | CAssert of int
   | CFalse
   | CResolution of certif list
+and certif = string * node
 
 
 type 'hform rule_kind =
@@ -127,6 +128,7 @@ let process_certif =
 
   (* Process the certificate *)
   let rec process_certif c =
+    let (_, c) = c in
     let kind = match c with
         | CAssert i -> RRoot (i+1)
         | CFalse -> RKind(SmtCertif.Other SmtCertif.False)
@@ -183,3 +185,27 @@ let checker (smt:smtlib2) (proof:certif) : bool =
  **)
 
 let _ = Callback.register "checker" checker
+
+
+(** Pretty_printers **)
+
+let pp_sort fmt (s:sort) = Format.fprintf fmt "%s" s
+
+let pp_funsym fmt (f:funsym) =
+  let (n, _, _) = f in
+  Format.fprintf fmt "%s" n
+
+let rec pp_term fmt = function
+  | TFun(f, l) ->
+     let pp fmt l =
+       if List.compare_length_with l 0 = 0 then
+         ()
+       else
+         Smt_utils.pp_list pp_term ", " "(" ")" fmt l
+     in
+     Format.fprintf fmt "%a%a" pp_funsym f pp l
+
+let rec pp_form fmt = function
+  | FTerm t -> pp_term fmt t
+  | FFalse -> Format.fprintf fmt "⊥"
+  | FNeg f -> Format.fprintf fmt "(¬%a)" pp_form f

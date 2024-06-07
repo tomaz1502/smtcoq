@@ -29,3 +29,7 @@ val checker : Smtcoq_plugin.SmtAtom.Atom.reify_tbl ->
               int ->
               Smtcoq_plugin.SmtAtom.Form.t Smtcoq_plugin.SmtCertif.clause ->
               bool
+
+(** Pretty printers **)
+val pp_list : (Format.formatter -> 'a -> unit) ->
+              string -> string -> string -> Format.formatter -> 'a list -> unit

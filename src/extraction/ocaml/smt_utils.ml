@@ -465,3 +465,16 @@ let checker ra rf roots max_id confl =
   let t_form = form_interp_tbl rf in
 
   Smt_checker.Checker_Ext.checker_ext t_atom t_form rootsCstr used_rootsCstr certif
+
+
+(** Pretty printers **)
+let rec pp_list_aux2 pp_elem delim fmt = function
+| [] -> ()
+| t::q -> Format.fprintf fmt "%s %a%a" delim pp_elem t (pp_list_aux2 pp_elem delim) q
+
+let pp_list_aux pp_elem delim fmt = function
+| [] -> ()
+| t::q -> Format.fprintf fmt "%a%a" pp_elem t (pp_list_aux2 pp_elem delim) q
+
+let pp_list pp_elem delim left right fmt l =
+  Format.fprintf fmt "%s%a%s" left (pp_list_aux pp_elem delim) l right

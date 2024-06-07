@@ -22,7 +22,15 @@
 #include "checker.h"
 
 
-/** Lists and arrays of values **/
+/** Utils **/
+
+/* String as a value */
+value value_string(char* s) {
+  return caml_alloc_initialized_string(strlen(s), s);
+}
+
+
+/* Lists and arrays of values */
 
 value value_list(size_t nb, const value* elem) {
   if (nb == 0) {
@@ -48,7 +56,7 @@ value value_array(size_t nb, const value* elem) {
 /** Sorts of first-order logic **/
 
 SORT sort(char* s) {
-  return (caml_alloc_initialized_string(strlen(s), s));
+  return value_string(s);
 }
 
 
@@ -58,7 +66,7 @@ FUNSYM funsym(char* name, size_t arity, const SORT* domain, SORT codomain) {
   CAMLparam1(codomain);
   CAMLlocal2(res, d);
   res = caml_alloc(3, 0);
-  Store_field(res, 0, caml_alloc_initialized_string(strlen(name), name));
+  Store_field(res, 0, value_string(name));
   d = value_list(arity, domain);
   Store_field(res, 1, d);
   Store_field(res, 2, codomain);
@@ -115,29 +123,39 @@ FORM fneg(FORM form) {
 
 /** Certificates **/
 
+CERTIF certif(char* name, value node) {
+  CAMLparam1(node);
+  CAMLlocal1(res);
+  res = caml_alloc(2, 0);
+  Store_field(res, 0, value_string(name));
+  Store_field(res, 1, node);
+  CAMLreturn(res);
+}
+
 #define CFALSE 0
 
 #define CASSERT 0
 #define CRESOLUTION 1
 
 /* Refer to an assertion */
-CERTIF cassert(size_t num) {
-  value res = caml_alloc(1, CASSERT);
-  Store_field(res, 0, Val_int(num));
-  return res;
+CERTIF cassert(char* name, size_t num) {
+  value node = caml_alloc(1, CASSERT);
+  Store_field(node, 0, Val_int(num));
+  return certif(name, node);
 }
 
 /* Proof of the clause {(not false)} */
-CERTIF cfalse() {
-  return Val_int(CFALSE);
+CERTIF cfalse(char* name) {
+  value node = Val_int(CFALSE);
+  return certif(name, node);
 }
 
 /* Resolution chain */
-CERTIF cresolution(size_t nb, const CERTIF* premisses) {
-  value res = caml_alloc(1, CRESOLUTION);
+CERTIF cresolution(char* name, size_t nb, const CERTIF* premisses) {
+  value node = caml_alloc(1, CRESOLUTION);
   value p = value_list(nb, premisses);
-  Store_field(res, 0, p);
-  return res;
+  Store_field(node, 0, p);
+  return certif(name, node);
 }
 
 

@@ -23,8 +23,8 @@ CURLIB=-I ocaml
 COQCMX=unix.cmxa threads.cmxa nums.cmxa str.cmxa zarith.cmxa dynlink.cmxa findlib.cmxa findlib_dynload.cmxa clib.cmxa config.cmxa boot.cmxa coqperf.cmxa lib.cmxa coqworkmgrlib.cmxa gramlib.cmxa kernel.cmxa library.cmxa engine.cmxa pretyping.cmxa interp.cmxa proofs.cmxa parsing.cmxa printing.cmxa tactics.cmxa vernac.cmxa sysinit.cmxa stm.cmxa toplevel.cmxa ltac_plugin.cmxa micromega_plugin.cmxa coqrun.cmxa
 SMTCOQCMX=smtcoq_plugin.cmx
 
-MLIFILES=ocaml/utils.mli ocaml/sat_checker.mli ocaml/zchaff_checker.mli ocaml/smt_checker.mli ocaml/smt_utils.mli ocaml/verit_checker.mli ocaml/api.mli
-MLFILES=ocaml/utils.ml ocaml/sat_checker.ml ocaml/zchaff_checker.ml ocaml/smt_checker.ml ocaml/smt_utils.ml ocaml/verit_checker.ml ocaml/api.ml
+MLIFILES=ocaml/utils.mli ocaml/sat_checker.mli ocaml/zchaff_checker.mli ocaml/smt_checker.mli ocaml/smt_utils.mli ocaml/verit_checker.mli ocaml/api.mli ocaml/debug_checker.mli
+MLFILES=ocaml/utils.ml ocaml/sat_checker.ml ocaml/zchaff_checker.ml ocaml/smt_checker.ml ocaml/smt_utils.ml ocaml/verit_checker.ml ocaml/api.ml ocaml/debug_checker.ml
 CMI=$(MLIFILES:%.mli=%.cmi)
 CMX=$(MLFILES:%.ml=%.cmx)
 
