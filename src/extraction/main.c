@@ -20,7 +20,7 @@
 #include "c/checker.h"
 
 
-/** Incorrect proof (to make sure that the checker does something) **/
+/** Incorrect proofs **/
 
 int test00() {
   // SMT-LIB2 problem
@@ -75,6 +75,60 @@ void testd00b() {
   // Proof
   CERTIF r[2] = {cfalse("t1"), cfalse("t2")};
   CERTIF proof = cresolution("t3", 2, r);
+
+  // Proof checking
+  debug_check_proof(proof);
+}
+
+int test01() {
+  // SMT-LIB2 problem
+  SORTS s = sorts(0, NULL);
+  FUNSYMS f = funsyms(0, NULL);
+  FORM ff = ffalse();
+  ASSERTIONS a = assertions(1, &ff);
+  SMTLIB2 smt = smtlib2(s, f, a);
+
+  // Proof
+  CERTIF proof = cfalse("t1");
+
+  // Proof checking
+  return checker(smt, proof);
+}
+
+int test01b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  assertf(ffalse());
+
+  // Proof
+  CERTIF proof = cfalse("t1");
+
+  // Proof checking
+  return check_proof(proof);
+}
+
+void testd01() {
+  // SMT-LIB2 problem
+  SORTS s = sorts(0, NULL);
+  FUNSYMS f = funsyms(0, NULL);
+  FORM ff = ffalse();
+  ASSERTIONS a = assertions(1, &ff);
+  SMTLIB2 smt = smtlib2(s, f, a);
+
+  // Proof
+  CERTIF proof = cfalse("t1");
+
+  // Proof checking
+  debug_checker(smt, proof);
+}
+
+void testd01b() {
+  // SMT-LIB2 problem
+  start_smt2();
+  assertf(ffalse());
+
+  // Proof
+  CERTIF proof = cfalse("t1");
 
   // Proof checking
   debug_check_proof(proof);
@@ -352,6 +406,8 @@ int main(int argc, char ** argv)
   // Run tests
   assert(!test00());
   assert(!test00b());
+  assert(!test01());
+  assert(!test01b());
   assert(test02());
   assert(test02b());
   assert(test03());
@@ -363,24 +419,28 @@ int main(int argc, char ** argv)
   printf("All tests suceeded\nNow testing the debugging checker:\n");
   printf("test00:\n");
   testd00();
-  /* printf("test00b:\n"); */
-  /* testd00b(); */
-  /* printf("test02:\n"); */
-  /* testd02(); */
-  /* printf("test02b:\n"); */
-  /* testd02b(); */
-  /* printf("test03:\n"); */
-  /* testd03(); */
-  /* printf("test03b:\n"); */
-  /* testd03b(); */
-  /* printf("test04:\n"); */
-  /* testd04(); */
-  /* printf("test04b:\n"); */
-  /* testd04b(); */
-  /* printf("test05:\n"); */
-  /* testd05(); */
-  /* printf("test05b:\n"); */
-  /* testd05b(); */
+  printf("test00b:\n");
+  testd00b();
+  printf("test01:\n");
+  testd01();
+  printf("test01b:\n");
+  testd01b();
+  printf("test02:\n");
+  testd02();
+  printf("test02b:\n");
+  testd02b();
+  printf("test03:\n");
+  testd03();
+  printf("test03b:\n");
+  testd03b();
+  printf("test04:\n");
+  testd04();
+  printf("test04b:\n");
+  testd04b();
+  printf("test05:\n");
+  testd05();
+  printf("test05b:\n");
+  testd05b();
 
   return 0;
 }

@@ -237,11 +237,9 @@ void reset_commands() {
   free(icommands.sorts);
   free(icommands.funsyms);
   free(icommands.asserts);
-  /* caml_remove_global_root(&icommands); */
 }
 
 void start_smt2() {
-  /* caml_register_global_root(&icommands); */
   icommands.nb_sorts = 0;
   icommands.log2_nb_sorts = 0;
   icommands.nb_funsyms = 0;
@@ -317,5 +315,6 @@ void debug_check_proof(CERTIF proof) {
   a = assertions(icommands.nb_asserts, icommands.asserts);
   smt = smtlib2(s, f, a);
   debug_checker(smt, proof);
-  reset_commands();
+  /* TODO: find why it fails */
+  /* reset_commands(); */
 }
