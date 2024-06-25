@@ -218,6 +218,7 @@ Module Raw.
   Qed.
 
   Hint Resolve InA_eqke_eqk : smtcoq_array.
+  Hint Resolve eqke_equiv : smtcoq_array.
 
   Lemma In_alt : forall k l, In k l <-> exists e, InA eqk (k,e) l.
   Proof.
@@ -232,7 +233,7 @@ Module Raw.
 
   Lemma MapsTo_eq : forall l x y e, eq x y -> MapsTo x e l -> MapsTo y e l.
   Proof.
-  intros; unfold MapsTo in *; apply InA_eqA with (x,e); eauto with *.
+  intros; unfold MapsTo in *; apply InA_eqA with (x,e); eauto with smtcoq_array.
   Qed.
 
   Lemma In_eq : forall l x y, eq x y -> In x l -> In y l.
