@@ -845,7 +845,7 @@ Module Raw.
   Proof.
     intros m Hm m' Hm' cmp; generalize Hm Hm'; clear Hm Hm'.
     revert m'; induction m as [ |[x e] l IHl]; intros [ |[x' e'] l']; simpl; subst;auto with smtcoq_array; unfold Equivb;
-      intuition; try discriminate; subst;
+      intuition auto with bool; try discriminate; subst;
         try match goal with H: compare _ _ = _ |- _ => clear H end.
     - inversion H0.
     - revert H; case_eq (compare x x'); intros _x _ H; try inversion H.
@@ -1171,14 +1171,14 @@ Section FArray.
   Proof.
     intros (l,Hl,Hd); induction l as [ |a l IHl].
     - intros (l',Hl',Hd'); unfold eq; simpl.
-      destruct l'; unfold equal; simpl; intuition.
+      destruct l'; unfold equal; simpl; intuition auto with bool.
     - intros (l',Hl',Hd'); unfold eq.
       destruct l' as [ |p l'].
-      + destruct a; unfold equal; simpl; intuition.
+      + destruct a; unfold equal; simpl; intuition auto with bool.
       + destruct a as (x,e).
         destruct p as (x',e').
         unfold equal; simpl.
-        destruct (compare x x') as [Hlt|Heq|Hlt]; simpl; [intuition| |intuition].
+        destruct (compare x x') as [Hlt|Heq|Hlt]; simpl; [intuition auto with bool| |intuition auto with bool].
         split.
         * intros [H0 H1].
           unfold cmp, compare2eqb at 1.
